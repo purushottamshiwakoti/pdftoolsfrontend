@@ -32,17 +32,45 @@ import AvailableTools from "../components/AvailableTools";
 import usePages from "../hooks/usePages";
 import useToolsData from "../hooks/useToolsData";
 import pageStyles from "../styles/Page.module.css";
+// export async function getStaticProps({ locale }) {
+//   const url = `${process.env.API_URL}/merge-pdf`;
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   const { page } = data;
+//   return {
+//     props: {
+//       myData: page,
+//       ...(await serverSideTranslations(locale, ["common", "merge-pdf"])),
+//     },
+//   };
+// }
+
 export async function getStaticProps({ locale }) {
-  const url = `${process.env.API_URL}/merge-pdf`;
-  const response = await fetch(url);
-  const data = await response.json();
-  const { page } = data;
-  return {
-    props: {
-      myData: page,
-      ...(await serverSideTranslations(locale, ["common", "merge-pdf"])),
-    },
-  };
+  try {
+    const url = `${process.env.API_URL}/merge-pdf`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from ${url}`);
+    }
+
+    const data = await response.json();
+    const { page } = data;
+
+    return {
+      props: {
+        myData: page,
+        ...(await serverSideTranslations(locale, ["common", "merge-pdf"])),
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    return {
+      props: {
+        myData: null, // or any default value
+      },
+    };
+  }
 }
 
 const MergePDFPage = ({ myData }) => {

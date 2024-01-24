@@ -33,17 +33,48 @@ import AvailableTools from "../components/AvailableTools";
 import usePages from "../hooks/usePages";
 import useToolsData from "../hooks/useToolsData";
 import pageStyles from "../styles/Page.module.css";
+// export async function getStaticProps({ locale }) {
+//   const url = `${process.env.API_URL}/remove-pdf-pages`;
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   const { page } = data;
+//   return {
+//     props: {
+//       myData: page,
+//       ...(await serverSideTranslations(locale, ["common", "remove-pdf-pages"])),
+//     },
+//   };
+// }
+
 export async function getStaticProps({ locale }) {
-  const url = `${process.env.API_URL}/remove-pdf-pages`;
-  const response = await fetch(url);
-  const data = await response.json();
-  const { page } = data;
-  return {
-    props: {
-      myData: page,
-      ...(await serverSideTranslations(locale, ["common", "remove-pdf-pages"])),
-    },
-  };
+  try {
+    const url = `${process.env.API_URL}/remove-pdf-pages`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from ${url}`);
+    }
+
+    const data = await response.json();
+    const { page } = data;
+
+    return {
+      props: {
+        myData: page,
+        ...(await serverSideTranslations(locale, [
+          "common",
+          "remove-pdf-pages",
+        ])),
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    return {
+      props: {
+        myData: null, // or any default value
+      },
+    };
+  }
 }
 
 const DeletePDFPages = ({ myData }) => {

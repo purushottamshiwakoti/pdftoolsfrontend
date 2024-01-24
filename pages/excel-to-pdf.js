@@ -34,17 +34,45 @@ import useDocuments from "../hooks/useDocuments";
 import useToolsData from "../hooks/useToolsData";
 import Alerts from "../components/Alerts.js";
 import pageStyles from "../styles/Page.module.css";
+// export async function getStaticProps({ locale }) {
+//   const url = `${process.env.API_URL}/bmp-to-pdf`;
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   const { page } = data;
+//   return {
+//     props: {
+//       myData: page,
+//       ...(await serverSideTranslations(locale, ["common", "excel-to-pdf"])),
+//     },
+//   };
+// }
+
 export async function getStaticProps({ locale }) {
-  const url = `${process.env.API_URL}/bmp-to-pdf`;
-  const response = await fetch(url);
-  const data = await response.json();
-  const { page } = data;
-  return {
-    props: {
-      myData: page,
-      ...(await serverSideTranslations(locale, ["common", "excel-to-pdf"])),
-    },
-  };
+  try {
+    const url = `${process.env.API_URL}/excel-to-pdf`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from ${url}`);
+    }
+
+    const data = await response.json();
+    const { page } = data;
+
+    return {
+      props: {
+        myData: page,
+        ...(await serverSideTranslations(locale, ["common", "excel-to-pdf"])),
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    return {
+      props: {
+        myData: null, // or any default value
+      },
+    };
+  }
 }
 
 const EXCELToPDFPage = ({ myData }) => {

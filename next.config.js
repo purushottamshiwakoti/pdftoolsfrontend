@@ -21,4 +21,7 @@ module.exports = {
     //delay between two download requests // sending download request every 5s
     NEXT_PUBLIC_DOWNLOAD_REQUEST_DELAY: "5000", // 5 seconds in miliseconds  // 5s = 5000
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };

@@ -43,17 +43,48 @@ import Option from "../components/Option";
 import SelectOptionFormStep from "../components/SelectOptionFormStep";
 import Alerts from "../components/Alerts";
 import pageStyles from "../styles/Page.module.css";
+// export async function getStaticProps({ locale }) {
+//   const url = `${process.env.API_URL}/pdf-to-tiff`;
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   const { page } = data;
+//   return {
+//     myData: page,
+//     props: {
+//       ...(await serverSideTranslations(locale, ["common", "pdf-to-tiff"])),
+//     },
+//   };
+// }
+
 export async function getStaticProps({ locale }) {
-  const url = `${process.env.API_URL}/pdf-to-tiff`;
-  const response = await fetch(url);
-  const data = await response.json();
-  const { page } = data;
-  return {
-    myData: page,
-    props: {
-      ...(await serverSideTranslations(locale, ["common", "pdf-to-tiff"])),
-    },
-  };
+  try {
+    const url = `${process.env.API_URL}/pdf-to-tiff`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from ${url}`);
+    }
+
+    const data = await response.json();
+    const { page } = data;
+
+    return {
+      props: {
+        myData: page,
+        ...(await serverSideTranslations(locale, [
+          "common",
+          "pdf-to-tiff",
+        ])),
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    return {
+      props: {
+        myData: null, // or any default value
+      },
+    };
+  }
 }
 
 const PDFToTIFFPage = ({ myData }) => {

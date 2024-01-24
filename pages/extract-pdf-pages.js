@@ -40,20 +40,51 @@ import SelectOptionFormStep from "../components/SelectOptionFormStep";
 import EditFilesFormStep from "../components/EditFilesFormStep";
 import Alerts from "../components/Alerts";
 import pageStyles from "../styles/Page.module.css";
+// export async function getStaticProps({ locale }) {
+//   const url = `${process.env.API_URL}/extract-pdf-pages`;
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   const { page } = data;
+//   return {
+//     props: {
+//       myData: page,
+//       ...(await serverSideTranslations(locale, [
+//         "common",
+//         "extract-pdf-pages",
+//       ])),
+//     },
+//   };
+// }
+
 export async function getStaticProps({ locale }) {
-  const url = `${process.env.API_URL}/extract-pdf-pages`;
-  const response = await fetch(url);
-  const data = await response.json();
-  const { page } = data;
-  return {
-    props: {
-      myData: page,
-      ...(await serverSideTranslations(locale, [
-        "common",
-        "extract-pdf-pages",
-      ])),
-    },
-  };
+  try {
+    const url = `${process.env.API_URL}/extract-pdf-pages`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from ${url}`);
+    }
+
+    const data = await response.json();
+    const { page } = data;
+
+    return {
+      props: {
+        myData: page,
+        ...(await serverSideTranslations(locale, [
+          "common",
+          "extract-pdf-pages",
+        ])),
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    return {
+      props: {
+        myData: null, // or any default value
+      },
+    };
+  }
 }
 
 const ExtractPagesPage = ({ myData }) => {

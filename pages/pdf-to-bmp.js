@@ -44,17 +44,47 @@ import SelectOptionFormStep from "../components/SelectOptionFormStep";
 import Alerts from "../components/Alerts";
 import pageStyles from "../styles/Page.module.css";
 
+// export async function getStaticProps({ locale }) {
+//   const url = `${process.env.API_URL}/pdf-to-bmp`;
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   const { page } = data;
+//   return {
+//     props: {
+//       myData: page,
+//       ...(await serverSideTranslations(locale, ["common", "pdf-to-bmp"])),
+//     },
+//   };
+// }
 export async function getStaticProps({ locale }) {
-  const url = `${process.env.API_URL}/pdf-to-bmp`;
-  const response = await fetch(url);
-  const data = await response.json();
-  const { page } = data;
-  return {
-    props: {
-      myData: page,
-      ...(await serverSideTranslations(locale, ["common", "pdf-to-bmp"])),
-    },
-  };
+  try {
+    const url = `${process.env.API_URL}/pdf-to-bmp`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from ${url}`);
+    }
+
+    const data = await response.json();
+    const { page } = data;
+
+    return {
+      props: {
+        myData: page,
+        ...(await serverSideTranslations(locale, [
+          "common",
+          "pdf-to-bmp",
+        ])),
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    return {
+      props: {
+        myData: null, // or any default value
+      },
+    };
+  }
 }
 
 const PDFToBMPPage = ({ myData }) => {
