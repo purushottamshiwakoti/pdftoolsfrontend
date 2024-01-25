@@ -1,40 +1,31 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-} from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
-import Selecto from "react-selecto";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import React, { useEffect, useRef, useState } from "react";
+import { isMobile } from "react-device-detect";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
-import { isMobile } from "react-device-detect";
-import PagePreviwerModal from "../components/PagePreviwerModal";
-import PageDragLayer from "../components/PageDragLayer";
+import Selecto from "react-selecto";
+import AvailableTools from "../components/AvailableTools";
 import DocumentPreviewDraggable from "../components/DocumentPreviewDraggable";
+import EditFilesFormStep from "../components/EditFilesFormStep";
+import Features from "../components/Features";
+import PageDragLayer from "../components/PageDragLayer";
+import PagePreviwerModal from "../components/PagePreviwerModal";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
 import {
   handleMerge,
   handlePDFOperationsFileSelection,
 } from "../helpers/utils.js";
-import Steps from "../components/Steps";
-import styles from "../styles/UploadContainer.module.css";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import AvailableTools from "../components/AvailableTools";
 import usePages from "../hooks/usePages";
 import useToolsData from "../hooks/useToolsData";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
-import { icons } from "../lib/icons.js";
 
 export async function getStaticProps({ locale }) {
   return {
@@ -48,19 +39,10 @@ export async function getStaticProps({ locale }) {
 
 const MergePDFPage = () => {
   const [myData, setData] = useState(null);
-  const targetIcon = "ShieldFillCheck";
-  const foundIcon = icons.find((ico) => ico.name === targetIcon);
-
-  if (foundIcon) {
-    console.log("Icon found:", foundIcon);
-  } else {
-    console.log("Icon not found");
-  }
-
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/hello")
+    fetch(`/api/data/${"merge-pdf"}`)
       .then((res) => res.json())
       .then((data) => {
         const { page } = data;

@@ -23,6 +23,7 @@
     "jszip": "^3.10.1",
     "next": "^13.4.5",
     "next-i18next": "^11.0.0",
+    "nextjs-toploader": "^1.6.4",
     "pdf-lib": "^1.17.1",
     "pdfkit": "^0.13.0",
     "prop-types": "^15.8.1",

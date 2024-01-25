@@ -42,8 +42,10 @@ const Layout = ({ children }) => {
       <ToastAlert />
       <BackToTopButton />
 
-      <Nav />
-      <div className="main">{children}</div>
+      <div>
+        <Nav />
+      </div>
+      <div className="main mt-28">{children}</div>
       <Footer />
     </div>
   );
