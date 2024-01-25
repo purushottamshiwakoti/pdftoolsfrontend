@@ -18,16 +18,17 @@ const Features = React.memo(function Features({ title, featuresArray }) {
           <section>
             <div className={`${styles.features_container}`}>
               <div className={`${styles.features_wrapper}`}>
-                {featuresArray.map((feature, i) => {
-                  return (
-                    <Feature
-                      key={"feature" + i}
-                      title={feature.title}
-                      description={feature.description}
-                      icon={feature.icon}
-                    />
-                  );
-                })}
+                {featuresArray &&
+                  featuresArray.map((feature, i) => {
+                    return (
+                      <Feature
+                        key={"feature" + i}
+                        title={feature.title}
+                        description={feature.description}
+                        icon={feature.icon}
+                      />
+                    );
+                  })}
               </div>
             </div>
           </section>

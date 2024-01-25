@@ -39,6 +39,9 @@ import styles from "../styles/UploadContainer.module.css";
 import useToolsData from "../hooks/useToolsData";
 import Alerts from "../components/Alerts.js";
 import pageStyles from "../styles/Page.module.css";
+
+import parse from "html-react-parser";
+
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/bmp-to-pdf`;
 //   const response = await fetch(url);
@@ -590,7 +593,7 @@ const BMPToPDFPage = ({ myData }) => {
           featuresArray={myData.Features.map((item) => ({
             title: item.title,
             description: item.description,
-            icon: <GearFill />,
+            icon: <item.icon />,
           }))}
         />
         {/* features end */}

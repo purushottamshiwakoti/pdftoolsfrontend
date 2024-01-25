@@ -23,15 +23,16 @@ const Steps = React.memo(function Steps({ title, stepsArray }) {
           }}
         >
           <div>
-            {stepsArray.map((step, i) => {
-              return (
-                <Step
-                  key={"step" + i}
-                  number={step.number}
-                  description={step.description}
-                />
-              );
-            })}
+            {stepsArray &&
+              stepsArray.map((step, i) => {
+                return (
+                  <Step
+                    key={"step" + i}
+                    number={step.number}
+                    description={step.description}
+                  />
+                );
+              })}
           </div>
         </section>
       </article>
