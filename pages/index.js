@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -6,6 +6,7 @@ import { useTranslation } from "next-i18next";
 import styles from "../styles/index.module.css";
 import Share from "../components/Share";
 import useToolsData from "../hooks/useToolsData";
+import parse from "html-react-parser";
 
 export async function getStaticProps({ locale }) {
   return {
@@ -17,7 +18,19 @@ export async function getStaticProps({ locale }) {
 
 const Home = () => {
   const toolsData = useToolsData();
+  const [myData, setData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    fetch(`/api/other/${"home"}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const { page } = data;
+        setData(page);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <>
@@ -125,8 +138,20 @@ const Home = () => {
       <>
         <main>
           <header className="page_section header mb-0">
-            <h1 className="title">{t("common:page_header_title")}</h1>
-            <p className="description">{t("common:page_header_text")}</p>
+            {/* <h1 className="title">{t("common:page_header_title")}</h1> */}
+            {isLoading ? (
+              <h1 className="title bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse"></h1>
+            ) : (
+              <h1 className="title">{myData.title}</h1>
+            )}
+            {/* <p className="description">{t("common:page_header_text")}</p>  */}
+            {isLoading ? (
+              <p className="title bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
+            ) : (
+              <p className="description">
+                {myData?.description && parse(myData.description)}
+              </p>
+            )}
           </header>
           <section className="page_section mt-0">
             <article className="container">

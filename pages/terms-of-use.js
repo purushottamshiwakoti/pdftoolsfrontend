@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import pageStyles from "../styles/Page.module.css";
+import parse from "html-react-parser";
+
 export async function getStaticProps({ locale }) {
   return {
     props: {
@@ -12,7 +14,19 @@ export async function getStaticProps({ locale }) {
 }
 
 const TermsOfUse = () => {
+  const [myData, setData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    fetch(`/api/other/${"terms-and-conditions"}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const { page } = data;
+        setData(page);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <>
@@ -29,13 +43,18 @@ const TermsOfUse = () => {
 
       <main>
         <header className="page_section header mb-0">
-          <h1 className="title">{t("common:terms")}</h1>
+          {/* <h1 className="title">{t("common:terms")}</h1> */}
+          {isLoading ? (
+            <h1 className="title bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse"></h1>
+          ) : (
+            <h1 className="title">{myData.title}</h1>
+          )}
         </header>
         <section className="page_section mt-0">
           <article className="container">
             <section>
               <div className={`${pageStyles.paragraph_text}`}>
-                <h3>{t("terms:title_01")}</h3>
+                {/* <h3>{t("terms:title_01")}</h3>
                 <p>{t("terms:paragraph_01")}</p>
                 <h3>{t("terms:title_02")}</h3>
                 <p>{t("terms:paragraph_02")}</p>
@@ -48,7 +67,16 @@ const TermsOfUse = () => {
                   <li>{t("terms:section_list_item_01")}</li>
                   <li>{t("terms:section_list_item_02")}</li>
                   <li>{t("terms:section_list_item_03")}</li>
-                </ul>
+                </ul> */}
+                {isLoading ? (
+                  <div className="space-y-4">
+                    <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
+                    <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
+                    <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
+                  </div>
+                ) : (
+                  myData?.description && parse(myData.description)
+                )}
               </div>
             </section>
           </article>

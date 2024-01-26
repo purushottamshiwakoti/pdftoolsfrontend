@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import pageStyles from "../styles/Page.module.css";
+import parse from "html-react-parser";
+
 export async function getStaticProps({ locale }) {
   return {
     props: {
@@ -12,7 +14,19 @@ export async function getStaticProps({ locale }) {
 }
 
 const Contacts = () => {
+  const [myData, setData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    fetch(`/api/other/${"about"}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const { page } = data;
+        setData(page);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <>
@@ -27,14 +41,28 @@ const Contacts = () => {
       </Head>
       <main>
         <header className="page_section header mb-0">
-          <h1 className="title">{t("common:contact")}</h1>
+          {isLoading ? (
+            <h1 className="title bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse"></h1>
+          ) : (
+            <h1 className="title">{myData.title}</h1>
+          )}
         </header>
         <section className="page_section mt-0">
           <article className="container">
             <section>
-              <p className={`${pageStyles.paragraph_text}`}>
+              {/* <p className={`${pageStyles.paragraph_text}`}>
                 {t("contact:contact_text")}
-              </p>
+              </p> */}
+
+              {isLoading ? (
+                <div className="space-y-4">
+                  <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
+                  <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
+                  <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
+                </div>
+              ) : (
+                myData?.description && parse(myData.description)
+              )}
             </section>
           </article>
         </section>
