@@ -322,13 +322,8 @@ const PDFToPNGPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>
-          Free Online PDF to PNG Converter | Best PDF to PNG Converter
-        </title>
-        <meta
-          name="description"
-          content="Convert your PDF files to high-quality PNG images in just a few clicks with our online tool. Fast, easy, and free!"
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PDF to PNG conversion, online tool, convert PDF to PNG, free, high-quality images."

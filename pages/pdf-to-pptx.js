@@ -259,13 +259,8 @@ const PDFToPPTXPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>
-          Convert PDF to Powerpoint | Best PDF to Powerpoint Converter Online
-        </title>
-        <meta
-          name="description"
-          content="Convert your PDFs to PowerPoint slideshows with our easy-to-use online tool. Perfect for professionals and students alike"
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PDF to PowerPoint, convert PDF to PowerPoint, PDF to PPT, PDF converter, online converter"

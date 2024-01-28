@@ -250,11 +250,8 @@ const WORDToPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>WORD To PDF Online | Best WORD To PDF Converter Online</title>
-        <meta
-          name="description"
-          content="Convert Word documents to PDF format online quickly and easily with our free Word to PDF converter tool. No installation or registration required."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="Word to PDF, convert Word to PDF, online Word to PDF converter, free Word to PDF converter, Word to PDF online, Word to PDF conversion tool"

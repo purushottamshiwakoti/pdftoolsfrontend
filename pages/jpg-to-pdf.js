@@ -321,11 +321,8 @@ const JPGToPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Convert JPG To PDF | Best JPG To PDF Convertor Online</title>
-        <meta
-          name="description"
-          content="Convert JPG images to high-quality PDF documents quickly and easily with our online JPG to PDF converter. Choose from customizable settings for margins, page size, and orientation."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="JPG to PDF converter, online converter, convert images to PDF, PDF creation, customizable settings, high-quality output"

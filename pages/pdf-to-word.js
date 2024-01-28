@@ -253,11 +253,8 @@ const PDFToWordPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Convert PDF to Word | Best PDF to Word Converter Online</title>
-        <meta
-          name="description"
-          content="Convert your PDF documents to editable Microsoft Word format with our online tool. Retain the formatting, layout, and images of your PDF files in the resulting Word document."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PDF to Word, convert PDF to Word, PDF to Word converter, online PDF to Word converter, convert PDF to editable Word, PDF to Word online, PDF to Word conversion tool"

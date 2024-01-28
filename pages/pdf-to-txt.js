@@ -260,11 +260,8 @@ const PDFToTextPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Convert PDF to Text | Best PDF to Text Converter Online</title>
-        <meta
-          name="description"
-          content="Convert PDF files to TXT format quickly and easily with our online tool. Preserve the original formatting and layout of the document."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PDF to TXT converter, convert PDF to text, online PDF to TXT converter, extract text from PDF"

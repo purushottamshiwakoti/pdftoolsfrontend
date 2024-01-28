@@ -321,11 +321,8 @@ const PNGToPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Convert PNG To PDF | Best PNG To PDF Converter Online</title>
-        <meta
-          name="description"
-          content="Convert your PNG images to PDF format quickly and easily with our online tool. No installation or registration is required."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PNG to PDF converter, convert PNG to PDF, online PNG to PDF converter, free PNG to PDF converter, PNG image to PDF conversion."

@@ -257,13 +257,8 @@ const GrayscalePDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>
-          Grayscale Your PDF | Best PDF To Grayscale Convertor Online
-        </title>
-        <meta
-          name="description"
-          content="Convert your colorful PDF documents to grayscale with our online tool. Reduce the file size and make it easier to print and read."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="Convert your colorful PDF documents to grayscale with our online tool. Reduce the file size and make it easier to print and read."

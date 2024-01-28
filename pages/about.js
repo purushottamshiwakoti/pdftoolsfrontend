@@ -33,11 +33,8 @@ const About = () => {
     <>
       <Head>
         {/* Anything you add here will be added this page only */}
-        <title>About Us</title>
-        <meta
-          name="description"
-          content="Learn more about our PDF tools web app, including its features, capabilities, and commitment to fast, reliable, and secure document manipulation. Discover how our app can help you merge, split, compress, convert, and more with ease."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PDF tools, PDF manipulation, PDF merge, PDF split, PDF compress, PDF convert"

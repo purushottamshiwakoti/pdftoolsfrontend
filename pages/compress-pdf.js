@@ -43,7 +43,6 @@ import pageStyles from "../styles/Page.module.css";
 
 import parse from "html-react-parser";
 
-
 export async function getStaticProps({ locale }) {
   return {
     props: {
@@ -452,11 +451,8 @@ const CompressPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Compress PDF | Best PDF Compressor Online</title>
-        <meta
-          name="description"
-          content="Use our online PDF compressor to reduce the size of your PDF files and make them easier to share and store, without losing quality or important information."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="compress PDF, online PDF compressor, reduce PDF size, PDF compression tool, compress PDF online, compress PDF files"

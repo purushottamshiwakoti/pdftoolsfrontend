@@ -146,11 +146,8 @@ const PDFToZipPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Convert PDF To ZIP | Best PDF To ZIP Converter Online</title>
-        <meta
-          name="description"
-          content="Convert your PDF files to ZIP format quickly and easily with our online tool. Protect your files and save storage space by compressing them into a ZIP archive."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PDF to ZIP Conversion, Online PDF to ZIP Converter, Convert PDF to ZIP, PDF to ZIP Compression, PDF to ZIP File Conversion"

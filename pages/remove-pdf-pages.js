@@ -263,11 +263,8 @@ const DeletePDFPages = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Remove Pages from PDF | Best PDF Pages Remover Online</title>
-        <meta
-          name="description"
-          content="Remove unwanted pages from your PDF documents online with ease using our remove PDF pages tool. It's fast, free, and easy to use!"
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="remove pdf pages, pdf page remover, delete pdf pages, pdf page delete, online pdf page remover, remove specific pages from pdf, remove pages from pdf online"

@@ -319,11 +319,8 @@ const PDFToBMPPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Convert PDF to BMP | Best PDF to BMP Converter Online</title>
-        <meta
-          name="description"
-          content="Convert your PDF files to BMP format easily and quickly with our online PDF to BMP converter tool."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PDF to BMP, convert PDF to BMP, online PDF to BMP converter, free PDF to BMP converter, PDF to BMP conversion tool"

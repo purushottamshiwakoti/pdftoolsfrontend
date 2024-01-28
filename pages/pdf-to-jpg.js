@@ -323,11 +323,8 @@ const PDFToJPGPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Convert PDF to JPG | Best PDF to JPG Converter Online</title>
-        <meta
-          name="description"
-          content="Convert your PDF files to high-quality JPG images with our fast and easy-to-use online PDF to JPG converter tool. No need to install any software, simply upload your PDF file and download the converted JPG images."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PDF to JPG converter, convert PDF to JPG, online PDF to JPG converter, PDF to JPG conversion tool, free PDF to JPG converter, PDF to image converter."

@@ -249,11 +249,8 @@ const EXCELToPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>EXCEL To PDF | Best EXCEL To PDF Converter Online</title>
-        <meta
-          name="description"
-          content="Convert your Excel files to high-quality PDF documents online. No installation or registration required. Protect your data and maintain formatting with our reliable Excel to PDF converter."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="Excel to PDF, XLS to PDF, XLSX to PDF, convert Excel to PDF, online converter, free, high-quality, secure, no watermark, no registration"

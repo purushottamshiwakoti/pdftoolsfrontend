@@ -322,11 +322,8 @@ const BMPToPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Convert BMP To PDF | Best BMP To PDF Convertor Online</title>
-        <meta
-          name="description"
-          content="Convert BMP images to PDF format online with our free and easy-to-use BMP to PDF converter tool. No installation or registration required."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="BMP to PDF converter, convert BMP to PDF online, free BMP to PDF converter, BMP to PDF online conversion, BMP to PDF online converter"

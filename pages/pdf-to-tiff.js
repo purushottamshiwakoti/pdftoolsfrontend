@@ -322,11 +322,8 @@ const PDFToTIFFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Convert PDF to TIFF | Best PDF to TIFF Converter Online</title>
-        <meta
-          name="description"
-          content="Convert PDF files to TIFF images with our online PDF to TIFF converter tool. Select specific pages or convert all pages. Fast, secure, and easy to use."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PDF to TIFF, PDF to TIFF converter, PDF to TIFF online, convert PDF to TIFF, online PDF to TIFF converter, PDF to TIFF conversion, TIFF from PDF, PDF to TIFF tool"

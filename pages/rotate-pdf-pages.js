@@ -230,11 +230,8 @@ const RotatePDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Rotate PDF | Best PDF Rotator Online</title>
-        <meta
-          name="description"
-          content="Use our online tool to rotate pages in your PDF document. Rotate all or specific pages in a few clicks."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="rotate pdf pages online, rotate specific pages in pdf, pdf page orientation, online pdf page rotator, rotate pdf files online, pdf document rotator"

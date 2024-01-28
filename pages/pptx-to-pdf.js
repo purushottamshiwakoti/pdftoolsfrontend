@@ -251,13 +251,8 @@ const PPTXToPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>
-          Convert Powerpoint To PDF | Best Powerpoint To PDF Converter Online
-        </title>
-        <meta
-          name="description"
-          content="Use our online Powerpoint to PDF conversion tool to quickly and easily convert your PPT or PPTX files to high-quality PDFs. Preserve formatting and make your presentations accessible to anyone with our simple tool."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="Powerpoint to PDF, PPT to PDF, PPTX to PDF, convert Powerpoint to PDF, online Powerpoint to PDF converter"

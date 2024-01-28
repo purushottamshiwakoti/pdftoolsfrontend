@@ -366,11 +366,8 @@ const ExtractPagesPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Extract PDF Pages | Best PDF Pages Extractor Online</title>
-        <meta
-          name="description"
-          content="Extract specific pages from your PDF file online using our free extract PDF pages tool. No installation or registration required."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="extract pdf pages, pdf page extractor, extract specific pages from pdf, free online pdf page extractor."

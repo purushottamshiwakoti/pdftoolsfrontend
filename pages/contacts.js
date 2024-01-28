@@ -32,8 +32,8 @@ const Contacts = () => {
     <>
       <Head>
         {/* Anything you add here will be added this page only */}
-        <title>Contact Us</title>
-        <meta name="description" content="" />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta name="Keywords" content="" />
         <meta name="robots" content="noindex,nofollow" />
         {/* You can add your canonical here */}

@@ -238,11 +238,8 @@ const UnlockPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Unlock PDF File | Best PDF Passowrd Remover Online</title>
-        <meta
-          name="description"
-          content="Unlock your password-protected PDF files quickly and easily with our online Unlock PDF tool. No need to install software or provide personal information. Simply upload your file, enter the password, and download the unlocked PDF in seconds."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="Unlock PDF, Remove PDF password, PDF password remover, PDF unlocker, PDF decryption tool, Online PDF unlock, Free PDF unlock, Secure PDF unlock, PDF password cracker, PDF password recovery"

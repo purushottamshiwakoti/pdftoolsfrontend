@@ -320,11 +320,8 @@ const TIFFToPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Convert TIFF To PDF | Best TIFF To PDF Convertor Online</title>
-        <meta
-          name="description"
-          content="Convert TIFF images to PDF online for free. Preserve the quality of your images and simplify document sharing with our easy-to-use TIFF to PDF converter tool."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="TIFF to PDF converter, online TIFF to PDF converter, convert TIFF to PDF, free TIFF to PDF converter, TIFF to PDF conversion, TIFF to PDF online converter"

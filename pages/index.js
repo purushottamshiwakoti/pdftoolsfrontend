@@ -36,11 +36,8 @@ const Home = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>PDF Online Tools | Free, Easy, and Quick Online PDF tools</title>
-        <meta
-          name="description"
-          content="Convert, compress, and edit PDF files online with our free PDF tool. No downloads required. Easily convert PDF to Word, Excel, JPG, PNG, and more."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PDF tool, PDF converter, PDF editor, PDF compressor, online PDF tool, free PDF tool, PDF to Word, PDF to Excel, PDF to JPG, PDF to PNG, edit PDF online, compress PDF online."

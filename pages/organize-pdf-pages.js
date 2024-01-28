@@ -272,11 +272,8 @@ const OrganizePDFPages = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Organize PDF Pages | Best PDF Organizer Online</title>
-        <meta
-          name="description"
-          content="Organize your PDF pages easily with our online tool. Rearrange, delete, or add pages to your PDF document with just a few clicks."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="organize pdf pages, rearrange pdf pages, delete pdf pages, add pdf pages, online tool"

@@ -254,11 +254,8 @@ const TextToPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Text To PDF Online | Best Text To PDF Converter</title>
-        <meta
-          name="description"
-          content="Easily convert TXT files to PDF online with our free tool. No registration or installation needed."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="TXT to PDF converter, convert TXT to PDF, online TXT to PDF converter, free TXT to PDF converter, convert plain text to PDF"

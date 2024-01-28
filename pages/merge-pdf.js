@@ -244,11 +244,8 @@ const MergePDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Merge PDF Files | Best PDF Files Merger Online</title>
-        <meta
-          name="description"
-          content="Combine multiple PDF files into a single document with our easy-to-use PDF Merger tool. Rearrange, delete or rotate pages as needed. Fast and secure, with no need to upload files to our server. Try it for free today!"
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="PDF Merger, combine PDF files, merge PDF files, rearrange pages, delete pages, rotate pages, online PDF tool, free PDF tool"

@@ -220,11 +220,8 @@ const ProtectPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Protect PDF | Best PDF Passowrd Protection Online</title>
-        <meta
-          name="description"
-          content="Protect your PDF files from unauthorized access with our secure online tool. Encrypt and password-protect your PDF documents quickly and easily."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="Protect PDF, PDF protection, PDF encryption, secure PDF, password protect PDF, online PDF protection, PDF security, PDF password, PDF security tool, PDF encryption tool"

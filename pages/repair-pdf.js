@@ -254,11 +254,8 @@ const RepairPDFPage = () => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>Repair PDF | Best PDF Repairing Tool Online</title>
-        <meta
-          name="description"
-          content="Repair your damaged PDF files quickly and easily with our online repair tool."
-        />
+        <title>{myData?.metaTitle}</title>
+        <meta name="description" content={myData?.metaDescription} />
         <meta
           name="Keywords"
           content="Repair PDF, online repair tool, damaged PDF files, corrupted PDF files, PDF file repair"
