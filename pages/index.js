@@ -7,6 +7,7 @@ import styles from "../styles/index.module.css";
 import Share from "../components/Share";
 import useToolsData from "../hooks/useToolsData";
 import parse from "html-react-parser";
+import Image from "next/image";
 
 export async function getStaticProps({ locale }) {
   return {
@@ -150,6 +151,28 @@ const Home = () => {
               </p>
             )}
           </header>
+          <section className="hero mx-[12rem] mt-20 mb-32">
+            <div className="flex items-center justify-between">
+              <div className="space-y-4">
+                <h1 className="text-[#7D64FF] font-bold tracking-wider text-5xl">
+                  We make PDF easy.
+                </h1>
+                <p className="w-[40rem] mr-20 tracking-normal text-xl">
+                  All the tools you’ll need to be more productive and work
+                  smarter with documents.
+                </p>
+                <div></div>
+              </div>
+              <div>
+                <Image
+                  src={"/img/banner.jpg"}
+                  alt="hello"
+                  width={700}
+                  height={400}
+                />
+              </div>
+            </div>
+          </section>
           <section className="page_section mt-0">
             <article className="container">
               <section
