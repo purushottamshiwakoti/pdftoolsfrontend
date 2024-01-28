@@ -417,9 +417,9 @@ const MergePDFPage = () => {
         {isLoading ? (
           <div className="flex items-center justify-center w-full ">
             <div className="bg-[#F1EEFF] w-[20rem] md:w-[40rem] lg:w-[72rem] p-4 rounded-md h-[20rem] lg:h-[30rem]">
-              <p className="mt-3 lg:mt-10  items-center justify-center flex">
+              <div className="mt-3 lg:mt-10  items-center justify-center flex">
                 <div className="bg-slate-200 h-6 w-[10rem] md:w-[20rem] lg:w-[25rem] animate-pulse"></div>
-              </p>
+              </div>
               <div className="mt-16 space-y-10">
                 <div className="bg-slate-200 h-6 lg:w-[25rem] animate-pulse"></div>
                 <div className="bg-slate-200 h-6 lg:w-[25rem] animate-pulse"></div>
@@ -467,9 +467,9 @@ const MergePDFPage = () => {
         {isLoading ? (
           <div className="flex items-center justify-center w-full   ">
             <div className="bg-[#F1EEFF]  w-[20rem] md:w-[40rem] lg:w-[72rem] p-4 rounded-md h-[30rem] mt-10">
-              <p className="mt-3 lg:mt-10  items-center justify-center flex">
+              <div className="mt-3 lg:mt-10  items-center justify-center flex">
                 <div className="bg-slate-200 h-6  w-[10rem] md:w-[20rem] lg:w-[25rem] animate-pulse"></div>
-              </p>
+              </div>
               <div className="mt-16 space-x-10 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
                 <div className="bg-slate-200 h-[14rem] lg:h-[15rem] lg:w-[20rem] animate-pulse"></div>
                 <div className="bg-slate-200 lg:h-[15rem] lg:w-[20rem] animate-pulse"></div>
