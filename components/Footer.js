@@ -52,6 +52,11 @@ const Footer = React.memo(function Footer() {
                   {t("common:contact")}
                 </Link>
               </li>
+              <li>
+                <Link href="/blogs" prefetch={false}>
+                  {"Blogs"}
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
