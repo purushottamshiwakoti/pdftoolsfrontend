@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { Button } from "@/components/ui/button";
+import parse from "html-react-parser";
 import { useTranslation } from "next-i18next";
-import styles from "../styles/index.module.css";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { ArrowRight, Quote, StarFill } from "react-bootstrap-icons";
 import Share from "../components/Share";
 import useToolsData from "../hooks/useToolsData";
-import parse from "html-react-parser";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { ArrowRight, Quote, Star, StarFill } from "react-bootstrap-icons";
+import styles from "../styles/index.module.css";
 
 export async function getStaticProps({ locale }) {
   return {
@@ -24,6 +23,9 @@ const Home = () => {
   const [isWindows, setIsWindows] = useState(false);
   const toolsData = useToolsData();
   const [myData, setData] = useState(null);
+  const [settingsArray, setSettingsArray] = useState(null);
+
+  console.log(settingsArray);
   const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
 
@@ -33,6 +35,7 @@ const Home = () => {
       .then((data) => {
         const { page } = data;
         setData(page);
+        setSettingsArray(page.Settings[0]);
         setLoading(false);
         setIsWindows(navigator.userAgent.includes("Windows"));
       });
@@ -163,33 +166,59 @@ const Home = () => {
           >
             <div className=" space-y-7 lg:flex items-center justify-around">
               <div className="lg:space-y-7 space-y-5">
-                <h1 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-5xl ">
-                  We make PDF easy.
-                </h1>
-                <p className="lg:w-[40rem] lg:mr-20 tracking-normal text-xl">
-                  All the tools you’ll need to be more productive and work
-                  smarter with documents.
-                </p>
+                {isLoading ? (
+                  <div className="bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse"></div>
+                ) : (
+                  <h1 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-5xl ">
+                    {settingsArray?.title}
+                  </h1>
+                )}
+                {isLoading ? (
+                  <div className="space-y-1">
+                    <div className="bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse" />
+                    <div className="bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse" />
+                  </div>
+                ) : (
+                  <p className="lg:w-[40rem] lg:mr-20 tracking-normal text-xl">
+                    {settingsArray?.description}
+                  </p>
+                )}
                 <div className="md:space-x-6 space-y-2">
-                  <Button asChild className="w-full md:w-auto " size="lg">
-                    <Link href={"/merge-pdf"}>Merge pdf</Link>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    asChild
-                    className="w-full md:w-auto "
-                  >
-                    <Link href={"/compress-pdf"}>Compress pdf</Link>
-                  </Button>
+                  {isLoading ? (
+                    <div className="h-[30px] w-[20px] md:w-auto bg-slate-200 flex animate-pulse" />
+                  ) : (
+                    <Button asChild className="w-full md:w-auto " size="lg">
+                      <Link href={settingsArray?.buttonHref}>
+                        {settingsArray?.button}
+                      </Link>
+                    </Button>
+                  )}
+                  {isLoading ? (
+                    <div className="h-[30px] flex w-[20px] md:w-auto bg-slate-200 animate-pulse" />
+                  ) : (
+                    <Button
+                      variant="outline"
+                      asChild
+                      className="w-full md:w-auto "
+                    >
+                      <Link href={settingsArray?.buttonTwoHref}>
+                        {settingsArray?.buttonTwo}
+                      </Link>
+                    </Button>
+                  )}
                 </div>
               </div>
               <div>
-                <Image
-                  src={"/img/banner.jpg"}
-                  alt="hello"
-                  width={700}
-                  height={400}
-                />
+                {isLoading ? (
+                  <div className="w-[500px] h-[500px] bg-slate-200 animate-pulse"></div>
+                ) : (
+                  <Image
+                    src={settingsArray?.image}
+                    alt={settingsArray?.imageAlt}
+                    width={700}
+                    height={400}
+                  />
+                )}
               </div>
             </div>
           </section>
@@ -236,24 +265,28 @@ const Home = () => {
             } mx-[1rem] md:mx-[3.8rem]`}
           >
             <div className="space-y-3 mb-10">
-              <h2 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl text-center ">
-                We make PDF easy.
-              </h2>
-              <p className="tracking-normal text-xl text-center text-black/70  ">
-                All the tools you’ll need to be more productive and work smarter
-                All the tools you’ll need to be more productive and work smarter
-                All the tools you’ll need to be more productive and work smarter
-                with documents.
-              </p>
+              {isLoading ? (
+                <h2 className="w-[30px] h-[10px] bg-slate-200 animate-pulse font-bold tracking-wider text-3xl md:text-4xl text-center "></h2>
+              ) : (
+                <h2 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl text-center ">
+                  {settingsArray?.tasksTitle}
+                </h2>
+              )}
+              {isLoading ? (
+                <p className="tracking-normal text-xl text-center text-black/70 w-[50px] h-[10px] bg-slate-200  "></p>
+              ) : (
+                <p className="tracking-normal text-xl text-center text-black/70  ">
+                  {settingsArray?.tasksDescription}
+                </p>
+              )}
             </div>
             <div className=" space-y-7 lg:flex items-center justify-around">
               <div className="lg:space-y-7 space-y-5">
                 <h2 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-5xl ">
-                  We make PDF easy.
+                  {settingsArray?.tasksSubTitle}
                 </h2>
                 <p className="lg:w-[40rem] lg:mr-20 tracking-normal text-xl">
-                  All the tools you’ll need to be more productive and work
-                  smarter with documents.
+                  {settingsArray?.tasksSubDescription}
                 </p>
                 <div className="">
                   <Button
@@ -262,17 +295,20 @@ const Home = () => {
                     size="lg"
                     variant="outline"
                   >
-                    <Link href={"/merge-pdf"}>
-                      Merge pdf
-                      <ArrowRight className="ml-1 w-5 h-5" />
-                    </Link>
+                    {settingsArray && (
+                      <Link href={settingsArray?.tasksButtonHref}>
+                        {settingsArray?.tasksButton}
+
+                        <ArrowRight className="ml-1 w-5 h-5" />
+                      </Link>
+                    )}
                   </Button>
                 </div>
               </div>
               <div>
                 <Image
-                  src={"/img/banner.jpg"}
-                  alt="hello"
+                  src={settingsArray?.tasksImage}
+                  alt={settingsArray?.tasksImageAlt}
                   width={700}
                   height={400}
                 />
@@ -432,12 +468,6 @@ const Home = () => {
               </h2>
               <div className="grid gap-6 text-center md:grid-cols-3 lg:gap-12">
                 <div className="mb-12 md:mb-0">
-                  <div className="mb-6 flex justify-center">
-                    <img
-                      src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
-                      className="w-32 rounded-full shadow-lg dark:shadow-black/30"
-                    />
-                  </div>
                   <h5 className="mb-4 text-xl font-semibold">Maria Smantha</h5>
                   <h6 className="mb-4 font-semibold text-primary dark:text-primary-500">
                     Web Developer
@@ -460,12 +490,6 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="mb-12 md:mb-0">
-                  <div className="mb-6 flex justify-center">
-                    <img
-                      src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
-                      className="w-32 rounded-full shadow-lg dark:shadow-black/30"
-                    />
-                  </div>
                   <h5 className="mb-4 text-xl font-semibold">Maria Smantha</h5>
                   <h6 className="mb-4 font-semibold text-primary dark:text-primary-500">
                     Web Developer
@@ -488,12 +512,6 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="mb-12 md:mb-0">
-                  <div className="mb-6 flex justify-center">
-                    <img
-                      src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
-                      className="w-32 rounded-full shadow-lg dark:shadow-black/30"
-                    />
-                  </div>
                   <h5 className="mb-4 text-xl font-semibold">Maria Smantha</h5>
                   <h6 className="mb-4 font-semibold text-primary dark:text-primary-500">
                     Web Developer
