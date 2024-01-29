@@ -5,7 +5,7 @@ module.exports = {
   swcMinify: true,
   i18n,
   images: {
-    domains: ["cdnjs.cloudflare.com"],
+    domains: ["cdnjs.cloudflare.com", "res.cloudinary.com"  ],
   },
   env: {
     NEXT_PUBLIC_GA_ID: "your_google_analytics_tracking_id",

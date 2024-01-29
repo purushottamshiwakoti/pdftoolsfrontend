@@ -10,6 +10,9 @@ import { ArrowRight, Quote, StarFill } from "react-bootstrap-icons";
 import Share from "../components/Share";
 import useToolsData from "../hooks/useToolsData";
 import styles from "../styles/index.module.css";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import Reviews from "@/components/Reviews";
+import GoodCompany from "@/components/GoodCompany";
 
 export async function getStaticProps({ locale }) {
   return {
@@ -24,10 +27,13 @@ const Home = () => {
   const toolsData = useToolsData();
   const [myData, setData] = useState(null);
   const [settingsArray, setSettingsArray] = useState(null);
+  const [chooseUsData, setChooseUsData] = useState(null);
+  const [reviewsData, setReviewsData] = useState(null);
+  const [CompanyImagesData, setCompanyImageData] = useState(null);
 
-  console.log(settingsArray);
   const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
+
 
   useEffect(() => {
     fetch(`/api/other/${"home"}`)
@@ -38,6 +44,21 @@ const Home = () => {
         setSettingsArray(page.Settings[0]);
         setLoading(false);
         setIsWindows(navigator.userAgent.includes("Windows"));
+      });
+    fetch(`/api/choose-us`)
+      .then((res) => res.json())
+      .then((data) => {
+        setChooseUsData(data.data);
+      });
+    fetch(`/api/reviews`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReviewsData(data.data);
+      });
+    fetch(`/api/company-image`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCompanyImageData(data.data);
       });
   }, []);
 
@@ -322,97 +343,7 @@ const Home = () => {
               isWindows ? "lg:mx-[12rem]" : "lg:mx-[5rem]"
             } mx-[1rem] md:mx-[3.8rem]`}
           >
-            <div>
-              <h2 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl  text-center mb-10">
-                Why Choose Us
-              </h2>
-              <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
-                <div className="space-y-3 mb-10">
-                  <Image
-                    src={"/img/banner.jpg"}
-                    alt="img"
-                    width={100}
-                    height={100}
-                  />
-                  <h2 className="text-xl font-medium">People Trust Us</h2>
-                  <p className="text-black/60">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Recusandae alias est laudantium sit aut accusamus quos,
-                    eligendi quam placeat possimus!
-                  </p>
-                </div>
-                <div className="space-y-4">
-                  <Image
-                    src={"/img/banner.jpg"}
-                    alt="img"
-                    width={100}
-                    height={100}
-                  />
-                  <h2 className="text-xl font-medium">People Trust Us</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Recusandae alias est laudantium sit aut accusamus quos,
-                    eligendi quam placeat possimus!
-                  </p>
-                </div>
-                <div className="space-y-4">
-                  <Image
-                    src={"/img/banner.jpg"}
-                    alt="img"
-                    width={100}
-                    height={100}
-                  />
-                  <h2 className="text-xl font-medium">People Trust Us</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Recusandae alias est laudantium sit aut accusamus quos,
-                    eligendi quam placeat possimus!
-                  </p>
-                </div>
-                <div className="space-y-4">
-                  <Image
-                    src={"/img/banner.jpg"}
-                    alt="img"
-                    width={100}
-                    height={100}
-                  />
-                  <h2 className="text-xl font-medium">People Trust Us</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Recusandae alias est laudantium sit aut accusamus quos,
-                    eligendi quam placeat possimus!
-                  </p>
-                </div>
-                <div className="space-y-4">
-                  <Image
-                    src={"/img/banner.jpg"}
-                    alt="img"
-                    width={100}
-                    height={100}
-                  />
-                  <h2 className="text-xl font-medium">People Trust Us</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Recusandae alias est laudantium sit aut accusamus quos,
-                    eligendi quam placeat possimus!
-                  </p>
-                </div>
-                <div className="space-y-4">
-                  <Image
-                    src={"/img/banner.jpg"}
-                    alt="img"
-                    width={100}
-                    height={100}
-                  />
-                  <h2 className="text-xl font-medium">People Trust Us</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Recusandae alias est laudantium sit aut accusamus quos,
-                    eligendi quam placeat possimus!
-                  </p>
-                </div>
-              </div>
-            </div>
+            {chooseUsData && <WhyChooseUs data={chooseUsData} />}
           </section>
           {/* why choose us end */}
 
@@ -426,32 +357,7 @@ const Home = () => {
               <h2 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl  text-center mb-10">
                 You are in a good company
               </h2>
-              <div className="grid lg:grid-cols-4 space-y-3 md:gap-y-3 md:space-y-0 md:gap-x-4 md:grid-cols-2 grid-cols-1">
-                <Image
-                  src={"/img/facebook.jpg"}
-                  alt="facebook"
-                  width={300}
-                  height={300}
-                />
-                <Image
-                  src={"/img/col.svg"}
-                  alt="facebook"
-                  width={300}
-                  height={300}
-                />
-                <Image
-                  src={"/img/facebook.jpg"}
-                  alt="facebook"
-                  width={300}
-                  height={300}
-                />
-                <Image
-                  src={"/img/facebook.jpg"}
-                  alt="facebook"
-                  width={300}
-                  height={300}
-                />
-              </div>
+              {CompanyImagesData && <GoodCompany data={CompanyImagesData} />}
             </div>
           </section>
           {/* good company end */}
@@ -462,79 +368,7 @@ const Home = () => {
               isWindows ? "lg:mx-[12rem]" : "lg:mx-[5rem]"
             } mx-[1rem] md:mx-[3.8rem]`}
           >
-            <div>
-              <h2 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl  text-center mb-10">
-                Reviews
-              </h2>
-              <div className="grid gap-6 text-center md:grid-cols-3 lg:gap-12">
-                <div className="mb-12 md:mb-0">
-                  <h5 className="mb-4 text-xl font-semibold">Maria Smantha</h5>
-                  <h6 className="mb-4 font-semibold text-primary dark:text-primary-500">
-                    Web Developer
-                  </h6>
-
-                  <p className="mb-4 flex">
-                    <span className="w-7 h-7 ">
-                      <Quote />
-                    </span>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Quod eos id officiis hic tenetur quae quaerat ad velit ab
-                    hic tenetur.
-                  </p>
-                  <div className="flex space-x-1 justify-center items-center">
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                  </div>
-                </div>
-                <div className="mb-12 md:mb-0">
-                  <h5 className="mb-4 text-xl font-semibold">Maria Smantha</h5>
-                  <h6 className="mb-4 font-semibold text-primary dark:text-primary-500">
-                    Web Developer
-                  </h6>
-
-                  <p className="mb-4 flex">
-                    <span className="w-7 h-7 ">
-                      <Quote />
-                    </span>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Quod eos id officiis hic tenetur quae quaerat ad velit ab
-                    hic tenetur.
-                  </p>
-                  <div className="flex space-x-1 justify-center items-center">
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                  </div>
-                </div>
-                <div className="mb-12 md:mb-0">
-                  <h5 className="mb-4 text-xl font-semibold">Maria Smantha</h5>
-                  <h6 className="mb-4 font-semibold text-primary dark:text-primary-500">
-                    Web Developer
-                  </h6>
-
-                  <p className="mb-4 flex">
-                    <span className="w-7 h-7 ">
-                      <Quote />
-                    </span>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Quod eos id officiis hic tenetur quae quaerat ad velit ab
-                    hic tenetur.
-                  </p>
-                  <div className="flex space-x-1 justify-center items-center">
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                    <StarFill color="#EAB308" className="w-5 h-5" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            {reviewsData && <Reviews data={reviewsData} />}
           </section>
           {/* review end */}
         </main>
