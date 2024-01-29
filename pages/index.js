@@ -33,8 +33,6 @@ const Home = () => {
 
   const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
-
-
   useEffect(() => {
     fetch(`/api/other/${"home"}`)
       .then((res) => res.json())
@@ -68,6 +66,7 @@ const Home = () => {
         {/* Anything you add here will be added to this page only */}
         <title>{myData?.metaTitle}</title>
         <meta name="description" content={myData?.metaDescription} />
+
         <meta
           name="Keywords"
           content="PDF tool, PDF converter, PDF editor, PDF compressor, online PDF tool, free PDF tool, PDF to Word, PDF to Excel, PDF to JPG, PDF to PNG, edit PDF online, compress PDF online."

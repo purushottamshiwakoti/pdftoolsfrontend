@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Script from "next/script";
 import { useRouter } from "next/router";
 import * as gtag from "../helpers/gtag";
@@ -10,6 +10,18 @@ import NextTopLoader from "nextjs-toploader";
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
+  const [seoData, setSeoData] = useState(null);
+
+  console.log(seoData);
+
+  useEffect(() => {
+    fetch(`/api/seo-settings`)
+      .then((res) => res.json())
+      .then((data) => {
+        setSeoData(data.data);
+      });
+  }, []);
+
   useEffect(() => {
     const handleRouteChange = (url) => {
       gtag.pageview(url);
@@ -27,10 +39,17 @@ const MyApp = ({ Component, pageProps }) => {
         <meta name="theme-color" content="#2d3748" />
         <link rel="icon" href="/img/files.png" />
         <link rel="apple-touch-icon" href="/img/files.png" />
-        <meta
-          name="google-site-verification"
-          content="add-your-google-site-verification-code"
-        />
+        {seoData && (
+          <>
+            <meta
+              name="google-site-verification"
+              content={seoData.googleSiteVerificationCode}
+            />
+            <meta property="og:title" content="Social Title for Cool Page" />
+            <meta property="og:description" content={seoData.ogDescription} />
+            <meta property="og:image" content={seoData.ogImage} />
+          </>
+        )}
       </Head>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       <Script
