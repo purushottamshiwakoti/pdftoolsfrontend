@@ -131,10 +131,12 @@ const BlogsPage = () => {
             </div>
           </div>
           <div>
-            <h2 className="text-[#7D64FF]  text-3xl font-medium ">All Blogs</h2>
-            <div className="flex">
+            <h2 className="text-[#7D64FF]  text-3xl font-medium mt-4 ">
+              All Blogs
+            </h2>
+            <div className="lg:flex">
               <div className="mt-10">
-                <div className=" grid grid-cols-2   ">
+                <div className=" grid lg:grid-cols-2 grid-cols-1   ">
                   {currentItems.map((item) => (
                     <div className=" p-2 bg-white-500 rounded-lg shadow-md cursor-pointer hover:scale-105 transition-all ease-in-out duration-300 delay-200 mr-10 mb-10   ">
                       <div className="relative h-[200px] w-[320px] ">
@@ -198,27 +200,29 @@ const BlogsPage = () => {
                   ))}
                 </div>
               </div>
-              <div className=" space-y-10">
+              <div className=" space-y-10 hidden  lg:flex">
                 <PopularBlogs />
                 <BlogCategory />
               </div>
             </div>{" "}
           </div>
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={6}
-            pageCount={pageCount}
-            previousLabel="< Previous"
-            renderOnZeroPageCount={null}
-            activeClassName="bg-purple-600 text-white p-2 rounded"
-            disabledClassName="disabled"
-            containerClassName="flex space-x-5 p-2 items-end justify-center"
-            pageClassName="hover:bg-purple-200 p-2 rounded"
-            previousClassName="hover:bg-purple-200 p-2 rounded"
-            nextClassName="hover:bg-purple-200 p-2 rounded"
-          />
+          <div className="mt-2">
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="next"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={6}
+              pageCount={pageCount}
+              previousLabel="Previous"
+              renderOnZeroPageCount={null}
+              activeClassName="bg-purple-600 text-white p-2 rounded"
+              disabledClassName="disabled"
+              containerClassName="flex space-x-5 p-2 items-end justify-center"
+              pageClassName="hover:bg-purple-200 p-2 rounded"
+              previousClassName="hover:bg-purple-200 p-2 rounded"
+              nextClassName="hover:bg-purple-200 p-2 rounded"
+            />
+          </div>
         </section>
       </main>
     </>
