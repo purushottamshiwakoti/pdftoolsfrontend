@@ -1,7 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
-const BlogCategory = () => {
+const BlogCategory = ({ categoriesData }) => {
+  const searchParams = useSearchParams();
+  const searchedCategory = searchParams.get("category");
   return (
     <div>
       <Card className="w-[23rem]">
@@ -11,18 +16,28 @@ const BlogCategory = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-5">
-            <div>
-              <p>Card Content</p>
-              <Separator className="mt-2" />
-            </div>
-            <div>
-              <p>Card Content</p>
-              <Separator className="mt-2" />
-            </div>
-            <div>
-              <p>Card Content</p>
-              <Separator className="mt-2" />
-            </div>
+            {categoriesData.map((item) => (
+              <div key={item.id}>
+                <Button
+                  variant={
+                    searchedCategory == item.name ? "primary" : "outline"
+                  }
+                  className="w-full flex items-start justify-start"
+                  asChild
+                >
+                  <Link
+                    href={{
+                      pathname: "blogs",
+                      query: { category: item.name },
+                    }}
+                    scroll={false}
+                  >
+                    {item.name}
+                  </Link>
+                </Button>
+                <Separator className="mt-2" />
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
