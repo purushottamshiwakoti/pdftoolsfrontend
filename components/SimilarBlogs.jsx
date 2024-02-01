@@ -4,17 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import parse from "html-react-parser";
 
-const PopularBlogs = ({ blogsData }) => {
+const SimilarBlogs = ({ blogsData }) => {
+  console.log(blogsData);
   return (
     <div className="mt-10">
       <Card>
         <CardHeader>
-          <CardTitle>Popular Blogs</CardTitle>
+          <CardTitle>Similar Blogs</CardTitle>
           <Separator />
         </CardHeader>
         <CardContent>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:space-x-4 md:space-y-4   mt-3 ">
-            {blogsData.length > 0 ? (
+            {blogsData !== null && blogsData.length > 0 ? (
               blogsData.map((item, index) =>
                 index == 0 ? null : index < 4 ? (
                   <div className="shadow-md bg-white p-2  hover:scale-105 transition-all ease-in-out duration-300 delay-200 cursor-pointer">
@@ -53,4 +54,4 @@ const PopularBlogs = ({ blogsData }) => {
   );
 };
 
-export default PopularBlogs;
+export default SimilarBlogs;

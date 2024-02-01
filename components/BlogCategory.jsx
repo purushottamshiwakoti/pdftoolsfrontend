@@ -27,7 +27,7 @@ const BlogCategory = ({ categoriesData }) => {
                 >
                   <Link
                     href={{
-                      pathname: "blogs",
+                      pathname: "/blogs",
                       query: { category: item.name },
                     }}
                     scroll={false}
