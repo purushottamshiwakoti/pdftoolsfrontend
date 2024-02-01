@@ -78,34 +78,39 @@ const AddComment = ({ id }) => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <div className="space-y-6">
-            <FormField
-              control={form.control}
-              name="fullName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Fullname</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your full name here" {...field} />
-                  </FormControl>
+            <div className="grid lg:grid-cols-2 lg:gap-x-5">
+              <FormField
+                control={form.control}
+                name="fullName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Fullname</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your full name here"
+                        {...field}
+                      />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your email here" {...field} />
-                  </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your email here" {...field} />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
               name="comment"

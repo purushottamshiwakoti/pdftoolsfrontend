@@ -3,27 +3,7 @@ const { i18n } = require("./next-i18next.config");
 module.exports = {
   reactStrictMode: false,
   swcMinify: true,
-  i18n: {
-    defaultLocale: "en",
-    locales: [
-      "ar",
-      "da",
-      "de",
-      "en",
-      "es",
-      "fr",
-      "hi",
-      "id",
-      "it",
-      "ja",
-      "ko",
-      "nl",
-      "pt",
-      "ru",
-      "uk",
-      "zh",
-    ],
-  },
+  i18n,
   images: {
     domains: ["cdnjs.cloudflare.com", "res.cloudinary.com", "i.pinimg.com"],
   },
@@ -45,7 +25,4 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   swcMinify: false,
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-  },
 };
