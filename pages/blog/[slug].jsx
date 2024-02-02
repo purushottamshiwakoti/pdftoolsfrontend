@@ -1,5 +1,6 @@
 import AddComment from "@/components/AddComment";
 import BlogCategory from "@/components/BlogCategory";
+import ShareBlog from "@/components/ShareBlog";
 import SimilarBlogs from "@/components/SimilarBlogs";
 import { Button } from "@/components/ui/button";
 import { dashboardUrl } from "@/lib/url";
@@ -90,6 +91,8 @@ const BlogDetail = () => {
     setDataFetched(true); // Set dataFetched to true after fetching data
   }, [slug, !myData]);
 
+  console.log(similarBlogsData);
+
   return (
     <>
       <div>
@@ -105,7 +108,7 @@ const BlogDetail = () => {
                   {myData.title}
                 </h2>
                 <div className="flex items-start justify-start">
-                  <Button variant="ghost" className="text-[#7D64FF]  ">
+                  <Button variant="link" className="text-[#7D64FF] -ml-6">
                     {myData.category.name}
                   </Button>
                 </div>
@@ -125,11 +128,14 @@ const BlogDetail = () => {
                     className="rounded-md "
                   />
                 </div>
-                <p>{parse(myData.description)}</p>
+                <p className="lg:max-w-[800px]">{parse(myData.description)}</p>
+              </div>
+              <div className="flex items-center w-[800px] justify-center">
+                <ShareBlog slug={myData.slug} />
               </div>
               <div>{myData && <AddComment id={myData.id} />}</div>
               <div>
-                {similarBlogsData && (
+                {similarBlogsData !== null && (
                   <SimilarBlogs blogsData={similarBlogsData} />
                 )}
               </div>

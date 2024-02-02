@@ -203,8 +203,8 @@ const BlogsPage = () => {
                       currentItems.map((item, index) =>
                         index === 0 ? null : (
                           <Link href={`/blog/${item.slug}`} key={index}>
-                            <div className="p-2 bg-white rounded-lg shadow-md cursor-pointer hover:scale-105 transition-all ease-in-out duration-300 delay-200 mr-10 mb-10">
-                              <div className="relative h-[200px] w-[320px]">
+                            <div className=" bg-white rounded-lg shadow-lg p-3 cursor-pointer hover:scale-105 transition-all ease-in-out duration-300 delay-200 mr-10 mb-10">
+                              <div className="relative h-[200px] w-[310px]">
                                 <Image
                                   fill
                                   src={item.image}
@@ -212,32 +212,34 @@ const BlogsPage = () => {
                                   className="rounded-md   "
                                 />
                               </div>
-                              <div className="space-y-3">
-                                <div>
+                              <div className="">
+                                <div className="">
                                   <Button
-                                    variant="ghost"
-                                    className="text-[#7D64FF] mt-2"
+                                    variant="link"
+                                    className="text-[#7D64FF] -ml-6"
                                   >
                                     {item.category.name}
                                   </Button>
                                 </div>
 
-                                <h2 className="text-black/80 text-lg font-bold line-clamp-1 tracking-wide">
-                                  {item.title}
-                                </h2>
-                                <p className="line-clamp-4 text-gray-600">
-                                  {parse(item.description)}
-                                </p>
-                                <div className="flex items-center space-x-3">
-                                  <p className="tracking-tighter text-gray-600 font-medium">
-                                    {format(
-                                      new Date(item.created_at),
-                                      "MMMM dd, yyyy"
-                                    )}
+                                <div className="space-y-2">
+                                  <h2 className="text-black/80 text-lg font-bold line-clamp-1 tracking-wide">
+                                    {item.title}
+                                  </h2>
+                                  <p className="line-clamp-4 text-gray-600 h-9">
+                                    {parse(item.description)}
                                   </p>
-                                  <p className="tracking-tighter text-gray-600 font-medium">
-                                    420 views
-                                  </p>
+                                  <div className="flex items-center space-x-3">
+                                    <p className="tracking-tighter text-gray-600 font-medium">
+                                      {format(
+                                        new Date(item.created_at),
+                                        "MMMM dd, yyyy"
+                                      )}
+                                    </p>
+                                    <p className="tracking-tighter text-gray-600 font-medium">
+                                      420 views
+                                    </p>
+                                  </div>
                                 </div>
                                 <Button
                                   asChild

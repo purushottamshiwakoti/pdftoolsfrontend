@@ -72,7 +72,7 @@ const MyApp = ({ Component, pageProps }) => {
       />
       <Layout>
         <NextTopLoader color="#7D64FF" />
-        <Toaster />
+        <Toaster richColors />
         <Component {...pageProps} />
       </Layout>
     </>

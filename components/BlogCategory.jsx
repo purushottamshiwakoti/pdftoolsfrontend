@@ -9,13 +9,13 @@ const BlogCategory = ({ categoriesData }) => {
   const searchedCategory = searchParams.get("category");
   return (
     <div className="">
-      <Card className="lg:w-[23rem]">
+      <Card className="lg:w-[20rem]">
         <CardHeader>
           <CardTitle>Categories</CardTitle>
-          <Separator />
+          <Separator className="mt-2" />
         </CardHeader>
         <CardContent>
-          <div className="space-y-5">
+          <div className="space-y-3">
             {categoriesData.map((item) => (
               <div key={item.id}>
                 <Button
