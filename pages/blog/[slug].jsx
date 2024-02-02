@@ -2,6 +2,7 @@ import AddComment from "@/components/AddComment";
 import BlogCategory from "@/components/BlogCategory";
 import SimilarBlogs from "@/components/SimilarBlogs";
 import { Button } from "@/components/ui/button";
+import { dashboardUrl } from "@/lib/url";
 import { format } from "date-fns";
 import parse from "html-react-parser";
 import { useTranslation } from "next-i18next";
@@ -11,7 +12,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export async function getStaticPaths() {
-  const res = await fetch("https://pdftoolsbackend.vercel.app/api/blogs ", {
+  const res = await fetch(`${dashboardUrl}/blogs `, {
     cache: "no-store",
     method: "GET",
   });
@@ -56,28 +57,16 @@ const BlogDetail = () => {
       fetch(`/api/blogs/${slug}`)
         .then((res) => res.json())
         .then((data) => {
+          console.log(data.data);
+          setMyData(data.data);
+          console.log(myData);
           if (data.error) {
             setNoBlog(true);
           }
 
-          setMyData((prevData) => data.data); // Use functional form for setMyData
+          console.log({ myData });
           setLoading(false);
           setIsWindows(navigator.userAgent.includes("Windows"));
-        })
-        .then(() => {
-          // Check if myData is available before making another API call
-          if (myData) {
-            fetch(`/api/blogs`)
-              .then((res) => res.json())
-              .then((data) => {
-                console.log(myData.category.name);
-                setSimilarBlogsData((prevData) =>
-                  data.data.filter(
-                    (item) => item.category.name == myData.category.name
-                  )
-                );
-              });
-          }
         });
     }
 
@@ -87,8 +76,19 @@ const BlogDetail = () => {
         setCategoriesData((prevData) => data.data);
       });
 
+    if (myData) {
+      fetch(`/api/blogs`)
+        .then((res) => res.json())
+        .then((data) => {
+          setSimilarBlogsData((prevData) =>
+            data.data.filter(
+              (item) => item.category.name == myData.category.name
+            )
+          );
+        });
+    }
     setDataFetched(true); // Set dataFetched to true after fetching data
-  }, [slug]);
+  }, [slug, !myData]);
 
   return (
     <>
@@ -99,7 +99,7 @@ const BlogDetail = () => {
           } mx-[1rem] md:mx-[3.8rem]`}
         >
           {myData ? (
-            <div className="lg:flex md:space-y-4 justify-between space-x-7">
+            <div className="  md:space-y-4 justify-between space-x-7">
               <div className="space-y-4 ">
                 <h2 className="text-[#7D64FF] text-lg font-bold line-clamp-1 tracking-wide">
                   {myData.title}
@@ -127,6 +127,12 @@ const BlogDetail = () => {
                 </div>
                 <p>{parse(myData.description)}</p>
               </div>
+              <div>{myData && <AddComment id={myData.id} />}</div>
+              <div>
+                {similarBlogsData && (
+                  <SimilarBlogs blogsData={similarBlogsData} />
+                )}
+              </div>
               <div className="mt-10 mb-10">
                 {categoriesData && (
                   <BlogCategory categoriesData={categoriesData} />
@@ -136,11 +142,6 @@ const BlogDetail = () => {
           ) : (
             <p>Loading..</p>
           )}
-
-          <div>{myData && <AddComment id={myData.id} />}</div>
-          <div>
-            {similarBlogsData && <SimilarBlogs blogsData={similarBlogsData} />}
-          </div>
         </section>
       </div>
     </>

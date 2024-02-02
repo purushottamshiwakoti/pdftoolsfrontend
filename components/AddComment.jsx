@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
 import axios from "axios";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   fullName: z.string().min(2, { message: "Full name is required" }),
@@ -27,8 +28,8 @@ const formSchema = z.object({
 });
 
 const AddComment = ({ id }) => {
+  const [loading, setLoading] = useState(false);
   // 1. Define your form.
-  console.log(id);
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,31 +43,26 @@ const AddComment = ({ id }) => {
   async function onSubmit(values) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
 
     const { fullName, email, comment } = values;
-    // const res = await fetch("/api/comment", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     fullName,
-    //     email,
-    //     comment,
-    //   }),
-    // });
-    // try {
-    //   const res = await axios.post(
-    //     "https://pdftoolsbackend.vercel.app/api/comment",
-    //     { ...values, id }
-    //   );
-    //   console.log(res.data);
-    // } catch (error) {
-    //   console.error("Error submitting comment:", error);
-    // }
+    setLoading(true);
+    const res = await fetch("/api/comment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName,
+        email,
+        comment,
+        id,
+      }),
+    });
+
+    toast.success("Successfully posted comment");
 
     form.reset();
+    setLoading(false);
   }
   return (
     <>
@@ -89,6 +85,7 @@ const AddComment = ({ id }) => {
                       <Input
                         placeholder="Enter your full name here"
                         {...field}
+                        disabled={loading}
                       />
                     </FormControl>
 
@@ -103,7 +100,11 @@ const AddComment = ({ id }) => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your email here" {...field} />
+                      <Input
+                        placeholder="Enter your email here"
+                        {...field}
+                        disabled={loading}
+                      />
                     </FormControl>
 
                     <FormMessage />
@@ -118,14 +119,20 @@ const AddComment = ({ id }) => {
                 <FormItem>
                   <FormLabel>Comment</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Enter comment here" {...field} />
+                    <Textarea
+                      placeholder="Enter comment here"
+                      {...field}
+                      disabled={loading}
+                    />
                   </FormControl>
 
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={loading}>
+              Submit
+            </Button>
           </div>
         </form>
       </Form>

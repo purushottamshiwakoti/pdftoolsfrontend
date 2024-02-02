@@ -7,6 +7,7 @@ import { appWithTranslation } from "next-i18next";
 import Layout from "../components/Layout";
 import "../styles/global.css";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "sonner";
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -71,6 +72,7 @@ const MyApp = ({ Component, pageProps }) => {
       />
       <Layout>
         <NextTopLoader color="#7D64FF" />
+        <Toaster />
         <Component {...pageProps} />
       </Layout>
     </>

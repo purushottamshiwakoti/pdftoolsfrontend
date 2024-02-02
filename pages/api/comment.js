@@ -1,3 +1,4 @@
+import { dashboardUrl } from "@/lib/url";
 import axios from "axios";
 
 export async function handler(req, res) {
@@ -11,19 +12,18 @@ export async function handler(req, res) {
     console.log(body);
 
     // Validate the presence of required fields
-    console.log(body);
-    const { fullName, email, comment } = body;
+    const { fullName, email, comment, id } = body;
 
     try {
-      const sendComment = await axios.post(
-        "https://pdftoolsbackend.vercel.app/api/comment",
-        { fullName, email, comment, id }
-      );
-      console.log(sendComment.data);
-
-      // Here, you can process the received values and perform any necessary actions
-
-      return res.status(200).json({ success: true, message: "Success" });
+      const sendComment = await axios.post(`${dashboardUrl}/comment`, {
+        fullName,
+        email,
+        comment,
+        id,
+      });
+      return res
+        .status(200)
+        .json({ success: true, message: "Successfully added comment" });
     } catch (error) {
       console.log("Error sending comment:", error.message);
 

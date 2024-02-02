@@ -1,5 +1,7 @@
+import { dashboardUrl } from "@/lib/url";
+
 export async function handler(req, res) {
-  const apiUrl = `https://pdftoolsbackend.vercel.app/api/blogs`;
+  const apiUrl = `${dashboardUrl}/blogs`;
 
   const response = await fetch(apiUrl, { cache: "no-store", method: "GET" });
   const data = await response.json();
