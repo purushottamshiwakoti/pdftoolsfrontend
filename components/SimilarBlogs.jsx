@@ -6,8 +6,7 @@ import parse from "html-react-parser";
 import { Button } from "./ui/button";
 import { ArrowRight } from "react-bootstrap-icons";
 
-const SimilarBlogs = ({ blogsData }) => {
-  console.log({ blogsData });
+const SimilarBlogs = ({ blogsData, blogId }) => {
   return (
     <div className="mt-10 -ml-10">
       {blogsData.length > 0 && (
@@ -22,7 +21,7 @@ const SimilarBlogs = ({ blogsData }) => {
         <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:space-x-4 lg:space-y-0 md:space-y-4  ">
           {blogsData ? (
             blogsData.map((item, index) =>
-              index < 4 ? (
+              item.id === blogId ? null : index < 4 ? (
                 <div className="shadow-md bg-white p-2  hover:scale-105 transition-all ease-in-out duration-300 delay-200 cursor-pointer">
                   <Link
                     href={`/blog/${item.slug}`}

@@ -22,7 +22,6 @@ import {
 } from "react-share";
 
 const ShareBlog = ({ slug }) => {
-  console.log(appUrl);
   return (
     <div className="-ml-10 mt-10 ">
       <div>
@@ -36,7 +35,7 @@ const ShareBlog = ({ slug }) => {
                 cursor-pointer
                 "
           >
-            <FacebookShareButton url={`${appUrl}/blogs/${slug}`}>
+            <FacebookShareButton url={`${appUrl}/blog/${slug}`}>
               <FaFacebookF className="w-8 h-8" color="#7D64FF" />
             </FacebookShareButton>
           </div>
@@ -48,7 +47,7 @@ const ShareBlog = ({ slug }) => {
                 cursor-pointer
                 "
           >
-            <LinkedinShareButton url={`${appUrl}/blogs/${slug}`}>
+            <LinkedinShareButton url={`${appUrl}/blog/${slug}`}>
               <FaLinkedin className="w-8 h-8" color="#7D64FF" />
             </LinkedinShareButton>
           </div>
@@ -60,7 +59,7 @@ const ShareBlog = ({ slug }) => {
                 cursor-pointer
                 "
           >
-            <WhatsappShareButton url={`${appUrl}/blogs/${slug}`}>
+            <WhatsappShareButton url={`${appUrl}/blog/${slug}`}>
               <FaWhatsapp className="w-8 h-8" color="#7D64FF" />
             </WhatsappShareButton>
           </div>
@@ -72,7 +71,7 @@ const ShareBlog = ({ slug }) => {
                 cursor-pointer
                 "
           >
-            <TwitterShareButton url={`${appUrl}/blogs/${slug}`}>
+            <TwitterShareButton url={`${appUrl}/blog/${slug}`}>
               <FaXTwitter className="w-8 h-8" color="#7D64FF" />
             </TwitterShareButton>
           </div>

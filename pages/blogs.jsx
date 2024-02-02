@@ -161,7 +161,10 @@ const BlogsPage = () => {
                           )}
                       </p>
                       <p className="tracking-tighter  text-gray-600 font-medium">
-                        420 views
+                        {blogsData && blogsData[0] && blogsData[0].views[0]
+                          ? blogsData[0].views[0].views
+                          : 0}{" "}
+                        views
                       </p>
                     </div>
                   </div>
@@ -237,7 +240,8 @@ const BlogsPage = () => {
                                       )}
                                     </p>
                                     <p className="tracking-tighter text-gray-600 font-medium">
-                                      420 views
+                                      {item.views[0] ? item.views[0].views : 0}{" "}
+                                      views
                                     </p>
                                   </div>
                                 </div>

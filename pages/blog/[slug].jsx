@@ -48,24 +48,17 @@ const BlogDetail = () => {
   const [isWindows, setIsWindows] = useState(false);
   const [categoriesData, setCategoriesData] = useState(null);
   const [similarBlogsData, setSimilarBlogsData] = useState(null);
-  const [noBlog, setNoBlog] = useState(false);
-  const [dataFetched, setDataFetched] = useState(false);
-
-  console.log(similarBlogsData);
 
   useEffect(() => {
+    setSimilarBlogsData(null);
     if (slug) {
       fetch(`/api/blogs/${slug}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.data);
           setMyData(data.data);
-          console.log(myData);
           if (data.error) {
-            setNoBlog(true);
           }
 
-          console.log({ myData });
           setLoading(false);
           setIsWindows(navigator.userAgent.includes("Windows"));
         });
@@ -87,11 +80,24 @@ const BlogDetail = () => {
             )
           );
         });
+      fetch(`/api/views`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: myData.id,
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+          }
+          return res.json();
+        })
+        .catch((error) => console.error("Error:", error));
     }
-    setDataFetched(true); // Set dataFetched to true after fetching data
   }, [slug, !myData]);
-
-  console.log(similarBlogsData);
 
   return (
     <>
@@ -117,7 +123,7 @@ const BlogDetail = () => {
                     {format(new Date(myData.created_at), "MMMM dd, yyyy")}
                   </p>
                   <p className="tracking-tighter text-gray-600 font-medium">
-                    420 views
+                    {myData.views[0] ? myData.views[0].views : 0} views
                   </p>
                 </div>
                 <div className="relative h-[200px] w-[350px] lg:h-[400px] lg:w-[800px]">
@@ -136,7 +142,10 @@ const BlogDetail = () => {
               <div>{myData && <AddComment id={myData.id} />}</div>
               <div>
                 {similarBlogsData !== null && (
-                  <SimilarBlogs blogsData={similarBlogsData} />
+                  <SimilarBlogs
+                    blogsData={similarBlogsData}
+                    blogId={myData.id}
+                  />
                 )}
               </div>
               <div className="mt-10 mb-10">
