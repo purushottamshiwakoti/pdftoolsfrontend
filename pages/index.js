@@ -31,6 +31,8 @@ const Home = () => {
   const [reviewsData, setReviewsData] = useState(null);
   const [CompanyImagesData, setCompanyImageData] = useState(null);
 
+  console.log({ chooseUsData });
+
   const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
   useEffect(() => {
@@ -163,22 +165,6 @@ const Home = () => {
 
       <>
         <main>
-          <header className="page_section header mb-0">
-            {/* <h1 className="title">{t("common:page_header_title")}</h1> */}
-            {isLoading ? (
-              <h1 className="title bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse"></h1>
-            ) : (
-              <h1 className="title">{myData.title}</h1>
-            )}
-            {/* <p className="description">{t("common:page_header_text")}</p>  */}
-            {isLoading ? (
-              <p className="title bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
-            ) : (
-              <p className="description">
-                {myData?.description && parse(myData.description)}
-              </p>
-            )}
-          </header>
           <section
             className={`hero mt-8 mb-8 lg:mt-20 lg:mb-32 ${
               isWindows ? "lg:mx-[12rem]" : "lg:mx-[5rem]"
@@ -242,6 +228,22 @@ const Home = () => {
               </div>
             </div>
           </section>
+          <header className="page_section header mb-0">
+            {/* <h1 className="title">{t("common:page_header_title")}</h1> */}
+            {isLoading ? (
+              <h1 className="title bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse"></h1>
+            ) : (
+              <h1 className="title">{myData.title}</h1>
+            )}
+            {/* <p className="description">{t("common:page_header_text")}</p>  */}
+            {isLoading ? (
+              <p className="title bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
+            ) : (
+              <p className="description">
+                {myData?.description && parse(myData.description)}
+              </p>
+            )}
+          </header>
           <section className="page_section mt-0">
             <article className="container">
               <section
@@ -276,7 +278,6 @@ const Home = () => {
             </article>
           </section>
 
-          <Share />
           {/* simple task start  */}
 
           <section
@@ -302,7 +303,7 @@ const Home = () => {
             </div>
             <div className=" space-y-7 lg:flex items-center justify-around">
               <div className="lg:space-y-7 space-y-5">
-                <h2 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-5xl ">
+                <h2 className="text-[#7D64FF] font-bold tracking-wider text-xl md:text-3xl ">
                   {settingsArray?.tasksSubTitle}
                 </h2>
                 <p className="lg:w-[40rem] lg:mr-20 tracking-normal text-xl">
@@ -370,6 +371,9 @@ const Home = () => {
             {reviewsData && <Reviews data={reviewsData} />}
           </section>
           {/* review end */}
+
+          {/* share  */}
+          <Share />
         </main>
       </>
     </>

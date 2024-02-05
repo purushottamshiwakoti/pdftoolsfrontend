@@ -10,12 +10,9 @@ const WhyChooseUs = ({ data }) => {
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
         {data.map((item) => (
           <div className="space-y-3 mb-10" key={item.id}>
-            <Image
-              src={item.image}
-              alt={item.imageAlt}
-              width={100}
-              height={100}
-            />
+            <div className="relative w-[100px] h-[100px]">
+              <Image src={item.image} alt={item.imageAlt} fill />
+            </div>
             <h2 className="text-xl font-medium">{item.title}</h2>
             <p className="text-black/60">{item.description}</p>
           </div>
