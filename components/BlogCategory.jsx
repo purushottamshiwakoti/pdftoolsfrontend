@@ -9,7 +9,7 @@ const BlogCategory = ({ categoriesData }) => {
   const searchedCategory = searchParams.get("category");
   return (
     <div className="">
-      <Card className="lg:w-[20rem]">
+      <Card className="lg:w-[20rem] w-[15rem] ">
         <CardHeader>
           <CardTitle>Categories</CardTitle>
           <Separator className="mt-2" />

@@ -66,7 +66,7 @@ const AddComment = ({ id }) => {
   }
   return (
     <>
-      <div className="mt-10 -ml-10 lg:max-w-[800px]">
+      <div className="mt-10 lg:-ml-10 -ml-3 md:-ml-10 lg:max-w-[800px]">
         <div>
           <h2 className="text-[#7D64FF] lg:text-3xl md:text-lg font-bold line-clamp-1 tracking-wide mb-5">
             Leave a Reply

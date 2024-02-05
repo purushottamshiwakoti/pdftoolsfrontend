@@ -31,8 +31,6 @@ const Home = () => {
   const [reviewsData, setReviewsData] = useState(null);
   const [CompanyImagesData, setCompanyImageData] = useState(null);
 
-  console.log({ chooseUsData });
-
   const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
   useEffect(() => {
@@ -175,7 +173,7 @@ const Home = () => {
                 {isLoading ? (
                   <div className="bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse"></div>
                 ) : (
-                  <h1 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-5xl ">
+                  <h1 className="text-[#7D64FF] font-bold tracking-wider text-2xl md:text-4xl ">
                     {settingsArray?.title}
                   </h1>
                 )}

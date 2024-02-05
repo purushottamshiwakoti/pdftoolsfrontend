@@ -4,6 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import pageStyles from "../styles/Page.module.css";
 import parse from "html-react-parser";
+import ContactForm from "@/components/ContactForm";
 
 export async function getStaticProps({ locale }) {
   return {
@@ -14,17 +15,20 @@ export async function getStaticProps({ locale }) {
 }
 
 const Contacts = () => {
+  const [isWindows, setIsWindows] = useState(false);
+
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
 
   useEffect(() => {
-    fetch(`/api/other/${"about"}`)
+    fetch(`/api/other/${"contact-us"}`)
       .then((res) => res.json())
       .then((data) => {
         const { page } = data;
         setData(page);
         setLoading(false);
+        setIsWindows(navigator.userAgent.includes("Windows"));
       });
   }, []);
 
@@ -65,6 +69,20 @@ const Contacts = () => {
               )}
             </section>
           </article>
+          <section
+            className={`hero mt-8 mb-8 lg:mt-10 lg:mb-32 ${
+              isWindows ? "lg:mx-[11rem]" : "lg:mx-[5rem]"
+            } mx-[1rem] md:mx-[3.8rem]`}
+          >
+            <div>
+              <h2 className="text-[#7D64FF] font-bold tracking-wider text-xl md:text-3xl ">
+                Contact Us
+              </h2>
+              <div className="mt-2">
+                <ContactForm />
+              </div>
+            </div>
+          </section>
         </section>
       </main>
     </>

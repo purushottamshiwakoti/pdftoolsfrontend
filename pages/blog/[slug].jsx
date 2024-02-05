@@ -109,34 +109,43 @@ const BlogDetail = () => {
         >
           {myData ? (
             <div className="  md:space-y-4 justify-between space-x-7">
-              <div className="space-y-4 ">
-                <h2 className="text-[#7D64FF] text-lg font-bold line-clamp-1 tracking-wide">
-                  {myData.title}
-                </h2>
-                <div className="flex items-start justify-start">
-                  <Button variant="link" className="text-[#7D64FF] -ml-6">
-                    {myData.category.name}
-                  </Button>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <p className="tracking-tighter text-gray-600 font-medium">
-                    {format(new Date(myData.created_at), "MMMM dd, yyyy")}
+              <div className="grid grid-cols-4">
+                <div className="space-y-4  lg:col-span-3 col-span-4">
+                  <h2 className="text-[#7D64FF] text-lg font-bold line-clamp-1 tracking-wide">
+                    {myData.title}
+                  </h2>
+                  <div className="flex items-start justify-start">
+                    <Button variant="link" className="text-[#7D64FF] -ml-6">
+                      {myData.category.name}
+                    </Button>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <p className="tracking-tighter text-gray-600 font-medium">
+                      {format(new Date(myData.created_at), "MMMM dd, yyyy")}
+                    </p>
+                    <p className="tracking-tighter text-gray-600 font-medium">
+                      {myData.views[0] ? myData.views[0].views : 0} views
+                    </p>
+                  </div>
+                  <div className="relative h-[200px] w-[350px] lg:h-[400px] lg:w-[800px]">
+                    <Image
+                      fill
+                      src={myData.image}
+                      alt={myData.imageAlt}
+                      className="rounded-md "
+                    />
+                  </div>
+                  <p className="lg:max-w-[800px]">
+                    {parse(myData.description)}
                   </p>
-                  <p className="tracking-tighter text-gray-600 font-medium">
-                    {myData.views[0] ? myData.views[0].views : 0} views
-                  </p>
                 </div>
-                <div className="relative h-[200px] w-[350px] lg:h-[400px] lg:w-[800px]">
-                  <Image
-                    fill
-                    src={myData.image}
-                    alt={myData.imageAlt}
-                    className="rounded-md "
-                  />
+                <div className="mt-10 mb-10">
+                  {categoriesData && (
+                    <BlogCategory categoriesData={categoriesData} />
+                  )}
                 </div>
-                <p className="lg:max-w-[800px]">{parse(myData.description)}</p>
               </div>
-              <div className="flex items-center w-[800px] justify-center">
+              <div className="flex items-center lg:w-[800px] justify-center">
                 <ShareBlog slug={myData.slug} />
               </div>
               <div>{myData && <AddComment id={myData.id} />}</div>
@@ -146,11 +155,6 @@ const BlogDetail = () => {
                     blogsData={similarBlogsData}
                     blogId={myData.id}
                   />
-                )}
-              </div>
-              <div className="mt-10 mb-10">
-                {categoriesData && (
-                  <BlogCategory categoriesData={categoriesData} />
                 )}
               </div>
             </div>

@@ -26,7 +26,7 @@ const ShareBlog = ({ slug }) => {
     <div className="-ml-10 mt-10 ">
       <div>
         <h2 className="text-gray-500 text-center">Share this article</h2>
-        <div className="mt-3 space-x-5">
+        <div className="mt-3 lg:space-x-5 space-x-2">
           <div
             class="w-20 h-20 rounded-full  
                 inline-flex items-center justify-center  
