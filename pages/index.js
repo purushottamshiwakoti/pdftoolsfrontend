@@ -229,9 +229,9 @@ const Home = () => {
           <header className="page_section header mb-0">
             {/* <h1 className="title">{t("common:page_header_title")}</h1> */}
             {isLoading ? (
-              <h1 className="title bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse"></h1>
+              <h2 className="title bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse"></h2>
             ) : (
-              <h1 className="title">{myData.title}</h1>
+              <h2 className="title">{myData.title}</h2>
             )}
             {/* <p className="description">{t("common:page_header_text")}</p>  */}
             {isLoading ? (
@@ -285,11 +285,11 @@ const Home = () => {
           >
             <div className="space-y-3 mb-10">
               {isLoading ? (
-                <h2 className="w-[30px] h-[10px] bg-slate-200 animate-pulse font-bold tracking-wider text-3xl md:text-4xl text-center "></h2>
+                <h3 className="w-[30px] h-[10px] bg-slate-200 animate-pulse font-bold tracking-wider text-3xl md:text-4xl text-center "></h3>
               ) : (
-                <h2 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl text-center ">
+                <h3 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl text-center ">
                   {settingsArray?.tasksTitle}
-                </h2>
+                </h3>
               )}
               {isLoading ? (
                 <p className="tracking-normal text-xl text-center text-black/70 w-[50px] h-[10px] bg-slate-200  "></p>
@@ -301,9 +301,9 @@ const Home = () => {
             </div>
             <div className=" space-y-7 lg:flex items-center justify-around">
               <div className="lg:space-y-7 space-y-5">
-                <h2 className="text-[#7D64FF] font-bold tracking-wider text-xl md:text-3xl ">
+                <h3 className="text-[#7D64FF] font-bold tracking-wider text-xl md:text-3xl ">
                   {settingsArray?.tasksSubTitle}
-                </h2>
+                </h3>
                 <p className="lg:w-[40rem] lg:mr-20 tracking-normal text-xl">
                   {settingsArray?.tasksSubDescription}
                 </p>
@@ -352,9 +352,9 @@ const Home = () => {
             } mx-[1rem] md:mx-[3.8rem]`}
           >
             <div>
-              <h2 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl  text-center mb-10">
-                You are in a good company
-              </h2>
+              <h3 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl  text-center mb-10">
+                {myData && myData.Settings[0].comapnyTitle}{" "}
+              </h3>
               {CompanyImagesData && <GoodCompany data={CompanyImagesData} />}
             </div>
           </section>

@@ -9,7 +9,7 @@ const Features = React.memo(function Features({ title, featuresArray }) {
       <section className="page_section">
         <article className={`container banner ${styles.features_section}`}>
           <header className={`${styles.features_title}`}>
-            <h2 className={pageStyles.title_section}>{title}</h2>
+            <h3 className={pageStyles.title_section}>{title}</h3>
             <div
               className={`${pageStyles.divider} ${pageStyles.mx_auto}`}
             ></div>

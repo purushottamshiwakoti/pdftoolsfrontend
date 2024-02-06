@@ -20,11 +20,11 @@ const Footer = React.memo(function Footer() {
         <div className="row">
           <div className="col-lg-12">
             <Link href="/" scroll={true}>
-              <h3>
+              <h4 className="text-2xl font-bold mb-2">
                 <span style={{ color: "#7d64ff" }}>PDF</span>
                 <span style={{ color: "#2d3748" }}>Tools</span>
                 <span className="dot"></span>
-              </h3>
+              </h4>
             </Link>
           </div>
         </div>

@@ -7,9 +7,9 @@ import { Carousel } from "react-responsive-carousel";
 const Reviews = ({ data }) => {
   return (
     <div>
-      <h2 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl  text-center mb-10">
+      <h4 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl  text-center mb-10">
         Reviews
-      </h2>
+      </h4>
 
       <div>
         <Carousel autoPlay infiniteLoop interval showArrows>

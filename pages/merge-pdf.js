@@ -529,14 +529,14 @@ const MergePDFPage = () => {
           <article className={`container ${pageStyles.article_section}`}>
             <header className={pageStyles.article_header}>
               {isLoading ? (
-                <h2 className=" flex md:ml-[10rem] lg:ml-[20rem]  bg-slate-200 h-6 md:w-[20rem] lg:w-[25rem] animate-pulse">
+                <div className=" flex md:ml-[10rem] lg:ml-[20rem]  bg-slate-200 h-6 md:w-[20rem] lg:w-[25rem] animate-pulse">
                   {/* {t("merge-pdf:article_title")} */}
-                </h2>
+                </div>
               ) : (
-                <h2 className={pageStyles.title_section}>
+                <h4 className={pageStyles.title_section}>
                   {myData?.longDescriptionTitle}
                   {/* {t("merge-pdf:article_title")} */}
-                </h2>
+                </h4>
               )}
               <div
                 className={`${pageStyles.divider} ${pageStyles.mx_auto}`}
@@ -563,7 +563,7 @@ const MergePDFPage = () => {
           </article>
         </section>
         {/* Article End */}
-        <AvailableTools />
+        {/* <AvailableTools /> */}
         <Share />
       </main>
     </>
