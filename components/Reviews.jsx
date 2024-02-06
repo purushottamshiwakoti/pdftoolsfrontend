@@ -1,21 +1,28 @@
 import React from "react";
 import { Quote, StarFill } from "react-bootstrap-icons";
-
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
 const Reviews = ({ data }) => {
   return (
     <div>
-      <h4 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl  text-center mb-10">
+      <h4 className="text-[#7D64FF] font-bold tracking-wider text-3xl md:text-4xl text-center mb-10">
         Reviews
       </h4>
 
       <div>
-        <Carousel autoPlay infiniteLoop interval showArrows>
-          <div className="grid gap-6 text-center md:grid-cols-3 lg:gap-12">
-            {data.map((item) => (
-              <div className="mb-12 md:mb-0" key={item.id}>
+        {/* <div className="grid grid-cols-3"> */}
+        <Carousel
+          autoPlay
+          infiniteLoop
+          interval={3000}
+          showArrows
+          centerMode
+          centerSlidePercentage={50}
+        >
+          {data.map((item) => (
+            <div className="text-center" key={item.id}>
+              <div className="mb-12">
                 <h5 className="mb-4 text-xl font-semibold">{item.name}</h5>
                 <h6 className="mb-4 font-semibold text-primary dark:text-primary-500">
                   {item.role}
@@ -33,10 +40,11 @@ const Reviews = ({ data }) => {
                   ))}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </Carousel>
       </div>
+      {/* </div> */}
     </div>
   );
 };
