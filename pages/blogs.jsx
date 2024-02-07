@@ -80,12 +80,22 @@ const BlogsPage = () => {
     setItemOffset(newOffset);
   };
 
+  console.log(blogsData ? blogsData[0] : "bno");
+
   return (
     <>
       <Head>
         {/* Anything you add here will be added this page only */}
         <title>{myData?.metaTitle}</title>
         <meta name="description" content={myData?.metaDescription} />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         <meta
           name="Keywords"
           content="PDF tools, PDF manipulation, PDF merge, PDF split, PDF compress, PDF convert"
@@ -129,71 +139,82 @@ const BlogsPage = () => {
             } mx-[1rem] md:mx-[3.8rem]`}
           >
             <div>
-              <div className="lg:flex lg:space-x-14 lg:justify-start lg:items-center hover:scale-105 transition-all ease-in-out duration-300 delay-200 cursor-pointer  ">
-                {blogsData && blogsData[0] && (
-                  <Link href={`/blog/${blogsData[0].slug}`}>
-                    <div className="relative min-h-[200px] lg:min-h-[400px] lg:min-w-[500px]">
-                      <Image
-                        fill
-                        src={blogsData[0].image}
-                        alt={blogsData[0].imageAlt}
-                        className="rounded-md "
-                      />
+              <Link href={`/blog/${blogsData[0].slug}`}>
+                <div className="lg:flex lg:space-x-14 lg:justify-start lg:items-center hover:scale-105 transition-all ease-in-out duration-300 delay-200 cursor-pointer  ">
+                  {blogsData && blogsData[0] && (
+                    <div className="">
+                      {blogsData[0].bannerImage ? (
+                        <Image
+                          src={blogsData[0].bannerImage}
+                          alt={blogsData[0].bannerImageAlt}
+                          className="rounded-md "
+                          width={500}
+                          height={500}
+                        />
+                      ) : (
+                        <Image
+                          src={"/img/banner.jpg"}
+                          alt={"img"}
+                          className="rounded-md "
+                          width={500}
+                          height={500}
+                        />
+                      )}
                     </div>
-                  </Link>
-                )}
-                <div className=" lg:space-y-4 space-y-2">
-                  <div className="mt-2 flex items-center justify-between">
-                    <div>
-                      <Button variant="ghost" className="text-[#7D64FF]">
-                        {blogsData &&
-                          blogsData[0] &&
-                          blogsData[0].category.name}
-                      </Button>
+                  )}
+                  <div className=" lg:space-y-4 space-y-2">
+                    <div className="mt-2 flex items-center justify-between">
+                      <div>
+                        <Button variant="ghost" className="text-[#7D64FF]">
+                          {blogsData &&
+                            blogsData[0] &&
+                            blogsData[0].category.name}
+                        </Button>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <p className="tracking-tighter  text-gray-600 font-medium">
+                          {blogsData &&
+                            blogsData[0] &&
+                            format(
+                              new Date(blogsData[0].created_at),
+                              "MMMM dd, yyyy"
+                            )}
+                        </p>
+                        <p className="tracking-tighter  text-gray-600 font-medium">
+                          {blogsData && blogsData[0] && blogsData[0].views[0]
+                            ? blogsData[0].views[0].views
+                            : 0}{" "}
+                          views
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <p className="tracking-tighter  text-gray-600 font-medium">
-                        {blogsData &&
-                          blogsData[0] &&
-                          format(
-                            new Date(blogsData[0].created_at),
-                            "MMMM dd, yyyy"
-                          )}
-                      </p>
-                      <p className="tracking-tighter  text-gray-600 font-medium">
-                        {blogsData && blogsData[0] && blogsData[0].views[0]
-                          ? blogsData[0].views[0].views
-                          : 0}{" "}
-                        views
-                      </p>
-                    </div>
-                  </div>
 
-                  <h2 className="text-black/80  text-3xl font-bold line-clamp-2 tracking-wide">
-                    {blogsData && blogsData[0] && blogsData[0].title}
-                  </h2>
-                  <p className="line-clamp-6 tracking-normal text-gray-600">
-                    {blogsData &&
-                      blogsData[0] &&
-                      parse(blogsData[0].description)}
-                  </p>
-                  <Button
-                    asChild
-                    variant="link"
-                    className="flex  lg:justify-start  "
-                  >
-                    {blogsData && blogsData[0] && (
-                      <Link
-                        href={`/blog/${blogsData[0].slug}`}
-                        className="text-[#7D64FF]  "
-                      >
-                        Read More
-                        <ArrowRight className="ml-2" />
-                      </Link>
-                    )}
-                  </Button>
+                    <h2 className="text-black/80  text-3xl font-bold line-clamp-2 tracking-wide">
+                      {blogsData && blogsData[0] && blogsData[0].title}
+                    </h2>
+                    <p className="line-clamp-6 tracking-normal text-gray-600">
+                      {blogsData &&
+                        blogsData[0] &&
+                        parse(blogsData[0].description)}
+                    </p>
+                    <Button
+                      asChild
+                      variant="link"
+                      className="flex  lg:justify-start  "
+                    >
+                      {blogsData && blogsData[0] && (
+                        <Link
+                          href={`/blog/${blogsData[0].slug}`}
+                          className="text-[#7D64FF]  "
+                        >
+                          Read More
+                          <ArrowRight className="ml-2" />
+                        </Link>
+                      )}
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
             <div>
               <h2 className="text-[#7D64FF]  text-3xl font-medium mt-4 ">
@@ -207,13 +228,24 @@ const BlogsPage = () => {
                         index === 0 ? null : (
                           <Link href={`/blog/${item.slug}`} key={index}>
                             <div className=" bg-white rounded-lg shadow-lg p-3 cursor-pointer hover:scale-105 transition-all ease-in-out duration-300 delay-200 mr-10 mb-10">
-                              <div className="relative h-[200px] w-[310px]">
-                                <Image
-                                  fill
-                                  src={item.image}
-                                  alt={item.imageAlt}
-                                  className="rounded-md   "
-                                />
+                              <div>
+                                {item.bannerImage ? (
+                                  <Image
+                                    src={item.bannerImage}
+                                    alt={item.bannerImageAlt}
+                                    width={500}
+                                    height={500}
+                                    className="rounded-md  image   "
+                                  />
+                                ) : (
+                                  <Image
+                                    src={"/img/banner.jpg"}
+                                    alt={"img"}
+                                    className="rounded-md "
+                                    width={500}
+                                    height={500}
+                                  />
+                                )}
                               </div>
                               <div className="">
                                 <div className="">

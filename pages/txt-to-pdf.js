@@ -260,6 +260,14 @@ const TextToPDFPage = () => {
           name="Keywords"
           content="TXT to PDF converter, convert TXT to PDF, online TXT to PDF converter, free TXT to PDF converter, convert plain text to PDF"
         />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         {/* You can add your canonical link here */}
         <link
           rel="canonical"

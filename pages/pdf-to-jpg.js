@@ -329,6 +329,14 @@ const PDFToJPGPage = () => {
           name="Keywords"
           content="PDF to JPG converter, convert PDF to JPG, online PDF to JPG converter, PDF to JPG conversion tool, free PDF to JPG converter, PDF to image converter."
         />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         {/* You can add your canonical link here */}
         <link
           rel="canonical"

@@ -372,6 +372,14 @@ const ExtractPagesPage = () => {
           name="Keywords"
           content="extract pdf pages, pdf page extractor, extract specific pages from pdf, free online pdf page extractor."
         />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         {/* You can add your canonical link here */}
         <link
           rel="canonical"

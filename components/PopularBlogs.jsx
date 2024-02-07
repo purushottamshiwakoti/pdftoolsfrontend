@@ -27,13 +27,24 @@ const PopularBlogs = ({ blogsData }) => {
                       className="space-y-3 "
                       key={index}
                     >
-                      <div className="relative h-[200px] w-[320px] -ml-8  ">
-                        <Image
-                          fill
-                          src={item.image}
-                          alt={item.imageAlt}
-                          className="rounded-md "
-                        />
+                      <div className=" -ml-8  ">
+                        {item.bannerImage ? (
+                          <Image
+                            src={item.bannerImage}
+                            alt={item.bannerImageAlt}
+                            className="rounded-md "
+                            width={500}
+                            height={500}
+                          />
+                        ) : (
+                          <Image
+                            src={"/img/banner.jpg"}
+                            alt={"img"}
+                            className="rounded-md "
+                            width={500}
+                            height={500}
+                          />
+                        )}
                       </div>
                       <div className="space-y-2">
                         <h2 className="font-bold text-black/80 line-clamp-1">

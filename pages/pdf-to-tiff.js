@@ -328,6 +328,14 @@ const PDFToTIFFPage = () => {
           name="Keywords"
           content="PDF to TIFF, PDF to TIFF converter, PDF to TIFF online, convert PDF to TIFF, online PDF to TIFF converter, PDF to TIFF conversion, TIFF from PDF, PDF to TIFF tool"
         />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         {/* You can add your canonical link here */}
         <link
           rel="canonical"

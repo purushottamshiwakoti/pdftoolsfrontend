@@ -226,6 +226,14 @@ const ProtectPDFPage = () => {
           name="Keywords"
           content="Protect PDF, PDF protection, PDF encryption, secure PDF, password protect PDF, online PDF protection, PDF security, PDF password, PDF security tool, PDF encryption tool"
         />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         {/* You can add your canonical link here */}
         <link
           rel="canonical"

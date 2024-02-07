@@ -28,13 +28,24 @@ const SimilarBlogs = ({ blogsData, blogId }) => {
                     className="space-y-3"
                     key={index}
                   >
-                    <div className="relative h-[200px] w-[320px] ">
-                      <Image
-                        fill
-                        src={item.image}
-                        alt={item.imageAlt}
-                        className="rounded-md "
-                      />
+                    <div className=" ">
+                      {item.bannerImage ? (
+                        <Image
+                          width={500}
+                          height={500}
+                          src={item.bannerImage}
+                          alt={item.bannerImageAlt}
+                          className="rounded-md "
+                        />
+                      ) : (
+                        <Image
+                          width={500}
+                          height={500}
+                          src={"/img/banner.jpg"}
+                          alt={"img"}
+                          className="rounded-md "
+                        />
+                      )}
                     </div>
                     <div className="space-y-2">
                       <h2 className="font-bold text-black/80 line-clamp-1">

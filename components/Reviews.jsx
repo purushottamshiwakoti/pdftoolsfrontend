@@ -11,15 +11,7 @@ const Reviews = ({ data }) => {
       </h4>
 
       <div>
-        {/* <div className="grid grid-cols-3"> */}
-        <Carousel
-          autoPlay
-          infiniteLoop
-          interval={3000}
-          showArrows
-          centerMode
-          centerSlidePercentage={50}
-        >
+        <Carousel autoPlay infiniteLoop interval={3000} showArrows>
           {data.map((item) => (
             <div className="text-center" key={item.id}>
               <div className="mb-12">
@@ -27,7 +19,6 @@ const Reviews = ({ data }) => {
                 <h6 className="mb-4 font-semibold text-primary dark:text-primary-500">
                   {item.role}
                 </h6>
-
                 <p className="mb-4 flex">
                   <span className="w-7 h-7 ">
                     <Quote />
@@ -44,7 +35,6 @@ const Reviews = ({ data }) => {
           ))}
         </Carousel>
       </div>
-      {/* </div> */}
     </div>
   );
 };

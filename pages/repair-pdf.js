@@ -260,6 +260,14 @@ const RepairPDFPage = () => {
           name="Keywords"
           content="Repair PDF, online repair tool, damaged PDF files, corrupted PDF files, PDF file repair"
         />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         <link
           rel="canonical"
           href={`https://www.example.com${RepairPDFTool.href}`}

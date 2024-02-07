@@ -33,6 +33,15 @@ const PrivacyPolicy = () => {
         {/* Anything you add here will be added to this page only */}
         <title>{myData?.metaTitle}</title>
         <meta name="description" content={myData?.metaDescription} />
+
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         <meta name="Keywords" content="" />
         <meta name="robots" content="noindex,nofollow" />
         {/* Anything you add here will be added this page only */}

@@ -321,6 +321,14 @@ const PDFToBMPPage = () => {
         {/* Anything you add here will be added to this page only */}
         <title>{myData?.metaTitle}</title>
         <meta name="description" content={myData?.metaDescription} />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         <meta
           name="Keywords"
           content="PDF to BMP, convert PDF to BMP, online PDF to BMP converter, free PDF to BMP converter, PDF to BMP conversion tool"

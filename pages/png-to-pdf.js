@@ -323,6 +323,14 @@ const PNGToPDFPage = () => {
         {/* Anything you add here will be added to this page only */}
         <title>{myData?.metaTitle}</title>
         <meta name="description" content={myData?.metaDescription} />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         <meta
           name="Keywords"
           content="PNG to PDF converter, convert PNG to PDF, online PNG to PDF converter, free PNG to PDF converter, PNG image to PDF conversion."

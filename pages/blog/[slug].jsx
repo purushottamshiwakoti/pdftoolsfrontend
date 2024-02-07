@@ -8,6 +8,8 @@ import { format } from "date-fns";
 import parse from "html-react-parser";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { redirect } from "next/dist/server/api-utils";
+import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -45,9 +47,16 @@ const BlogDetail = () => {
 
   const [myData, setMyData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [notFound, setNotFound] = useState(false);
   const [isWindows, setIsWindows] = useState(false);
   const [categoriesData, setCategoriesData] = useState(null);
   const [similarBlogsData, setSimilarBlogsData] = useState(null);
+
+  console.log(myData);
+
+  if (notFound) {
+    router.push("/not-found");
+  }
 
   useEffect(() => {
     setSimilarBlogsData(null);
@@ -57,6 +66,7 @@ const BlogDetail = () => {
         .then((data) => {
           setMyData(data.data);
           if (data.error) {
+            setNotFound(true);
           }
 
           setLoading(false);
@@ -101,6 +111,22 @@ const BlogDetail = () => {
 
   return (
     <>
+      <Head>
+        {/* Anything you add here will be added this page only */}
+        <title>{myData && myData.metaTitle}</title>
+        <meta name="Keywords" content={myData && myData.metaDescription} />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
+        <meta name="robots" content="noindex,nofollow" />
+        {/* You can add your canonical here */}
+        {/* You can add your alternate here */}
+      </Head>
       <div>
         <section
           className={`hero mt-8 mb-8 lg:mt-5 lg:mb-32 ${
@@ -111,9 +137,9 @@ const BlogDetail = () => {
             <div className="  md:space-y-4 justify-between space-x-7">
               <div className="grid grid-cols-4">
                 <div className="space-y-4  lg:col-span-3 col-span-4">
-                  <h2 className="text-[#7D64FF] text-lg font-bold line-clamp-1 tracking-wide">
+                  <h1 className="text-[#7D64FF] text-lg font-bold line-clamp-1 tracking-wide">
                     {myData.title}
-                  </h2>
+                  </h1>
                   <div className="flex items-start justify-start">
                     <Button variant="link" className="text-[#7D64FF] -ml-6">
                       {myData.category.name}
@@ -127,14 +153,15 @@ const BlogDetail = () => {
                       {myData.views[0] ? myData.views[0].views : 0} views
                     </p>
                   </div>
-                  <div className="relative h-[200px] w-[350px] lg:h-[400px] lg:w-[800px]">
+                  {myData.image && (
                     <Image
-                      fill
                       src={myData.image}
                       alt={myData.imageAlt}
                       className="rounded-md "
+                      width={1920}
+                      height={1080}
                     />
-                  </div>
+                  )}
                   <p className="lg:max-w-[800px]">
                     {parse(myData.description)}
                   </p>

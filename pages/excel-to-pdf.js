@@ -251,6 +251,14 @@ const EXCELToPDFPage = () => {
         {/* Anything you add here will be added to this page only */}
         <title>{myData?.metaTitle}</title>
         <meta name="description" content={myData?.metaDescription} />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         <meta
           name="Keywords"
           content="Excel to PDF, XLS to PDF, XLSX to PDF, convert Excel to PDF, online converter, free, high-quality, secure, no watermark, no registration"

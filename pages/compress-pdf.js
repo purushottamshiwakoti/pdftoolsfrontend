@@ -457,6 +457,14 @@ const CompressPDFPage = () => {
           name="Keywords"
           content="compress PDF, online PDF compressor, reduce PDF size, PDF compression tool, compress PDF online, compress PDF files"
         />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         {/* You can add your canonical link here */}
         <link
           rel="canonical"

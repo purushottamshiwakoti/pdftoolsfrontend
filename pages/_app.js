@@ -39,7 +39,7 @@ const MyApp = ({ Component, pageProps }) => {
         <link rel="icon" href="/img/files.png" />
         <link rel="apple-touch-icon" href="/img/files.png" />
 
-        {seoData && (
+        {/* {seoData && (
           <>
             <meta
               name="google-site-verification"
@@ -48,8 +48,10 @@ const MyApp = ({ Component, pageProps }) => {
             <meta property="og:title" content={seoData.ogTitle} />
             <meta property="og:description" content={seoData.ogDescription} />
             <meta property="og:image" content={seoData.ogImage} />
+            <meta property="og:title" content={seoData.ogTitle} />
+            <meta property="og:description" content={seoData.ogDescription} />
           </>
-        )}
+        )} */}
       </Head>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       <Script

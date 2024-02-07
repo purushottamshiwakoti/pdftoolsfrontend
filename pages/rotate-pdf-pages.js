@@ -236,6 +236,14 @@ const RotatePDFPage = () => {
           name="Keywords"
           content="rotate pdf pages online, rotate specific pages in pdf, pdf page orientation, online pdf page rotator, rotate pdf files online, pdf document rotator"
         />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         <link
           rel="canonical"
           href={`https://www.example.com${RotatePDFTool.href}`}

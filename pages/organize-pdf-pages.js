@@ -278,6 +278,14 @@ const OrganizePDFPages = () => {
           name="Keywords"
           content="organize pdf pages, rearrange pdf pages, delete pdf pages, add pdf pages, online tool"
         />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         {/* You can add your canonical link here */}
         <link
           rel="canonical"

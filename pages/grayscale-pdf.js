@@ -263,6 +263,14 @@ const GrayscalePDFPage = () => {
           name="Keywords"
           content="Convert your colorful PDF documents to grayscale with our online tool. Reduce the file size and make it easier to print and read."
         />
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         {/* You can add your canonical link here */}
         <link
           rel="canonical"

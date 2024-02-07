@@ -252,6 +252,15 @@ const WORDToPDFPage = () => {
         {/* Anything you add here will be added to this page only */}
         <title>{myData?.metaTitle}</title>
         <meta name="description" content={myData?.metaDescription} />
+
+        {myData && (
+          <>
+            <meta property="og:title" content={myData.ogTitle} />
+            <meta property="og:description" content={myData.ogDescription} />
+            <meta property="og:image" content={myData.ogImage} />
+            <meta property="og:image:alt" content={myData.ogImageAlt} />
+          </>
+        )}
         <meta
           name="Keywords"
           content="Word to PDF, convert Word to PDF, online Word to PDF converter, free Word to PDF converter, Word to PDF online, Word to PDF conversion tool"
