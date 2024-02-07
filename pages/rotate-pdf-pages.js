@@ -1,35 +1,29 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-} from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
-import Selecto from "react-selecto";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
 import { isMobile } from "react-device-detect";
+import Selecto from "react-selecto";
+import DocumentPreviewSelectable from "../components/DocumentPreviewSelectable";
+import EditFilesFormStep from "../components/EditFilesFormStep";
+import Features from "../components/Features";
 import PagePreviwerModal from "../components/PagePreviwerModal";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
 import {
   handleMerge,
   handlePDFOperationsFileSelection,
 } from "../helpers/utils.js";
-import Steps from "../components/Steps";
-import styles from "../styles/UploadContainer.module.css";
-import DocumentPreviewSelectable from "../components/DocumentPreviewSelectable";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import AvailableTools from "../components/AvailableTools";
 import usePages from "../hooks/usePages";
 import useToolsData from "../hooks/useToolsData";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
+
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/rotate-pdf-pages`;
@@ -55,6 +49,8 @@ export async function getStaticProps({ locale }) {
 const RotatePDFPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"rotate-pdf-pages"}`)
@@ -244,92 +240,7 @@ const RotatePDFPage = () => {
             <meta property="og:image:alt" content={myData.ogImageAlt} />
           </>
         )}
-        <link
-          rel="canonical"
-          href={`https://www.example.com${RotatePDFTool.href}`}
-          key="canonical"
-        />
-        {/* You can add your alternate links here, example: */}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/en${RotatePDFTool.href}`}
-          hrefLang="en"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/es${RotatePDFTool.href}`}
-          hrefLang="es"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ar${RotatePDFTool.href}`}
-          hrefLang="ar"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/zh${RotatePDFTool.href}`}
-          hrefLang="zh"
-        />{" "}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/de${RotatePDFTool.href}`}
-          hrefLang="de"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/fr${RotatePDFTool.href}`}
-          hrefLang="fr"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/it${RotatePDFTool.href}`}
-          hrefLang="it"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/pt${RotatePDFTool.href}`}
-          hrefLang="pt"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ru${RotatePDFTool.href}`}
-          hrefLang="ru"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/uk${RotatePDFTool.href}`}
-          hrefLang="uk"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/id${RotatePDFTool.href}`}
-          hrefLang="id"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/da${RotatePDFTool.href}`}
-          hrefLang="da"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/nl${RotatePDFTool.href}`}
-          hrefLang="nl"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/hi${RotatePDFTool.href}`}
-          hrefLang="hi"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ko${RotatePDFTool.href}`}
-          hrefLang="ko"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ja${RotatePDFTool.href}`}
-          hrefLang="ja"
-        />
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
       </Head>
 
       <main>

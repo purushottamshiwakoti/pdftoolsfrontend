@@ -41,6 +41,9 @@ import DownloadFilesFormStep from "../components/DownloadFilesFormStep.js";
 import Alerts from "../components/Alerts.js";
 import pageStyles from "../styles/Page.module.css";
 
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
+
 import parse from "html-react-parser";
 
 export async function getStaticProps({ locale }) {
@@ -54,6 +57,9 @@ export async function getStaticProps({ locale }) {
 const CompressPDFPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"compress-pdf"}`)
@@ -466,13 +472,14 @@ const CompressPDFPage = () => {
           </>
         )}
         {/* You can add your canonical link here */}
-        <link
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
+        {/* <link
           rel="canonical"
           href={`https://www.example.com${CompressPDFTool.href}`}
           key="canonical"
-        />
+        /> */}
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en${CompressPDFTool.href}`}
           hrefLang="en"
@@ -551,7 +558,7 @@ const CompressPDFPage = () => {
           rel="alternate"
           href={`https://www.example.com/ja${CompressPDFTool.href}`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
 
       <main>

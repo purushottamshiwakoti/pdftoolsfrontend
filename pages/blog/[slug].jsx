@@ -14,6 +14,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
+import { appUrl } from "@/lib/url";
+
 export async function getStaticPaths() {
   const res = await fetch(`${dashboardUrl}/blogs `, {
     cache: "no-store",
@@ -51,6 +53,7 @@ const BlogDetail = () => {
   const [isWindows, setIsWindows] = useState(false);
   const [categoriesData, setCategoriesData] = useState(null);
   const [similarBlogsData, setSimilarBlogsData] = useState(null);
+  const currentUrl = router.asPath;
 
   console.log(myData);
 
@@ -123,7 +126,7 @@ const BlogDetail = () => {
             <meta property="og:image:alt" content={myData.ogImageAlt} />
           </>
         )}
-        <meta name="robots" content="noindex,nofollow" />
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
         {/* You can add your canonical here */}
         {/* You can add your alternate here */}
       </Head>

@@ -47,6 +47,9 @@ import pageStyles from "../styles/Page.module.css";
 
 import parse from "html-react-parser";
 
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
+
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/pdf-to-jpg`;
 //   const response = await fetch(url);
@@ -71,6 +74,8 @@ export async function getStaticProps({ locale }) {
 const PDFToJPGPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"pdf-to-jpg"}`)
@@ -337,14 +342,16 @@ const PDFToJPGPage = () => {
             <meta property="og:image:alt" content={myData.ogImageAlt} />
           </>
         )}
+
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
         {/* You can add your canonical link here */}
-        <link
+        {/* <link
           rel="canonical"
           href={`https://www.example.com${PDFToJPGTool.href}`}
           key="canonical"
-        />
+        /> */}
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en${PDFToJPGTool.href}`}
           hrefLang="en"
@@ -423,7 +430,7 @@ const PDFToJPGPage = () => {
           rel="alternate"
           href={`https://www.example.com/ja${PDFToJPGTool.href}`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
 
       <main>

@@ -1,42 +1,35 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  AwardFill,
-  GearFill,
-  HeartFill,
-  ShieldFillCheck,
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  Check2Circle,
-  ExclamationTriangle,
-} from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
 import DocumentPreview from "../components/DocumentPreview";
 import {
-  handleFileSelection,
-  uploadFiles,
-  saveNewFiles,
   downloadFiles,
+  handleFileSelection,
+  saveNewFiles,
+  uploadFiles,
 } from "../helpers/utils.js";
 
-import styles from "../styles/UploadContainer.module.css";
-import Steps from "../components/Steps";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
-import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
+import Alerts from "../components/Alerts";
 import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
 import EditFilesFormStep from "../components/EditFilesFormStep";
-import AvailableTools from "../components/AvailableTools";
-import useUploadStats from "../hooks/useUploadStats";
+import Features from "../components/Features";
+import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
+import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
 import useDocuments from "../hooks/useDocuments";
 import useToolsData from "../hooks/useToolsData";
-import Alerts from "../components/Alerts";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
+
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/grayscale-pdf`;
@@ -62,6 +55,9 @@ export async function getStaticProps({ locale }) {
 const GrayscalePDFPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"grayscale-pdf"}`)
@@ -272,13 +268,14 @@ const GrayscalePDFPage = () => {
           </>
         )}
         {/* You can add your canonical link here */}
-        <link
+        {/* <link
           rel="canonical"
           href={`https://www.example.com${GrayscalePDFTool.href}`}
           key="canonical"
-        />
+        /> */}
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en${GrayscalePDFTool.href}`}
           hrefLang="en"
@@ -357,7 +354,7 @@ const GrayscalePDFPage = () => {
           rel="alternate"
           href={`https://www.example.com/ja${GrayscalePDFTool.href}`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
       <main>
         <header className="page_section header mb-0">

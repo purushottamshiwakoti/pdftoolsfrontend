@@ -1,41 +1,33 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-  Check2Circle,
-  ExclamationTriangle,
-} from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
+import Alerts from "../components/Alerts";
 import DocumentPreview from "../components/DocumentPreview";
+import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
+import EditFilesFormStep from "../components/EditFilesFormStep";
+import Features from "../components/Features";
+import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
+import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
 import {
-  uploadFiles,
-  saveNewFiles,
   downloadFiles,
   handleRepairPDFFileSelection,
+  saveNewFiles,
+  uploadFiles,
 } from "../helpers/utils.js";
-import styles from "../styles/UploadContainer.module.css";
-import Steps from "../components/Steps";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
-import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
-import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import AvailableTools from "../components/AvailableTools";
-import useUploadStats from "../hooks/useUploadStats";
 import useDocuments from "../hooks/useDocuments";
 import useToolsData from "../hooks/useToolsData";
-import Alerts from "../components/Alerts";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/repair-pdf`;
@@ -61,6 +53,9 @@ export async function getStaticProps({ locale }) {
 const RepairPDFPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"repair-pdf"}`)
@@ -268,92 +263,7 @@ const RepairPDFPage = () => {
             <meta property="og:image:alt" content={myData.ogImageAlt} />
           </>
         )}
-        <link
-          rel="canonical"
-          href={`https://www.example.com${RepairPDFTool.href}`}
-          key="canonical"
-        />
-        {/* You can add your alternate links here, example: */}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/en${RepairPDFTool.href}`}
-          hrefLang="en"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/es${RepairPDFTool.href}`}
-          hrefLang="es"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ar${RepairPDFTool.href}`}
-          hrefLang="ar"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/zh${RepairPDFTool.href}`}
-          hrefLang="zh"
-        />{" "}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/de${RepairPDFTool.href}`}
-          hrefLang="de"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/fr${RepairPDFTool.href}`}
-          hrefLang="fr"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/it${RepairPDFTool.href}`}
-          hrefLang="it"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/pt${RepairPDFTool.href}`}
-          hrefLang="pt"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ru${RepairPDFTool.href}`}
-          hrefLang="ru"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/uk${RepairPDFTool.href}`}
-          hrefLang="uk"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/id${RepairPDFTool.href}`}
-          hrefLang="id"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/da${RepairPDFTool.href}`}
-          hrefLang="da"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/nl${RepairPDFTool.href}`}
-          hrefLang="nl"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/hi${RepairPDFTool.href}`}
-          hrefLang="hi"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ko${RepairPDFTool.href}`}
-          hrefLang="ko"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ja${RepairPDFTool.href}`}
-          hrefLang="ja"
-        />
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
       </Head>
       <main>
         <header className="page_section header mb-0">

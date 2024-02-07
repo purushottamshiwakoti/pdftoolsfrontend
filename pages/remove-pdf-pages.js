@@ -1,39 +1,33 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-} from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
-import Selecto from "react-selecto";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+import { isMobile } from "react-device-detect";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
-import { isMobile } from "react-device-detect";
-import PagePreviwerModal from "../components/PagePreviwerModal";
-import PageDragLayer from "../components/PageDragLayer";
+import Selecto from "react-selecto";
 import DocumentPreviewDraggable from "../components/DocumentPreviewDraggable";
+import PageDragLayer from "../components/PageDragLayer";
+import PagePreviwerModal from "../components/PagePreviwerModal";
 import {
   handleMerge,
   handlePDFOperationsFileSelection,
 } from "../helpers/utils.js";
 
-import styles from "../styles/UploadContainer.module.css";
-import Steps from "../components/Steps";
+import parse from "html-react-parser";
+import EditFilesFormStep from "../components/EditFilesFormStep";
 import Features from "../components/Features";
 import Share from "../components/Share";
+import Steps from "../components/Steps";
 import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import AvailableTools from "../components/AvailableTools";
 import usePages from "../hooks/usePages";
 import useToolsData from "../hooks/useToolsData";
 import pageStyles from "../styles/Page.module.css";
-import parse from "html-react-parser";
+import styles from "../styles/UploadContainer.module.css";
+
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/remove-pdf-pages`;
@@ -59,6 +53,8 @@ export async function getStaticProps({ locale }) {
 const DeletePDFPages = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"remove-pdf-pages"}`)
@@ -278,92 +274,7 @@ const DeletePDFPages = () => {
           content="remove pdf pages, pdf page remover, delete pdf pages, pdf page delete, online pdf page remover, remove specific pages from pdf, remove pages from pdf online"
         />
         {/* You can add your canonical link here */}
-        <link
-          rel="canonical"
-          href={`https://www.example.com${RemovePDFPagesTool.href}`}
-          key="canonical"
-        />
-        {/* You can add your alternate links here, example: */}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/en${RemovePDFPagesTool.href}`}
-          hrefLang="en"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/es${RemovePDFPagesTool.href}`}
-          hrefLang="es"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ar${RemovePDFPagesTool.href}`}
-          hrefLang="ar"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/zh${RemovePDFPagesTool.href}`}
-          hrefLang="zh"
-        />{" "}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/de${RemovePDFPagesTool.href}`}
-          hrefLang="de"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/fr${RemovePDFPagesTool.href}`}
-          hrefLang="fr"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/it${RemovePDFPagesTool.href}`}
-          hrefLang="it"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/pt${RemovePDFPagesTool.href}`}
-          hrefLang="pt"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ru${RemovePDFPagesTool.href}`}
-          hrefLang="ru"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/uk${RemovePDFPagesTool.href}`}
-          hrefLang="uk"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/id${RemovePDFPagesTool.href}`}
-          hrefLang="id"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/da${RemovePDFPagesTool.href}`}
-          hrefLang="da"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/nl${RemovePDFPagesTool.href}`}
-          hrefLang="nl"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/hi${RemovePDFPagesTool.href}`}
-          hrefLang="hi"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ko${RemovePDFPagesTool.href}`}
-          hrefLang="ko"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ja${RemovePDFPagesTool.href}`}
-          hrefLang="ja"
-        />
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
       </Head>
 
       <main>

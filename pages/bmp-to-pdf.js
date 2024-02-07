@@ -42,6 +42,9 @@ import pageStyles from "../styles/Page.module.css";
 
 import parse from "html-react-parser";
 
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
+
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/bmp-to-pdf`;
 //   const response = await fetch(url);
@@ -65,6 +68,9 @@ export async function getStaticProps({ locale }) {
 const BMPToPDFPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"bmp-to-pdf"}`)
@@ -324,6 +330,7 @@ const BMPToPDFPage = () => {
         {/* Anything you add here will be added to this page only */}
         <title>{myData?.metaTitle}</title>
         <meta name="description" content={myData?.metaDescription} />
+
         {myData && (
           <>
             <meta property="og:title" content={myData.ogTitle} />
@@ -336,14 +343,15 @@ const BMPToPDFPage = () => {
           name="Keywords"
           content="BMP to PDF converter, convert BMP to PDF online, free BMP to PDF converter, BMP to PDF online conversion, BMP to PDF online converter"
         />
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
         {/* You can add your canonical link here */}
-        <link
+        {/* <link
           rel="canonical"
           href={`https://www.example.com${BMPToPDFTool.href}`}
           key="canonical"
-        />
+        /> */}
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en${BMPToPDFTool.href}`}
           hrefLang="en"
@@ -422,7 +430,7 @@ const BMPToPDFPage = () => {
           rel="alternate"
           href={`https://www.example.com/ja${BMPToPDFTool.href}`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
 
       <main>

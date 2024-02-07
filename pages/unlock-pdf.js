@@ -1,39 +1,31 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
+import parse from "html-react-parser";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  Unlock,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-  Check2Circle,
-  ExclamationTriangle,
-} from "react-bootstrap-icons";
-import usePassword from "../hooks/usePassword";
-import useUploadStats from "../hooks/useUploadStats";
-import useDocuments from "../hooks/useDocuments";
-import useToolsData from "../hooks/useToolsData";
-import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import Steps from "../components/Steps";
-import Features from "../components/Features";
-import Share from "../components/Share";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
+import Alerts from "../components/Alerts";
 import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
-import AvailableTools from "../components/AvailableTools";
+import Features from "../components/Features";
 import PasswordForm from "../components/PasswordForm.js";
-import styles from "../styles/UploadContainer.module.css";
+import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
 import {
-  saveNewFiles,
-  uploadFiles,
   downloadFiles,
   handleUnlockPDFFileSelection,
+  saveNewFiles,
+  uploadFiles,
 } from "../helpers/utils.js";
-import Alerts from "../components/Alerts";
+import useDocuments from "../hooks/useDocuments";
+import usePassword from "../hooks/usePassword";
+import useToolsData from "../hooks/useToolsData";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
-import parse from "html-react-parser";
+
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/unlock-pdf`;
@@ -59,6 +51,9 @@ export async function getStaticProps({ locale }) {
 const UnlockPDFPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"unlock-pdf"}`)
@@ -253,92 +248,7 @@ const UnlockPDFPage = () => {
           </>
         )}
         {/* You can add your canonical link here */}
-        <link
-          rel="canonical"
-          href={`https://www.example.com${UnlockPDFTool.href}`}
-          key="canonical"
-        />
-        {/* You can add your alternate links here, example: */}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/en${UnlockPDFTool.href}`}
-          hrefLang="en"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/es${UnlockPDFTool.href}`}
-          hrefLang="es"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ar${UnlockPDFTool.href}`}
-          hrefLang="ar"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/zh${UnlockPDFTool.href}`}
-          hrefLang="zh"
-        />{" "}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/de${UnlockPDFTool.href}`}
-          hrefLang="de"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/fr${UnlockPDFTool.href}`}
-          hrefLang="fr"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/it${UnlockPDFTool.href}`}
-          hrefLang="it"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/pt${UnlockPDFTool.href}`}
-          hrefLang="pt"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ru${UnlockPDFTool.href}`}
-          hrefLang="ru"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/uk${UnlockPDFTool.href}`}
-          hrefLang="uk"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/id${UnlockPDFTool.href}`}
-          hrefLang="id"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/da${UnlockPDFTool.href}`}
-          hrefLang="da"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/nl${UnlockPDFTool.href}`}
-          hrefLang="nl"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/hi${UnlockPDFTool.href}`}
-          hrefLang="hi"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ko${UnlockPDFTool.href}`}
-          hrefLang="ko"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ja${UnlockPDFTool.href}`}
-          hrefLang="ja"
-        />
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
       </Head>
 
       <main>

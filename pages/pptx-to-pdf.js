@@ -1,41 +1,34 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  AwardFill,
-  GearFill,
-  HeartFill,
-  ShieldFillCheck,
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  Check2Circle,
-  ExclamationTriangle,
-} from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
+import Alerts from "../components/Alerts.js";
+import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
+import EditFilesFormStep from "../components/EditFilesFormStep";
+import Features from "../components/Features";
+import ImagePreview from "../components/ImagePreview";
+import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
+import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
 import {
-  uploadFiles,
-  saveNewFiles,
   downloadFiles,
   handleOfficeToPDFFileSelection,
+  saveNewFiles,
+  uploadFiles,
 } from "../helpers/utils.js";
-import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
-import styles from "../styles/UploadContainer.module.css";
-import Steps from "../components/Steps";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
-import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
-import AvailableTools from "../components/AvailableTools";
-import ImagePreview from "../components/ImagePreview";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import useUploadStats from "../hooks/useUploadStats";
 import useDocuments from "../hooks/useDocuments";
 import useToolsData from "../hooks/useToolsData";
-import Alerts from "../components/Alerts.js";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
+
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/pptx-to-pdf`;
@@ -61,6 +54,8 @@ export async function getStaticProps({ locale }) {
 const PPTXToPDFPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"pptx-to-pdf"}`)
@@ -266,13 +261,14 @@ const PPTXToPDFPage = () => {
           content="Powerpoint to PDF, PPT to PDF, PPTX to PDF, convert Powerpoint to PDF, online Powerpoint to PDF converter"
         />
         {/* You can add your canonical link here */}
-        <link
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
+        {/* <link
           rel="canonical"
           href={`https://www.example.com${PPTXToPDFTool.href}`}
           key="canonical"
-        />
+        /> */}
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en${PPTXToPDFTool.href}`}
           hrefLang="en"
@@ -351,7 +347,7 @@ const PPTXToPDFPage = () => {
           rel="alternate"
           href={`https://www.example.com/ja${PPTXToPDFTool.href}`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
 
       <main>

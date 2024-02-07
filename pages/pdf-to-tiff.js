@@ -1,50 +1,46 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { isMobile } from "react-device-detect";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Selecto from "react-selecto";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
 import {
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  FileEarmarkPdf,
   ArrowRight,
-  Images,
   CardImage,
   Check2Circle,
   ExclamationTriangle,
+  FileEarmarkPdf,
+  Images,
 } from "react-bootstrap-icons";
-import useUploadStats from "../hooks/useUploadStats";
+import { isMobile } from "react-device-detect";
+import Selecto from "react-selecto";
+import Alerts from "../components/Alerts";
+import DocumentPreviewSelectable from "../components/DocumentPreviewSelectable";
+import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
+import EditFilesFormStep from "../components/EditFilesFormStep";
+import Features from "../components/Features";
+import Option from "../components/Option";
+import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
+import SelectOptionFormStep from "../components/SelectOptionFormStep";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
+import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
+import {
+  downloadFiles,
+  handlePDFToImageFileSelection,
+  saveNewFiles,
+  uploadFiles,
+} from "../helpers/utils.js";
 import useDocuments from "../hooks/useDocuments";
 import usePages from "../hooks/usePages";
 import useToolsData from "../hooks/useToolsData";
-import DocumentPreviewSelectable from "../components/DocumentPreviewSelectable";
-import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
-import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
-import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import AvailableTools from "../components/AvailableTools";
-import Steps from "../components/Steps";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import styles from "../styles/UploadContainer.module.css";
-import {
-  saveNewFiles,
-  uploadFiles,
-  downloadFiles,
-  handlePDFToImageFileSelection,
-} from "../helpers/utils.js";
-import Option from "../components/Option";
-import SelectOptionFormStep from "../components/SelectOptionFormStep";
-import Alerts from "../components/Alerts";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
+
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/pdf-to-tiff`;
@@ -70,6 +66,9 @@ export async function getStaticProps({ locale }) {
 const PDFToTIFFPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"pdf-to-tiff"}`)
@@ -336,14 +335,17 @@ const PDFToTIFFPage = () => {
             <meta property="og:image:alt" content={myData.ogImageAlt} />
           </>
         )}
+
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
+
         {/* You can add your canonical link here */}
-        <link
+        {/* <link
           rel="canonical"
           href={`https://www.example.com${PDFToTIFFTool.href}`}
           key="canonical"
-        />
+        /> */}
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en${PDFToTIFFTool.href}`}
           hrefLang="en"
@@ -422,7 +424,7 @@ const PDFToTIFFPage = () => {
           rel="alternate"
           href={`https://www.example.com/ja${PDFToTIFFTool.href}`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
 
       <main>

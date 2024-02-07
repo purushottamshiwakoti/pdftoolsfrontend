@@ -27,6 +27,9 @@ import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
 
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
+
 export async function getStaticProps({ locale }) {
   return {
     props: {
@@ -40,6 +43,9 @@ export async function getStaticProps({ locale }) {
 const MergePDFPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"merge-pdf"}`)
@@ -258,14 +264,16 @@ const MergePDFPage = () => {
             <meta property="og:image:alt" content={myData.ogImageAlt} />
           </>
         )}
+
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
         {/* You can add your canonical link here */}
-        <link
+        {/* <link
           rel="canonical"
           href={`https://www.example.com${MergePDFTool.href}`}
           key="canonical"
-        />
+        /> */}
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en${MergePDFTool.href}`}
           hrefLang="en"
@@ -344,7 +352,7 @@ const MergePDFPage = () => {
           rel="alternate"
           href={`https://www.example.com/ja${MergePDFTool.href}`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
 
       <main>

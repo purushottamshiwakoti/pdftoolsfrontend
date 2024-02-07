@@ -6,6 +6,9 @@ import Share from "../components/Share";
 import pageStyles from "../styles/Page.module.css";
 import parse from "html-react-parser";
 
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
+
 export async function getStaticProps({ locale }) {
   return {
     props: {
@@ -18,6 +21,9 @@ const About = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/other/${"about"}`)
@@ -35,6 +41,7 @@ const About = () => {
         {/* Anything you add here will be added this page only */}
         <title>{myData?.metaTitle}</title>
         <meta name="description" content={myData?.metaDescription} />
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
         {myData && (
           <>
             <meta property="og:title" content={myData.ogTitle} />

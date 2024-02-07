@@ -14,6 +14,9 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import Reviews from "@/components/Reviews";
 import GoodCompany from "@/components/GoodCompany";
 
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
+
 export async function getStaticProps({ locale }) {
   return {
     props: {
@@ -30,6 +33,9 @@ const Home = () => {
   const [chooseUsData, setChooseUsData] = useState(null);
   const [reviewsData, setReviewsData] = useState(null);
   const [CompanyImagesData, setCompanyImageData] = useState(null);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
@@ -80,13 +86,9 @@ const Home = () => {
           content="PDF tool, PDF converter, PDF editor, PDF compressor, online PDF tool, free PDF tool, PDF to Word, PDF to Excel, PDF to JPG, PDF to PNG, edit PDF online, compress PDF online."
         />
         {/* You can add your canonical here */}
-        <link
-          rel="canonical"
-          href={`https://www.example.com/`}
-          key="canonical"
-        />
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en`}
           hrefLang="en"
@@ -166,7 +168,7 @@ const Home = () => {
           rel="alternate"
           href={`https://www.example.com/ja`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
 
       <>

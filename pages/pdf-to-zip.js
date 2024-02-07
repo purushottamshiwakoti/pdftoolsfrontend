@@ -1,33 +1,26 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-} from "react-bootstrap-icons";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
 
 import { useTranslation } from "next-i18next";
 import DocumentPreview from "../components/DocumentPreview";
 
 import { ZipFiles, handlePDFToZIPFileSelection } from "../helpers/utils.js";
 
-import styles from "../styles/UploadContainer.module.css";
-import Steps from "../components/Steps";
+import EditFilesFormStep from "../components/EditFilesFormStep";
 import Features from "../components/Features";
 import Share from "../components/Share";
-import EditFilesFormStep from "../components/EditFilesFormStep";
+import Steps from "../components/Steps";
 import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import AvailableTools from "../components/AvailableTools";
 import useDocuments from "../hooks/useDocuments";
 import useToolsData from "../hooks/useToolsData";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
 
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/pdf-to-zip`;
 //   const response = await fetch(url);
@@ -52,6 +45,9 @@ export async function getStaticProps({ locale }) {
 const PDFToZipPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"pdf-to-zip"}`)
@@ -161,13 +157,14 @@ const PDFToZipPage = () => {
           content="PDF to ZIP Conversion, Online PDF to ZIP Converter, Convert PDF to ZIP, PDF to ZIP Compression, PDF to ZIP File Conversion"
         />
         {/* You can add your canonical link here */}
-        <link
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
+        {/* <link
           rel="canonical"
           href={`https://www.example.com${PDFToZIPTool.href}`}
           key="canonical"
-        />
+        /> */}
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en${PDFToZIPTool.href}`}
           hrefLang="en"
@@ -246,7 +243,7 @@ const PDFToZipPage = () => {
           rel="alternate"
           href={`https://www.example.com/ja${PDFToZIPTool.href}`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
 
       <main>

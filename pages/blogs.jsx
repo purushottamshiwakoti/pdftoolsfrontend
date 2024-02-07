@@ -15,6 +15,9 @@ import ReactPaginate from "react-paginate";
 import { format } from "date-fns";
 import { useSearchParams } from "next/navigation";
 
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
+
 export async function getStaticProps({ locale }) {
   return {
     props: {
@@ -33,6 +36,9 @@ const BlogsPage = () => {
 
   const [isWindows, setIsWindows] = useState(false);
   const [myData, setData] = useState(null);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/other/${"blogs"}`)
@@ -100,8 +106,9 @@ const BlogsPage = () => {
           name="Keywords"
           content="PDF tools, PDF manipulation, PDF merge, PDF split, PDF compress, PDF convert"
         />
-        <meta name="robots" content="noindex,nofollow" />
+
         {/* You can add your canonical here */}
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
         {/* You can add your alternate here */}
       </Head>
       {isLoading ? (

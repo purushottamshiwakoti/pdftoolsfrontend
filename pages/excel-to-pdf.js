@@ -37,6 +37,9 @@ import pageStyles from "../styles/Page.module.css";
 
 import parse from "html-react-parser";
 
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
+
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/bmp-to-pdf`;
 //   const response = await fetch(url);
@@ -61,6 +64,9 @@ export async function getStaticProps({ locale }) {
 const EXCELToPDFPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"excel-to-pdf"}`)
@@ -263,14 +269,16 @@ const EXCELToPDFPage = () => {
           name="Keywords"
           content="Excel to PDF, XLS to PDF, XLSX to PDF, convert Excel to PDF, online converter, free, high-quality, secure, no watermark, no registration"
         />
+
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
         {/* You can add your canonical link here */}
-        <link
+        {/* <link
           rel="canonical"
           href={`https://www.example.com${EXCELToPDFTool.href}`}
           key="canonical"
-        />
+        /> */}
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en${EXCELToPDFTool.href}`}
           hrefLang="en"
@@ -349,7 +357,7 @@ const EXCELToPDFPage = () => {
           rel="alternate"
           href={`https://www.example.com/ja${EXCELToPDFTool.href}`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
 
       <main>

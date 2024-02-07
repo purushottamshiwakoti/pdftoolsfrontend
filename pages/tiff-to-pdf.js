@@ -1,46 +1,39 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-  Check2Circle,
-  ExclamationTriangle,
-} from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
-import Selecto from "react-selecto";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
+import { isMobile } from "react-device-detect";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
-import { isMobile } from "react-device-detect";
+import Selecto from "react-selecto";
 import ImageDragLayer from "../components/ImageDragLayer";
 import {
-  saveNewFiles,
-  handleMerge,
   convertImageToPDF,
+  handleMerge,
   handleTIFFSelection,
+  saveNewFiles,
 } from "../helpers/utils.js";
 
-import Steps from "../components/Steps";
-import styles from "../styles/UploadContainer.module.css";
+import parse from "html-react-parser";
+import Alerts from "../components/Alerts";
+import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
 import Features from "../components/Features";
-import Share from "../components/Share";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
 import ImagePreviewDraggable from "../components/ImagePreviewDraggable";
 import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
-import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
 import SetPagesSettingsFormStep from "../components/SetPagesSettingsFormStep";
-import AvailableTools from "../components/AvailableTools";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
 import useImages from "../hooks/useImages";
-import useUploadStats from "../hooks/useUploadStats";
 import useToolsData from "../hooks/useToolsData";
-import Alerts from "../components/Alerts";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
-import parse from "html-react-parser";
+import styles from "../styles/UploadContainer.module.css";
+
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/tiff-to-pdf`;
@@ -66,6 +59,9 @@ export async function getStaticProps({ locale }) {
 const TIFFToPDFPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"tiff-to-pdf"}`)
@@ -335,92 +331,7 @@ const TIFFToPDFPage = () => {
           content="TIFF to PDF converter, online TIFF to PDF converter, convert TIFF to PDF, free TIFF to PDF converter, TIFF to PDF conversion, TIFF to PDF online converter"
         />
         {/* You can add your canonical link here */}
-        <link
-          rel="canonical"
-          href={`https://www.example.com${TIFFToPDFTool.href}`}
-          key="canonical"
-        />
-        {/* You can add your alternate links here, example: */}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/en${TIFFToPDFTool.href}`}
-          hrefLang="en"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/es${TIFFToPDFTool.href}`}
-          hrefLang="es"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ar${TIFFToPDFTool.href}`}
-          hrefLang="ar"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/zh${TIFFToPDFTool.href}`}
-          hrefLang="zh"
-        />{" "}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/de${TIFFToPDFTool.href}`}
-          hrefLang="de"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/fr${TIFFToPDFTool.href}`}
-          hrefLang="fr"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/it${TIFFToPDFTool.href}`}
-          hrefLang="it"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/pt${TIFFToPDFTool.href}`}
-          hrefLang="pt"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ru${TIFFToPDFTool.href}`}
-          hrefLang="ru"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/uk${TIFFToPDFTool.href}`}
-          hrefLang="uk"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/id${TIFFToPDFTool.href}`}
-          hrefLang="id"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/da${TIFFToPDFTool.href}`}
-          hrefLang="da"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/nl${TIFFToPDFTool.href}`}
-          hrefLang="nl"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/hi${TIFFToPDFTool.href}`}
-          hrefLang="hi"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ko${TIFFToPDFTool.href}`}
-          hrefLang="ko"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ja${TIFFToPDFTool.href}`}
-          hrefLang="ja"
-        />
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
       </Head>
 
       <main>

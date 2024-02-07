@@ -6,6 +6,9 @@ import pageStyles from "../styles/Page.module.css";
 import parse from "html-react-parser";
 import ContactForm from "@/components/ContactForm";
 
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
+
 export async function getStaticProps({ locale }) {
   return {
     props: {
@@ -20,6 +23,9 @@ const Contacts = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/other/${"contact-us"}`)
@@ -47,6 +53,8 @@ const Contacts = () => {
           </>
         )}
         <meta name="Keywords" content="" />
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
+
         <meta name="robots" content="noindex,nofollow" />
         {/* You can add your canonical here */}
         {/* You can add your alternate here */}

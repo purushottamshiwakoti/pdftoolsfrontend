@@ -35,6 +35,9 @@ import pageStyles from "../styles/Page.module.css";
 
 import parse from "html-react-parser";
 
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
+
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/organize-pdf-pages`;
 //   const response = await fetch(url);
@@ -103,6 +106,8 @@ const OrganizePDFPages = () => {
   //loadedfilesCount is used to count the files currently being loaded to show progress spinner while loading the files //
   const [loadedfilesCount, setLoadedFilesCount] = useState(0);
   const [scrollOptions, setScrollOptions] = useState({});
+  const router = useRouter();
+  const currentUrl = router.asPath;
   const opts = {
     scrollAngleRanges: [
       { start: 30, end: 150 },
@@ -286,14 +291,15 @@ const OrganizePDFPages = () => {
             <meta property="og:image:alt" content={myData.ogImageAlt} />
           </>
         )}
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
         {/* You can add your canonical link here */}
-        <link
+        {/* <link
           rel="canonical"
           href={`https://www.example.com${OrganizePDFTool.href}`}
           key="canonical"
-        />
+        /> */}
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en${OrganizePDFTool.href}`}
           hrefLang="en"
@@ -372,7 +378,7 @@ const OrganizePDFPages = () => {
           rel="alternate"
           href={`https://www.example.com/ja${OrganizePDFTool.href}`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
 
       <main>

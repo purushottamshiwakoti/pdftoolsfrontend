@@ -4,6 +4,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import pageStyles from "../styles/Page.module.css";
 import parse from "html-react-parser";
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
 
 export async function getStaticProps({ locale }) {
   return {
@@ -17,6 +19,8 @@ const PrivacyPolicy = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const { t } = useTranslation();
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/other/${"privacy-policy"}`)
@@ -43,7 +47,7 @@ const PrivacyPolicy = () => {
           </>
         )}
         <meta name="Keywords" content="" />
-        <meta name="robots" content="noindex,nofollow" />
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
         {/* Anything you add here will be added this page only */}
         {/* You can add your canonical here */}
         {/* You can add your alternate here */}

@@ -1,46 +1,39 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  AwardFill,
-  GearFill,
-  HeartFill,
-  ShieldFillCheck,
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  Check2Circle,
-  ExclamationTriangle,
-} from "react-bootstrap-icons";
-import { isMobile } from "react-device-detect";
+import parse from "html-react-parser";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
+import { isMobile } from "react-device-detect";
 import Selecto from "react-selecto";
+import Alerts from "../components/Alerts";
 import DocumentPreviewSelectable from "../components/DocumentPreviewSelectable";
+import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
+import EditFilesFormStep from "../components/EditFilesFormStep";
+import Features from "../components/Features";
+import Option from "../components/Option";
 import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
+import SelectOptionFormStep from "../components/SelectOptionFormStep";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
+import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
 import {
-  notify,
-  uploadFiles,
-  saveNewFiles,
   downloadFiles,
   handleExtractPagesFileSelection,
+  notify,
+  saveNewFiles,
+  uploadFiles,
 } from "../helpers/utils.js";
-import Steps from "../components/Steps";
-import styles from "../styles/UploadContainer.module.css";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
-import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import AvailableTools from "../components/AvailableTools";
-import useUploadStats from "../hooks/useUploadStats";
 import useDocuments from "../hooks/useDocuments";
 import usePages from "../hooks/usePages";
 import useToolsData from "../hooks/useToolsData";
-import Option from "../components/Option";
-import SelectOptionFormStep from "../components/SelectOptionFormStep";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import Alerts from "../components/Alerts";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
-import parse from "html-react-parser";
+import styles from "../styles/UploadContainer.module.css";
+
+import { useRouter } from "next/router";
+import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/extract-pdf-pages`;
@@ -72,6 +65,9 @@ export async function getStaticProps({ locale }) {
 const ExtractPagesPage = () => {
   const [myData, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const currentUrl = router.asPath;
 
   useEffect(() => {
     fetch(`/api/data/${"extract-pdf-pages"}`)
@@ -380,14 +376,16 @@ const ExtractPagesPage = () => {
             <meta property="og:image:alt" content={myData.ogImageAlt} />
           </>
         )}
+        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
+
         {/* You can add your canonical link here */}
-        <link
+        {/* <link
           rel="canonical"
           href={`https://www.example.com${ExtractPagesTool.href}`}
           key="canonical"
-        />
+        /> */}
         {/* You can add your alternate links here, example: */}
-        <link
+        {/* <link
           rel="alternate"
           href={`https://www.example.com/en${ExtractPagesTool.href}`}
           hrefLang="en"
@@ -466,7 +464,7 @@ const ExtractPagesPage = () => {
           rel="alternate"
           href={`https://www.example.com/ja${ExtractPagesTool.href}`}
           hrefLang="ja"
-        />
+        /> */}
       </Head>
 
       <main>
