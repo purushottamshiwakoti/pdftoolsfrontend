@@ -320,3 +320,11 @@ select:disabled {
 .pdisabled{
   background-color: #007bff;
 }
+
+ul{
+  list-style: disc;
+}
+
+ol{
+  list-style: decimal;
+}
