@@ -9,7 +9,7 @@ const Steps = React.memo(function Steps({ title, stepsArray }) {
       <article className={`container banner ${styles.steps_section}`}>
         <section className="w-100 mb-5">
           <header>
-            <h2 className={`${styles.steps_title} mt-0`}>{title}</h2>
+            <h2 className={`${styles.steps_title} text-3xl mt-0`}>{title}</h2>
             <div
               className={`${pageStyles.divider} ${pageStyles.mx_auto}`}
             ></div>

@@ -1,49 +1,42 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-  Check2Circle,
-  ExclamationTriangle,
-} from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
-import Selecto from "react-selecto";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+import {
+  Check2Circle,
+  ExclamationTriangle
+} from "react-bootstrap-icons";
+import { isMobile } from "react-device-detect";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
-import { isMobile } from "react-device-detect";
-import {
-  saveNewFiles,
-  handleMerge,
-  convertImageToPDF,
-  handleImagesSelection,
-} from "../helpers/utils.js";
-import useImages from "../hooks/useImages";
-import useUploadStats from "../hooks/useUploadStats";
-import ImageDragLayer from "../components/ImageDragLayer";
-import Steps from "../components/Steps";
+import Selecto from "react-selecto";
+import Alerts from "../components/Alerts.js";
+import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
 import Features from "../components/Features";
-import Share from "../components/Share";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
+import ImageDragLayer from "../components/ImageDragLayer";
 import ImagePreviewDraggable from "../components/ImagePreviewDraggable";
 import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
-import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
 import SetPagesSettingsFormStep from "../components/SetPagesSettingsFormStep";
-import AvailableTools from "../components/AvailableTools";
-import styles from "../styles/UploadContainer.module.css";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
+import {
+  convertImageToPDF,
+  handleImagesSelection,
+  handleMerge,
+  saveNewFiles,
+} from "../helpers/utils.js";
+import useImages from "../hooks/useImages";
 import useToolsData from "../hooks/useToolsData";
-import Alerts from "../components/Alerts.js";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
 
-import { useRouter } from "next/router";
 import { appUrl } from "@/lib/url";
+import { useRouter } from "next/router";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/bmp-to-pdf`;
@@ -640,7 +633,7 @@ const BMPToPDFPage = () => {
                   {/* {t("merge-pdf:article_title")} */}
                 </div>
               ) : (
-                <h4 className={pageStyles.title_section}>
+                <h4 className={`${pageStyles.title_section} text-3xl`}>
                   {myData?.longDescriptionTitle}
                   {/* {t("merge-pdf:article_title")} */}
                 </h4>

@@ -321,9 +321,9 @@ select:disabled {
   background-color: #007bff;
 }
 
-ul{
+/* ul{
   list-style: disc;
-}
+} */
 
 ol{
   list-style: decimal;

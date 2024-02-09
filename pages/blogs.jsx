@@ -151,13 +151,14 @@ const BlogsPage = () => {
                   {blogsData && blogsData[0] && (
                     <div className="">
                       {blogsData[0].bannerImage ? (
-                        <Image
-                          src={blogsData[0].bannerImage}
-                          alt={blogsData[0].bannerImageAlt}
-                          className="rounded-md "
-                          width={500}
-                          height={500}
-                        />
+                        <div className="relative w-[300px] h-[300px]">
+                          <Image
+                            src={blogsData[0].bannerImage}
+                            alt={blogsData[0].bannerImageAlt}
+                            className="rounded-md "
+                            fill
+                          />
+                        </div>
                       ) : (
                         <Image
                           src={"/img/banner.jpg"}
@@ -224,7 +225,7 @@ const BlogsPage = () => {
               </Link>
             </div>
             <div>
-              <h2 className="text-[#7D64FF]  text-3xl font-medium mt-4 ">
+              <h2 className="text-[#7D64FF]  text-3xl font-medium mt-4 lg:mt-3 ">
                 All Blogs
               </h2>
               <div className="lg:flex ">
@@ -318,7 +319,7 @@ const BlogsPage = () => {
             <div className="mt-2">
               <ReactPaginate
                 breakLabel="..."
-                nextLabel="next"
+                nextLabel="Next"
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={6}
                 pageCount={pageCount}

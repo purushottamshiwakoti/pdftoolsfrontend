@@ -5,14 +5,15 @@ import SimilarBlogs from "@/components/SimilarBlogs";
 import { Button } from "@/components/ui/button";
 import { dashboardUrl } from "@/lib/url";
 import { format } from "date-fns";
-import parse from "html-react-parser";
+import parse, { domToReact } from "html-react-parser";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { redirect } from "next/dist/server/api-utils";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import styles from "../../styles/UploadContainer.module.css";
 
 import { appUrl } from "@/lib/url";
 
@@ -130,68 +131,99 @@ const BlogDetail = () => {
         {/* You can add your canonical here */}
         {/* You can add your alternate here */}
       </Head>
-      <div>
-        <section
-          className={`hero mt-8 mb-8 lg:mt-5 lg:mb-32 ${
-            isWindows ? "lg:mx-[12rem]" : "lg:mx-[5rem]"
-          } mx-[1rem] md:mx-[3.8rem]`}
-        >
-          {myData ? (
-            <div className="  md:space-y-4 justify-between space-x-7">
-              <div className="grid grid-cols-4">
-                <div className="space-y-4  lg:col-span-3 col-span-4">
-                  <h1 className="text-[#7D64FF] text-lg font-bold line-clamp-1 tracking-wide">
-                    {myData.title}
-                  </h1>
-                  <div className="flex items-start justify-start">
-                    <Button variant="link" className="text-[#7D64FF] -ml-6">
-                      {myData.category.name}
-                    </Button>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <p className="tracking-tighter text-gray-600 font-medium">
-                      {format(new Date(myData.created_at), "MMMM dd, yyyy")}
+      <div className={styles}>
+        <div>
+          <section
+            className={`hero mt-8 mb-8 lg:mt-5 lg:mb-32 ${
+              isWindows ? "lg:mx-[12rem]" : "lg:mx-[5rem]"
+            } mx-[1rem] md:mx-[3.8rem]`}
+          >
+            {myData ? (
+              <div className="  md:space-y-4 justify-between space-x-7">
+                <div className="grid grid-cols-4">
+                  <div className="space-y-4  lg:col-span-3 col-span-4">
+                    <h1 className="text-[#7D64FF] text-lg font-bold line-clamp-1 tracking-wide">
+                      {myData.title}
+                    </h1>
+                    <div className="flex items-start justify-start">
+                      <Button variant="link" className="text-[#7D64FF] -ml-6">
+                        {myData.category.name}
+                      </Button>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <p className="tracking-tighter text-gray-600 font-medium">
+                        {format(new Date(myData.created_at), "MMMM dd, yyyy")}
+                      </p>
+                      <p className="tracking-tighter text-gray-600 font-medium">
+                        {myData.views[0] ? myData.views[0].views : 0} views
+                      </p>
+                    </div>
+                    {myData.image && (
+                      <Image
+                        src={myData.image}
+                        alt={myData.imageAlt}
+                        className="rounded-md "
+                        width={1920}
+                        height={1080}
+                      />
+                    )}
+                    <p className="lg:max-w-[800px]">
+                      {parse(myData.description, {
+                        replace: (domNode) => {
+                          if (domNode.type === "tag" && domNode.name === "ul") {
+                            return React.createElement(
+                              "ul",
+                              {
+                                style: { listStyle: "disc" }, // Apply style here
+                                key: domNode.children
+                                  .map((child) => child.data)
+                                  .join("-"),
+                              },
+                              domToReact(domNode.children)
+                            );
+                          } else if (
+                            domNode.type === "tag" &&
+                            domNode.name === "ol"
+                          ) {
+                            return React.createElement(
+                              "ol",
+                              {
+                                style: { listStyle: "decimal" }, // Apply style here
+                                key: domNode.children
+                                  .map((child) => child.data)
+                                  .join("-"),
+                              },
+                              domToReact(domNode.children)
+                            );
+                          }
+                        },
+                      })}
                     </p>
-                    <p className="tracking-tighter text-gray-600 font-medium">
-                      {myData.views[0] ? myData.views[0].views : 0} views
-                    </p>
                   </div>
-                  {myData.image && (
-                    <Image
-                      src={myData.image}
-                      alt={myData.imageAlt}
-                      className="rounded-md "
-                      width={1920}
-                      height={1080}
+                  <div className="mt-10 mb-10">
+                    {categoriesData && (
+                      <BlogCategory categoriesData={categoriesData} />
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center lg:w-[800px] justify-center">
+                  <ShareBlog slug={myData.slug} />
+                </div>
+                <div>{myData && <AddComment id={myData.id} />}</div>
+                <div>
+                  {similarBlogsData !== null && (
+                    <SimilarBlogs
+                      blogsData={similarBlogsData}
+                      blogId={myData.id}
                     />
                   )}
-                  <p className="lg:max-w-[800px]">
-                    {parse(myData.description)}
-                  </p>
-                </div>
-                <div className="mt-10 mb-10">
-                  {categoriesData && (
-                    <BlogCategory categoriesData={categoriesData} />
-                  )}
                 </div>
               </div>
-              <div className="flex items-center lg:w-[800px] justify-center">
-                <ShareBlog slug={myData.slug} />
-              </div>
-              <div>{myData && <AddComment id={myData.id} />}</div>
-              <div>
-                {similarBlogsData !== null && (
-                  <SimilarBlogs
-                    blogsData={similarBlogsData}
-                    blogId={myData.id}
-                  />
-                )}
-              </div>
-            </div>
-          ) : (
-            <p>Loading..</p>
-          )}
-        </section>
+            ) : (
+              <p>Loading..</p>
+            )}
+          </section>
+        </div>
       </div>
     </>
   );

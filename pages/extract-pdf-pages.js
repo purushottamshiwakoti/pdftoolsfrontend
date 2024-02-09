@@ -752,7 +752,7 @@ const ExtractPagesPage = () => {
                   {/* {t("merge-pdf:article_title")} */}
                 </div>
               ) : (
-                <h4 className={pageStyles.title_section}>
+                <h4 className={`${pageStyles.title_section} text-3xl`}>
                   {myData?.longDescriptionTitle}
                   {/* {t("merge-pdf:article_title")} */}
                 </h4>
