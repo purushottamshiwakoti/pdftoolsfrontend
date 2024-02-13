@@ -49,7 +49,7 @@ const Nav = React.memo(function Nav() {
   return (
     <>
       <header className="relative">
-        <div className="fixed top-0 w-full z-50  ">
+        <div className="fixed top-0 w-full z-[999]  ">
           <nav className={`${styles.navigation}`}>
             <Link href="/" className={`${styles.logo}`}>
               <h3>
