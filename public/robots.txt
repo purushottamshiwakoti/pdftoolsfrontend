@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:https://admin.allpdfconverter.com
+Allow: /
+
+Sitemap: https://allpdfconverter.com/sitemap.xml
