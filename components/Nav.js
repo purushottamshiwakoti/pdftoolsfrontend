@@ -8,6 +8,7 @@ import LanguageCountryFlag from "./LanguageCountryFlag";
 import styles from "../styles/MegaMenu.module.css";
 import { List, ChevronDown, X, ChevronUp } from "react-bootstrap-icons";
 import useToolsData from "../hooks/useToolsData";
+import Image from "next/image";
 
 const Nav = React.memo(function Nav() {
   const router = useRouter();
@@ -52,11 +53,18 @@ const Nav = React.memo(function Nav() {
         <div className="fixed top-0 w-full z-[999]  ">
           <nav className={`${styles.navigation}`}>
             <Link href="/" className={`${styles.logo}`}>
-              <h3>
+              {/* <h3>
                 <span style={{ color: "#7d64ff" }}>PDF</span>
                 <span style={{ color: "#2d3748" }}>Tools</span>
                 <span className="dot"></span>
-              </h3>
+              </h3> */}
+
+              <Image
+                src={"/all-pdf-convertor-logo.png"}
+                alt="all-pdf-convertor-logo"
+                width={210}
+                height={80}
+              />
             </Link>
             <ul
               ref={navMenuRef}
