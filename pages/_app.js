@@ -9,22 +9,12 @@ import "../styles/global.css";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
 
-const routes = [
-  "https://www.allpdfconverter.com",
-  "http://allpdfconverter.com",
-  "http://www.allpdfconverter.com",
-  "http://www.allpdfconverter.com",
-];
+
 
 const MyApp = ({ Component, pageProps }) => {
-  const fullUrl = typeof window !== "undefined" ? window.location.href : "";
 
-  const shouldRedirect = routes.some((route) => fullUrl.includes(route));
 
-  // If the current URL matches any of the routes, redirect to the first route
-  if (shouldRedirect) {
-    router.push(routes[0]);
-  }
+
 
   const router = useRouter();
   const [seoData, setSeoData] = useState(null);
