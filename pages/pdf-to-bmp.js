@@ -1,53 +1,46 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { isMobile } from "react-device-detect";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Selecto from "react-selecto";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
 import {
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  FileEarmarkPdf,
   ArrowRight,
-  Images,
   CardImage,
   Check2Circle,
   ExclamationTriangle,
+  FileEarmarkPdf,
+  Images,
 } from "react-bootstrap-icons";
-import useUploadStats from "../hooks/useUploadStats";
+import { isMobile } from "react-device-detect";
+import Selecto from "react-selecto";
+import Alerts from "../components/Alerts";
+import DocumentPreviewSelectable from "../components/DocumentPreviewSelectable";
+import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
+import EditFilesFormStep from "../components/EditFilesFormStep";
+import Features from "../components/Features";
+import Option from "../components/Option";
+import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
+import SelectOptionFormStep from "../components/SelectOptionFormStep";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
+import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
+import {
+  downloadFiles,
+  handlePDFToImageFileSelection,
+  saveNewFiles,
+  uploadFiles,
+} from "../helpers/utils.js";
 import useDocuments from "../hooks/useDocuments";
 import usePages from "../hooks/usePages";
 import useToolsData from "../hooks/useToolsData";
-import DocumentPreviewSelectable from "../components/DocumentPreviewSelectable";
-import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
-import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
-import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import AvailableTools from "../components/AvailableTools";
-import Steps from "../components/Steps";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import styles from "../styles/UploadContainer.module.css";
-import {
-  saveNewFiles,
-  uploadFiles,
-  downloadFiles,
-  handlePDFToImageFileSelection,
-} from "../helpers/utils.js";
-import Option from "../components/Option";
-import SelectOptionFormStep from "../components/SelectOptionFormStep";
-import Alerts from "../components/Alerts";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
 
+import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/pdf-to-bmp`;
@@ -62,28 +55,21 @@ import { appUrl } from "@/lib/url";
 //   };
 // }
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/pdf-to-bmp`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "pdf-to-bmp"])),
+      myData: page,
     },
   };
 }
 
-const PDFToBMPPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const PDFToBMPPage = ({ myData }) => {
+  const isLoading = false;
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"pdf-to-bmp"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { PDFToBMPTool } = useToolsData();
   const mountedRef = useRef(false);
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);

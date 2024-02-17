@@ -26,8 +26,8 @@ import useToolsData from "../hooks/useToolsData";
 import pageStyles from "../styles/Page.module.css";
 import styles from "../styles/UploadContainer.module.css";
 
+import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/remove-pdf-pages`;
@@ -43,28 +43,21 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/remove-pdf-pages`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "remove-pdf-pages"])),
+      myData: page,
     },
   };
 }
 
-const DeletePDFPages = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const DeletePDFPages = ({ myData }) => {
+  const isLoading = false;
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"remove-pdf-pages"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { RemovePDFPagesTool } = useToolsData();
   const { t } = useTranslation();
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);

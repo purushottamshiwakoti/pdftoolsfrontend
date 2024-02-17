@@ -33,7 +33,7 @@ import pageStyles from "../styles/Page.module.css";
 import styles from "../styles/UploadContainer.module.css";
 
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
+import { appUrl, dashboardUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/tiff-to-pdf`;
@@ -49,29 +49,21 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/tiff-to-pdf`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "tiff-to-pdf"])),
+      myData: page,
     },
   };
 }
 
-const TIFFToPDFPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const TIFFToPDFPage = ({ myData }) => {
+  const isLoading = false;
 
   const router = useRouter();
   const currentUrl = router.asPath;
-
-  useEffect(() => {
-    fetch(`/api/data/${"tiff-to-pdf"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { TIFFToPDFTool } = useToolsData();
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
   const [formStep, updateFormStep] = useState(0);

@@ -1,44 +1,34 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
+import Alerts from "../components/Alerts";
+import DocumentPreview from "../components/DocumentPreview";
+import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
+import EditFilesFormStep from "../components/EditFilesFormStep";
+import Features from "../components/Features";
+import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
+import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
 import {
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-  Check2Circle,
-  ExclamationTriangle,
-} from "react-bootstrap-icons";
-import useUploadStats from "../hooks/useUploadStats";
+  downloadFiles,
+  handleFileSelection,
+  saveNewFiles,
+  uploadFiles,
+} from "../helpers/utils.js";
 import useDocuments from "../hooks/useDocuments";
 import useToolsData from "../hooks/useToolsData";
-import DocumentPreview from "../components/DocumentPreview";
-import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
-import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
-import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import AvailableTools from "../components/AvailableTools";
-import Steps from "../components/Steps";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import styles from "../styles/UploadContainer.module.css";
-import {
-  handleFileSelection,
-  uploadFiles,
-  downloadFiles,
-  saveNewFiles,
-} from "../helpers/utils.js";
-import Alerts from "../components/Alerts";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
 
+import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/pdf-to-txt`;
@@ -54,29 +44,22 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/pdf-to-txt`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "pdf-to-txt"])),
+      myData: page,
     },
   };
 }
 
-const PDFToTextPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const PDFToTextPage = ({ myData }) => {
+  const isLoading = false;
 
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"pdf-to-txt"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { PDFToTXTTool } = useToolsData();
   const mountedRef = useRef(false);
   const compressBtnRef = useRef();

@@ -16,6 +16,8 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/UploadContainer.module.css";
 
 import { appUrl } from "@/lib/url";
+import { redirect } from "next/dist/server/api-utils";
+import { notFound } from "next/navigation";
 
 export async function getStaticPaths() {
   const res = await fetch(`${dashboardUrl}/blogs `, {
@@ -35,20 +37,27 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ params }) {
+  const res = await fetch(`${dashboardUrl}/blogs/${params.slug}`);
+  let myData = await res.json();
+  if (!myData) {
+    notFound();
+  }
+  myData = myData.data;
+
   return {
     props: {
       ...(await serverSideTranslations("en", ["common", "home"])),
+      myData: myData,
     },
   };
 }
 
-const BlogDetail = () => {
+const BlogDetail = ({ myData }) => {
   const { t } = useTranslation();
   const router = useRouter();
   const { slug } = router.query;
 
-  const [myData, setMyData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
   const [isWindows, setIsWindows] = useState(false);
@@ -56,27 +65,12 @@ const BlogDetail = () => {
   const [similarBlogsData, setSimilarBlogsData] = useState(null);
   const currentUrl = router.asPath;
 
-  console.log(myData);
-
   if (notFound) {
     router.push("/not-found");
   }
 
   useEffect(() => {
     setSimilarBlogsData(null);
-    if (slug) {
-      fetch(`/api/blogs/${slug}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setMyData(data.data);
-          if (data.error) {
-            setNotFound(true);
-          }
-
-          setLoading(false);
-          setIsWindows(navigator.userAgent.includes("Windows"));
-        });
-    }
 
     fetch(`/api/categories`)
       .then((res) => res.json())

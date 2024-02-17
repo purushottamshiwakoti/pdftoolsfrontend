@@ -24,8 +24,8 @@ import useToolsData from "../hooks/useToolsData";
 import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
 
+import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/unlock-pdf`;
@@ -41,29 +41,22 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/unlock-pdf`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "unlock-pdf"])),
+      myData: page,
     },
   };
 }
 
-const UnlockPDFPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const UnlockPDFPage = ({ myData }) => {
+  const isLoading = false;
 
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"unlock-pdf"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { UnlockPDFTool } = useToolsData();
   const mountedRef = useRef(false);
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);

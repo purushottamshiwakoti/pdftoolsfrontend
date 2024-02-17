@@ -1,44 +1,34 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-  Check2Circle,
-  ExclamationTriangle,
-} from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
+import Alerts from "../components/Alerts.js";
+import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
+import EditFilesFormStep from "../components/EditFilesFormStep";
+import Features from "../components/Features";
+import ImagePreview from "../components/ImagePreview";
+import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
+import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
 import {
-  uploadFiles,
-  saveNewFiles,
   downloadFiles,
   handleOfficeToPDFFileSelection,
+  saveNewFiles,
+  uploadFiles,
 } from "../helpers/utils.js";
-import styles from "../styles/UploadContainer.module.css";
-import Steps from "../components/Steps";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
-import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
-import DownloadFilesFormStep from "../components/DownloadFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import AvailableTools from "../components/AvailableTools";
-import ImagePreview from "../components/ImagePreview";
-import useUploadStats from "../hooks/useUploadStats";
 import useDocuments from "../hooks/useDocuments";
 import useToolsData from "../hooks/useToolsData";
-import Alerts from "../components/Alerts.js";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
 
+import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/bmp-to-pdf`;
@@ -54,29 +44,23 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/excel-to-pdf`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "excel-to-pdf"])),
+      myData: page,
     },
   };
 }
 
-const EXCELToPDFPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const EXCELToPDFPage = ({ myData }) => {
+  console.log(myData);
+  const isLoading = false;
 
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"excel-to-pdf"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { EXCELToPDFTool } = useToolsData();
   const {
     currentUploadingFile,

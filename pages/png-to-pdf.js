@@ -31,8 +31,8 @@ import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
 import styles from "../styles/UploadContainer.module.css";
 
+import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/png-to-pdf`;
@@ -48,28 +48,21 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/png-to-pdf`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "png-to-pdf"])),
+      myData: page,
     },
   };
 }
 
-const PNGToPDFPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const PNGToPDFPage = ({ myData }) => {
+  const isLoading = false;
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"png-to-pdf"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { PNGToPDFTool } = useToolsData();
 
   const {

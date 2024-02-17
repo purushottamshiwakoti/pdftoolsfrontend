@@ -1,42 +1,33 @@
-import React, { useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
-} from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
-import Selecto from "react-selecto";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+import { isMobile } from "react-device-detect";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
-import { isMobile } from "react-device-detect";
-import PagePreviwerModal from "../components/PagePreviwerModal";
-import PageDragLayer from "../components/PageDragLayer";
+import Selecto from "react-selecto";
 import DocumentPreviewDraggable from "../components/DocumentPreviewDraggable";
+import EditFilesFormStep from "../components/EditFilesFormStep";
+import Features from "../components/Features";
+import PageDragLayer from "../components/PageDragLayer";
+import PagePreviwerModal from "../components/PagePreviwerModal";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
 import {
   handleMerge,
   handlePDFOperationsFileSelection,
 } from "../helpers/utils.js";
-import styles from "../styles/UploadContainer.module.css";
-import Steps from "../components/Steps";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import AvailableTools from "../components/AvailableTools";
 import usePages from "../hooks/usePages";
 import useToolsData from "../hooks/useToolsData";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
 
+import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/organize-pdf-pages`;
@@ -55,29 +46,22 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/organize-pdf-pages`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, [
         "common",
         "organize-pdf-pages",
       ])),
+      myData: page,
     },
   };
 }
 
-const OrganizePDFPages = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const OrganizePDFPages = ({ myData }) => {
+  const isLoading = false;
 
-  useEffect(() => {
-    fetch(`/api/data/${"organize-pdf-pages"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { OrganizePDFTool } = useToolsData();
 
   const {

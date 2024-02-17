@@ -1,42 +1,31 @@
-import React, { useState, useEffect } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
-import pageStyles from "../styles/Page.module.css";
-import parse from "html-react-parser";
 import ContactForm from "@/components/ContactForm";
+import parse from "html-react-parser";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
 
+import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/other/contact-us`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "contact"])),
+      myData: page,
     },
   };
 }
 
-const Contacts = () => {
-  const [isWindows, setIsWindows] = useState(false);
-
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const Contacts = ({ myData }) => {
   const { t } = useTranslation();
 
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/other/${"contact-us"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-        setIsWindows(navigator.userAgent.includes("Windows"));
-      });
-  }, []);
+  const isLoading = false;
+  const isWindows = false;
 
   return (
     <>

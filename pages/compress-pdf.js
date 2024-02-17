@@ -1,75 +1,60 @@
-import React, { useReducer, useState, useEffect, useRef } from "react";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import { useEffect, useReducer, useRef, useState } from "react";
 import {
   ArrowRightShort,
   ExclamationCircle,
   ExclamationTriangle,
-  Infinity as InfinityIcon,
-  LightningChargeFill,
-  GearFill,
-  HeartFill,
-  AwardFill,
-  ShieldFillCheck,
 } from "react-bootstrap-icons";
-import {
-  formatBytes,
-  uploadFiles,
-  saveNewFiles,
-  downloadFiles,
-  displaySizeEstimations,
-  handleCompressPDFFileSelection,
-} from "../helpers/utils.js";
-import styles from "../styles/UploadContainer.module.css";
-import Steps from "../components/Steps";
-import Features from "../components/Features";
-import Share from "../components/Share";
-import DocumentPreview from "../components/DocumentPreview";
-import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
-import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
-import UploadAreaFormStep from "../components/UploadAreaFormStep";
-import EditFilesFormStep from "../components/EditFilesFormStep";
-import { rotatePDFDocument } from "../helpers/pdf-utils";
-import AvailableTools from "../components/AvailableTools";
-import useDocuments from "../hooks/useDocuments";
-import useUploadStats from "../hooks/useUploadStats";
-import useToolsData from "../hooks/useToolsData";
-import Option from "../components/Option.js";
-import SelectOptionFormStep from "../components/SelectOptionFormStep.js";
-import DownloadFilesFormStep from "../components/DownloadFilesFormStep.js";
 import Alerts from "../components/Alerts.js";
+import DocumentPreview from "../components/DocumentPreview";
+import DownloadFilesFormStep from "../components/DownloadFilesFormStep.js";
+import EditFilesFormStep from "../components/EditFilesFormStep";
+import Features from "../components/Features";
+import Option from "../components/Option.js";
+import ProcessingFilesFormStep from "../components/ProcessingFilesFormStep";
+import SelectOptionFormStep from "../components/SelectOptionFormStep.js";
+import Share from "../components/Share";
+import Steps from "../components/Steps";
+import UploadAreaFormStep from "../components/UploadAreaFormStep";
+import UploadingFilesFormStep from "../components/UploadingFilesFormStep";
+import { rotatePDFDocument } from "../helpers/pdf-utils";
+import {
+  displaySizeEstimations,
+  downloadFiles,
+  formatBytes,
+  handleCompressPDFFileSelection,
+  saveNewFiles,
+  uploadFiles,
+} from "../helpers/utils.js";
+import useDocuments from "../hooks/useDocuments";
+import useToolsData from "../hooks/useToolsData";
+import useUploadStats from "../hooks/useUploadStats";
 import pageStyles from "../styles/Page.module.css";
+import styles from "../styles/UploadContainer.module.css";
 
+import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
 
 import parse from "html-react-parser";
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/compress-pdf`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "compress-pdf"])),
+      myData: page,
     },
   };
 }
 
-const CompressPDFPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
-
+const CompressPDFPage = ({ myData }) => {
+  const isLoading = false;
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"compress-pdf"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { CompressPDFTool } = useToolsData();
   const mountedRef = useRef(false);
   const downloadBtnRef = useRef();

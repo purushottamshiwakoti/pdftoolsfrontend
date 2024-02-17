@@ -28,8 +28,8 @@ import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
 
+import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/grayscale-pdf`;
@@ -45,29 +45,21 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/grayscale-pdf`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "grayscale-pdf"])),
+      myData: page,
     },
   };
 }
 
-const GrayscalePDFPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const GrayscalePDFPage = ({ myData }) => {
+  const isLoading = false;
 
   const router = useRouter();
   const currentUrl = router.asPath;
-
-  useEffect(() => {
-    fetch(`/api/data/${"grayscale-pdf"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
 
   const { GrayscalePDFTool } = useToolsData();
   const {

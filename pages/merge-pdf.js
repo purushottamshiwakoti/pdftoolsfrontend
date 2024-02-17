@@ -1,13 +1,12 @@
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import Selecto from "react-selecto";
-import AvailableTools from "../components/AvailableTools";
 import DocumentPreviewDraggable from "../components/DocumentPreviewDraggable";
 import EditFilesFormStep from "../components/EditFilesFormStep";
 import Features from "../components/Features";
@@ -27,35 +26,28 @@ import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
 
+import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/merge-pdf`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "merge-pdf"])),
+      myData: page,
     },
   };
 }
 
 // // This function tells Next.js which paths should be built at build t
 
-const MergePDFPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const MergePDFPage = ({ myData }) => {
+  const isLoading = false;
 
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"merge-pdf"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { MergePDFTool } = useToolsData();
   const {
     pages,

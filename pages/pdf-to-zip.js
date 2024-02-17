@@ -20,7 +20,7 @@ import styles from "../styles/UploadContainer.module.css";
 import parse from "html-react-parser";
 
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
+import { appUrl, dashboardUrl } from "@/lib/url";
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/pdf-to-zip`;
 //   const response = await fetch(url);
@@ -35,29 +35,22 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/pdf-to-zip`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "pdf-to-zip"])),
+      myData: page,
     },
   };
 }
 
-const PDFToZipPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const PDFToZipPage = ({ myData }) => {
+  const isLoading = false;
 
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"pdf-to-zip"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { PDFToZIPTool } = useToolsData();
 
   const {

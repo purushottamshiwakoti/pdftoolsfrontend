@@ -28,7 +28,7 @@ import styles from "../styles/UploadContainer.module.css";
 import parse from "html-react-parser";
 
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
+import { appUrl, dashboardUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/pptx-to-pdf`;
@@ -44,28 +44,21 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/pptx-to-pdf`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "pptx-to-pdf"])),
+      myData: page,
     },
   };
 }
 
-const PPTXToPDFPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const PPTXToPDFPage = ({ myData }) => {
+  const isLoading = false;
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"pptx-to-pdf"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { PPTXToPDFTool } = useToolsData();
   const mountedRef = useRef(false);
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);

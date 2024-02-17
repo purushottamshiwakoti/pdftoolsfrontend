@@ -23,7 +23,7 @@ import styles from "../styles/UploadContainer.module.css";
 import parse from "html-react-parser";
 
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
+import { appUrl, dashboardUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/rotate-pdf-pages`;
@@ -39,28 +39,21 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/rotate-pdf-pages`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "rotate-pdf-pages"])),
+      myData: page,
     },
   };
 }
 
-const RotatePDFPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const RotatePDFPage = ({ myData }) => {
+  const isLoading = false;
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"rotate-pdf-pages"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { RotatePDFTool } = useToolsData();
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
   const mountedRef = useRef(false);

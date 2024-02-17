@@ -16,55 +16,38 @@ import { format } from "date-fns";
 import { useSearchParams } from "next/navigation";
 
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
+import { appUrl, dashboardUrl } from "@/lib/url";
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/other/blogs`);
+  const blogs = await fetch(`${dashboardUrl}/blogs`);
+  const categories = await fetch(`${dashboardUrl}/categories`);
+  let categoriesData = await categories.json();
+  categoriesData = categoriesData.data;
+  let blogsData = await blogs.json();
+  blogsData = blogsData.data;
+  const { page } = await res.json();
+
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "about"])),
+      myData: page,
+      blogsData: blogsData,
+      categoriesData: categoriesData,
     },
   };
 }
 
-const BlogsPage = () => {
+const BlogsPage = ({ myData, blogsData, categoriesData }) => {
   const searchParams = useSearchParams();
   const filterCategory = searchParams.get("category");
   const { t } = useTranslation();
-  const [isLoading, setLoading] = useState(true);
-  const [blogsData, setBlogsData] = useState(null);
-  const [categoriesData, setCategoriesData] = useState(null);
+  const isLoading = false;
 
-  const [isWindows, setIsWindows] = useState(false);
-  const [myData, setData] = useState(null);
+  const isWindows = false;
 
   const router = useRouter();
   const currentUrl = router.asPath;
-
-  useEffect(() => {
-    fetch(`/api/other/${"blogs"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setIsWindows(navigator.userAgent.includes("Windows"));
-      });
-    fetch(`/api/blogs`)
-      .then((res) => res.json())
-      .then((data) => {
-        setBlogsData(data.data);
-        if (filterCategory) {
-          setBlogsData(
-            data.data.filter((item) => item.category.name === filterCategory)
-          );
-        }
-        setLoading(false);
-      });
-    fetch(`/api/categories`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCategoriesData(data.data);
-      });
-  }, [filterCategory]);
 
   const [itemOffset, setItemOffset] = useState(0);
 
@@ -135,7 +118,7 @@ const BlogsPage = () => {
             {myData && (
               <>
                 <h1 className="title">{myData.title}</h1>
-                <p className="description">{parse(myData.description)}</p>
+                <h6 className="description">{parse(myData.description)}</h6>
               </>
             )}
           </header>
@@ -269,9 +252,9 @@ const BlogsPage = () => {
                                   <h2 className="text-black/80 text-lg font-bold line-clamp-1 tracking-wide">
                                     {item.title}
                                   </h2>
-                                  <p className="line-clamp-4 text-gray-600 h-9">
+                                  <div className="line-clamp-4 text-gray-600 h-9">
                                     {parse(item.description)}
-                                  </p>
+                                  </div>
                                   <div className="flex items-center space-x-3">
                                     <p className="tracking-tighter text-gray-600 font-medium">
                                       {format(

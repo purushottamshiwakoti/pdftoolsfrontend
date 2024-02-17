@@ -7,33 +7,25 @@ import pageStyles from "../styles/Page.module.css";
 import parse from "html-react-parser";
 
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
+import { appUrl, dashboardUrl } from "@/lib/url";
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/other/about`);
+  const { page } = await res.json();
+
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "about"])),
+      myData: page,
     },
   };
 }
 
-const About = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const About = ({ myData }) => {
   const { t } = useTranslation();
 
   const router = useRouter();
   const currentUrl = router.asPath;
-
-  useEffect(() => {
-    fetch(`/api/other/${"about"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
 
   return (
     <>
@@ -61,11 +53,7 @@ const About = () => {
 
       <main>
         <header className="page_section header mb-0">
-          {isLoading ? (
-            <h1 className="title bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse"></h1>
-          ) : (
-            <h1 className="title">{myData.title}</h1>
-          )}
+          <h1 className="title">{myData.title}</h1>
         </header>
         <section className="page_section mt-0">
           <article className="container">
@@ -79,15 +67,7 @@ const About = () => {
 
                 <p>{t("about:paragraph_04")}</p> */}
 
-                {isLoading ? (
-                  <div className="space-y-4">
-                    <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
-                    <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
-                    <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
-                  </div>
-                ) : (
-                  myData?.description && parse(myData.description)
-                )}
+                {myData?.description && parse(myData.description)}
               </div>
             </section>
           </article>

@@ -33,7 +33,7 @@ import pageStyles from "../styles/Page.module.css";
 import styles from "../styles/UploadContainer.module.css";
 
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
+import { appUrl, dashboardUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/extract-pdf-pages`;
@@ -52,32 +52,23 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/extract-pdf-pages`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, [
         "common",
         "extract-pdf-pages",
       ])),
+      myData: page,
     },
   };
 }
 
-const ExtractPagesPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
-
+const ExtractPagesPage = ({ myData }) => {
   const router = useRouter();
   const currentUrl = router.asPath;
-
-  useEffect(() => {
-    fetch(`/api/data/${"extract-pdf-pages"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
+  const isLoading = false;
 
   const { ExtractPagesTool } = useToolsData();
   const mountedRef = useRef(false);

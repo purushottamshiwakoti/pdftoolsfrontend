@@ -27,7 +27,7 @@ import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
+import { appUrl, dashboardUrl } from "@/lib/url";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/repair-pdf`;
@@ -43,29 +43,22 @@ import { appUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/page/repair-pdf`);
+  const { page } = await res.json();
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "repair-pdf"])),
+      myData: page,
     },
   };
 }
 
-const RepairPDFPage = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const RepairPDFPage = ({ myData }) => {
+  const isLoading = false;
 
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  useEffect(() => {
-    fetch(`/api/data/${"repair-pdf"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
   const { RepairPDFTool } = useToolsData();
   const mountedRef = useRef(false);
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);

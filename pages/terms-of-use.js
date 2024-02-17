@@ -5,32 +5,25 @@ import { useTranslation } from "next-i18next";
 import pageStyles from "../styles/Page.module.css";
 import parse from "html-react-parser";
 import { useRouter } from "next/router";
-import { appUrl } from "@/lib/url";
+import { appUrl, dashboardUrl } from "@/lib/url";
 
 export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/other/terms-and-conditions`);
+  const { page } = await res.json();
+
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "terms"])),
+      myData: page,
     },
   };
 }
 
-const TermsOfUse = () => {
-  const [myData, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+const TermsOfUse = ({ myData }) => {
+  const isLoading = false;
   const { t } = useTranslation();
   const router = useRouter();
   const currentUrl = router.asPath;
-
-  useEffect(() => {
-    fetch(`/api/other/${"terms-and-conditions"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { page } = data;
-        setData(page);
-        setLoading(false);
-      });
-  }, []);
 
   return (
     <>
