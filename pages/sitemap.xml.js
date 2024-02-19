@@ -1,6 +1,7 @@
 import React from "react";
 import fs from "fs";
 import fetch from "node-fetch"; // Importing fetch for Node.js environment
+import { dashboardUrl } from "@/lib/url";
 
 const Sitemap = () => {};
 
@@ -10,10 +11,9 @@ export const getServerSideProps = async ({ res }) => {
     production: "https://allpdfconverter.com",
   }[process.env.NODE_ENV];
 
-  const response = await fetch(`${baseUrl}/api/blogs`);
+  const response = await fetch(`${dashboardUrl}/blogs`);
   const data = await response.json();
   const blogs = data.data;
-
 
   const staticPages = fs
     .readdirSync("pages")
@@ -23,12 +23,20 @@ export const getServerSideProps = async ({ res }) => {
         "_document.js",
         "_error.js",
         "sitemap.xml.js",
+        "404.js",
         "api",
       ].includes(staticPage);
     })
     .map((staticPagePath) => {
       return `${baseUrl}/${staticPagePath.split(".")[0]}`;
     });
+
+  <url>
+    <loc>"sdmndsmnnm</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>;
 
   const staticUrls = staticPages
     .map((url) => {
@@ -37,7 +45,7 @@ export const getServerSideProps = async ({ res }) => {
           <loc>${url}</loc>
           <lastmod>${new Date().toISOString()}</lastmod>
           <changefreq>monthly</changefreq>
-          <priority>1.0</priority>
+          <priority>0.9</priority>
         </url>
       `;
     })
@@ -50,14 +58,20 @@ export const getServerSideProps = async ({ res }) => {
           <loc>${baseUrl}/blog/${item.slug}</loc>
           <lastmod>${new Date().toISOString()}</lastmod>
           <changefreq>monthly</changefreq>
-          <priority>1.0</priority>
+          <priority>0.9</priority>
         </url>
       `;
     })
     .join("");
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap">
+    <url>
+          <loc>${baseUrl}</loc>
+          <lastmod>${new Date().toISOString()}</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>1.0</priority>
+        </url>
       ${staticUrls}
       ${blogUrls}
     </urlset>
