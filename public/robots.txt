@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: https://allpdfconverter.com/sitemap.xml
+Sitemap: https://www.allpdfconverter.com/sitemap.xml
