@@ -208,8 +208,15 @@ const ProtectPDFPage = ({ myData }) => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>{myData?.metaTitle}</title>
-        <meta name="description" content={myData?.metaDescription} />
+        <title>{myData.metaTitle ? myData.metaTitle : myData.title}</title>
+        <meta
+          name="description"
+          content={
+            myData.metaDescription
+              ? myData.metaDescription
+              : myData.shortDescription
+          }
+        />
         <meta
           name="Keywords"
           content="Protect PDF, PDF protection, PDF encryption, secure PDF, password protect PDF, online PDF protection, PDF security, PDF password, PDF security tool, PDF encryption tool"

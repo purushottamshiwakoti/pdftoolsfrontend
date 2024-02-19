@@ -226,8 +226,15 @@ const UnlockPDFPage = ({ myData }) => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>{myData?.metaTitle}</title>
-        <meta name="description" content={myData?.metaDescription} />
+        <title>{myData.metaTitle ? myData.metaTitle : myData.title}</title>
+        <meta
+          name="description"
+          content={
+            myData.metaDescription
+              ? myData.metaDescription
+              : myData.shortDescription
+          }
+        />
         <meta
           name="Keywords"
           content="Unlock PDF, Remove PDF password, PDF password remover, PDF unlocker, PDF decryption tool, Online PDF unlock, Free PDF unlock, Secure PDF unlock, PDF password cracker, PDF password recovery"

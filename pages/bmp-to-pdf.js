@@ -59,6 +59,7 @@ export async function getStaticProps({ locale }) {
 }
 
 const BMPToPDFPage = ({ myData }) => {
+  console.log(myData);
   const router = useRouter();
   const currentUrl = router.asPath;
 
@@ -309,17 +310,22 @@ const BMPToPDFPage = ({ myData }) => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>{myData?.metaTitle}</title>
-        <meta name="description" content={myData?.metaDescription} />
+        <title>{myData.metaTitle ? myData.metaTitle : myData.title}</title>
+        <meta
+          name="description"
+          content={
+            myData.metaDescription
+              ? myData.metaDescription
+              : myData.shortDescription
+          }
+        />
 
-        {myData && (
-          <>
-            <meta property="og:title" content={myData.ogTitle} />
-            <meta property="og:description" content={myData.ogDescription} />
-            <meta property="og:image" content={myData.ogImage} />
-            <meta property="og:image:alt" content={myData.ogImageAlt} />
-          </>
-        )}
+        <>
+          <meta property="og:title" content={myData.ogTitle} />
+          <meta property="og:description" content={myData.ogDescription} />
+          <meta property="og:image" content={myData.ogImage} />
+          <meta property="og:image:alt" content={myData.ogImageAlt} />
+        </>
         <meta
           name="Keywords"
           content="BMP to PDF converter, convert BMP to PDF online, free BMP to PDF converter, BMP to PDF online conversion, BMP to PDF online converter"

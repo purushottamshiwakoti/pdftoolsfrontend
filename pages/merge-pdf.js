@@ -242,8 +242,15 @@ const MergePDFPage = ({ myData }) => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>{myData?.metaTitle}</title>
-        <meta name="description" content={myData?.metaDescription} />
+        <title>{myData.metaTitle ? myData.metaTitle : myData.title}</title>
+        <meta
+          name="description"
+          content={
+            myData.metaDescription
+              ? myData.metaDescription
+              : myData.shortDescription
+          }
+        />
         <meta
           name="Keywords"
           content="PDF Merger, combine PDF files, merge PDF files, rearrange pages, delete pages, rotate pages, online PDF tool, free PDF tool"

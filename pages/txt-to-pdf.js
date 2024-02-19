@@ -242,8 +242,15 @@ const TextToPDFPage = ({ myData }) => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>{myData?.metaTitle}</title>
-        <meta name="description" content={myData?.metaDescription} />
+        <title>{myData.metaTitle ? myData.metaTitle : myData.title}</title>
+        <meta
+          name="description"
+          content={
+            myData.metaDescription
+              ? myData.metaDescription
+              : myData.shortDescription
+          }
+        />
         <meta
           name="Keywords"
           content="TXT to PDF converter, convert TXT to PDF, online TXT to PDF converter, free TXT to PDF converter, convert plain text to PDF"

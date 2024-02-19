@@ -316,8 +316,15 @@ const TIFFToPDFPage = ({ myData }) => {
             <meta property="og:image:alt" content={myData.ogImageAlt} />
           </>
         )}
-        <title>{myData?.metaTitle}</title>
-        <meta name="description" content={myData?.metaDescription} />
+        <title>{myData.metaTitle ? myData.metaTitle : myData.title}</title>
+        <meta
+          name="description"
+          content={
+            myData.metaDescription
+              ? myData.metaDescription
+              : myData.shortDescription
+          }
+        />
         <meta
           name="Keywords"
           content="TIFF to PDF converter, online TIFF to PDF converter, convert TIFF to PDF, free TIFF to PDF converter, TIFF to PDF conversion, TIFF to PDF online converter"

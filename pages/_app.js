@@ -9,23 +9,21 @@ import "../styles/global.css";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
 
+export async function getStaticProps({ locale }) {
+  const res = await fetch(`${dashboardUrl}/seo-settings`);
+  let data = await res.json();
+  console.log(data)
+  data = data.data;
 
+  return {
+    props: {
+      seoData: data,
+    },
+  };
+}
 
-const MyApp = ({ Component, pageProps }) => {
-
-
-
-
+const MyApp = ({ Component, pageProps,  }) => {
   const router = useRouter();
-  const [seoData, setSeoData] = useState(null);
-
-  useEffect(() => {
-    fetch(`/api/seo-settings`)
-      .then((res) => res.json())
-      .then((data) => {
-        setSeoData(data.data);
-      });
-  }, []);
 
   useEffect(() => {
     const handleRouteChange = (url) => {

@@ -313,8 +313,15 @@ const PDFToJPGPage = ({ myData }) => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        <title>{myData?.metaTitle}</title>
-        <meta name="description" content={myData?.metaDescription} />
+        <title>{myData.metaTitle ? myData.metaTitle : myData.title}</title>
+        <meta
+          name="description"
+          content={
+            myData.metaDescription
+              ? myData.metaDescription
+              : myData.shortDescription
+          }
+        />
         <meta
           name="Keywords"
           content="PDF to JPG converter, convert PDF to JPG, online PDF to JPG converter, PDF to JPG conversion tool, free PDF to JPG converter, PDF to image converter."

@@ -7,8 +7,9 @@ const Sitemap = () => {};
 
 export const getServerSideProps = async ({ res }) => {
   const baseUrl = {
-    development: "http://localhost:3000",
-    production: "https://allpdfconverter.com",
+    // development: "http://localhost:3000",
+    development: "https://www.allpdfconverter.com",
+    production: "https://www.allpdfconverter.com",
   }[process.env.NODE_ENV];
 
   const response = await fetch(`${dashboardUrl}/blogs`);
@@ -56,7 +57,7 @@ export const getServerSideProps = async ({ res }) => {
       return `
         <url>
           <loc>${baseUrl}/blog/${item.slug}</loc>
-          <lastmod>${new Date().toISOString()}</lastmod>
+          // <lastmod>${new Date(item.updated_at).toISOString()}</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.9</priority>
         </url>

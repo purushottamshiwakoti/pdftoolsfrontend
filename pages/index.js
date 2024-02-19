@@ -1,3 +1,6 @@
+import GoodCompany from "@/components/GoodCompany";
+import Reviews from "@/components/Reviews";
+import WhyChooseUs from "@/components/WhyChooseUs";
 import { Button } from "@/components/ui/button";
 import parse from "html-react-parser";
 import { useTranslation } from "next-i18next";
@@ -5,23 +8,23 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { ArrowRight, Quote, StarFill } from "react-bootstrap-icons";
+import { ArrowRight } from "react-bootstrap-icons";
 import Share from "../components/Share";
 import useToolsData from "../hooks/useToolsData";
 import styles from "../styles/index.module.css";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import Reviews from "@/components/Reviews";
-import GoodCompany from "@/components/GoodCompany";
 
-import { useRouter } from "next/router";
 import { appUrl, dashboardUrl } from "@/lib/url";
+import { useRouter } from "next/router";
 
 export async function getStaticProps({ locale }) {
   const res = await fetch(`${dashboardUrl}/other/home`);
   const choose = await fetch(`${dashboardUrl}/choose-us`);
   const reviews = await fetch(`${dashboardUrl}/reviews`);
   const company = await fetch(`${dashboardUrl}/company-image`);
+
+  const seo = await fetch(`${dashboardUrl}/seo-settings`);
+  let seoData = await seo.json();
+  seoData = seoData.data;
 
   let CompanyImagesData = await company.json();
   CompanyImagesData = CompanyImagesData.data;
@@ -39,11 +42,19 @@ export async function getStaticProps({ locale }) {
       chooseUsData: data,
       reviewsData: reviewsData,
       CompanyImagesData: CompanyImagesData,
+      seoData: seoData,
     },
   };
 }
 
-const Home = ({ myData, chooseUsData, reviewsData, CompanyImagesData }) => {
+const Home = ({
+  myData,
+  chooseUsData,
+  reviewsData,
+  CompanyImagesData,
+  seoData,
+}) => {
+  console.log(myData);
   const toolsData = useToolsData();
   const router = useRouter();
   const currentUrl = router.asPath;
@@ -54,16 +65,28 @@ const Home = ({ myData, chooseUsData, reviewsData, CompanyImagesData }) => {
     <>
       <Head>
         {/* Anything you add here will be added to this page only */}
-        {/* <title>{myData?.metaTitle}</title>
-        {myData && (
+        <title>{myData?.metaTitle}</title>
+
+        <meta name="description" content={myData?.metaDescription} />
+
+        {/* {myData && (
           <>
             <meta property="og:title" content={myData.ogTitle} />
             <meta property="og:description" content={myData.ogDescription} />
             <meta property="og:image" content={myData.ogImage} />
             <meta property="og:image:alt" content={myData.ogImageAlt} />
           </>
-        )}
-        <meta name="description" content={myData?.metaDescription} /> */}
+        )} */}
+
+        <meta
+          name="google-site-verification"
+          content={seoData.googleSiteVerificationCode}
+        />
+        <meta property="og:title" content={seoData.ogTitle} />
+        <meta property="og:description" content={seoData.ogDescription} />
+        <meta property="og:image" content={seoData.ogImage} />
+        <meta property="og:title" content={seoData.ogTitle} />
+        <meta property="og:description" content={seoData.ogDescription} />
 
         <meta
           name="Keywords"
