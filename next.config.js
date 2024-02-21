@@ -1,5 +1,7 @@
 const { i18n } = require("./next-i18next.config");
 
+const isProd = process.env.NODE_ENV === "production";
+
 module.exports = {
   reactStrictMode: false,
   swcMinify: true,
@@ -20,6 +22,7 @@ module.exports = {
     NEXT_PUBLIC_DELETION_INTERVAL_DURATION: "3636000", //1.01 hour in miliseconds //1.01 h = 3636000 ms
     //delay between two download requests // sending download request every 5s
     NEXT_PUBLIC_DOWNLOAD_REQUEST_DELAY: "5000", // 5 seconds in miliseconds  // 5s = 5000
+    assetPrefix: isProd ? "https://www.allpdfconverter.com" : undefined,
   },
   eslint: {
     ignoreDuringBuilds: true,
