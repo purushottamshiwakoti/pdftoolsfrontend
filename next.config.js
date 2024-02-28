@@ -31,7 +31,7 @@ module.exports = {
   async headers() {
     return [
       {
-        // matching all API routes
+        // Allow CORS for all API routes
         source: "/api/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
@@ -49,11 +49,11 @@ module.exports = {
       },
       // Add additional headers as needed for other routes or resources
       {
-        source: "/_next/static/:path*",
+        source: "/_next/static/:path*", // Adjust the path as needed
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "*",
+            value: "*", // Allow requests from any origin
           },
         ],
       },
