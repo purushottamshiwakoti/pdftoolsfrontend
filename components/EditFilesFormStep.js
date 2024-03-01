@@ -133,7 +133,7 @@ const EditFilesFormStep = React.memo(function EditFilesFormStep({
                     buttonStyle={styles.btn_normal}
                   >
                     <ArrowCounterclockwise />
-                    <span>{t("common:rotate_all")}</span>
+                    <h2>{t("common:rotate_all")}</h2>
                   </ToolButton>
                 )}
                 {rotateFilesToRight && (

@@ -58,7 +58,7 @@ const About = ({ myData }) => {
         <section className="page_section mt-0">
           <article className="container">
             <section>
-              <div className={`${pageStyles.paragraph_text}`}>
+              <h2 className={`${pageStyles.paragraph_text}`}>
                 {/* <p>{t("about:paragraph_01")}</p>
 
                 <p>{t("about:paragraph_02")}</p>
@@ -68,7 +68,7 @@ const About = ({ myData }) => {
                 <p>{t("about:paragraph_04")}</p> */}
 
                 {myData?.description && parse(myData.description)}
-              </div>
+              </h2>
             </section>
           </article>
         </section>

@@ -80,7 +80,10 @@ const TermsOfUse = ({ myData }) => {
                     <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
                   </div>
                 ) : (
-                  myData?.description && parse(myData.description)
+                  <>
+                    <h2></h2>
+                    myData?.description && parse(myData.description)
+                  </>
                 )}
               </div>
             </section>

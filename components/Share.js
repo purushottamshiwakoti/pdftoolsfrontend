@@ -45,9 +45,9 @@ const Share = React.memo(function Share() {
         <article className={`container banner ${styles.share_section}`}>
           <section>
             <div className={`${styles.share_buttons}`}>
-              <div className={`${styles.share_btn}`} onClick={() => share(0)}>
+              <h2 className={`${styles.share_btn}`} onClick={() => share(0)}>
                 <Facebook />
-              </div>
+              </h2>
 
               <div className={`${styles.share_btn}`} onClick={() => twitter()}>
                 <Twitter />
@@ -65,7 +65,7 @@ const Share = React.memo(function Share() {
                   <b>{t("common:share_thanks")}</b>
                 </strong>
               </p>
-              <p>{t("common:share_with_friends")}</p>
+              <h2>{t("common:share_with_friends")}</h2>
             </div>
           </section>
         </article>

@@ -563,7 +563,7 @@ const CompressPDFPage = ({ myData }) => {
           ) : (
             <>
               <h1 className="title">{myData?.title}</h1>
-              <p className="description">{myData?.shortDescription}</p>
+              <h5 className="description">{myData?.shortDescription}</h5>
             </>
           )}
         </header>

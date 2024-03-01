@@ -12,7 +12,7 @@ import { Toaster } from "sonner";
 export async function getStaticProps({ locale }) {
   const res = await fetch(`${dashboardUrl}/seo-settings`);
   let data = await res.json();
-  console.log(data)
+  console.log(data);
   data = data.data;
 
   return {
@@ -22,7 +22,7 @@ export async function getStaticProps({ locale }) {
   };
 }
 
-const MyApp = ({ Component, pageProps,  }) => {
+const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -71,6 +71,7 @@ const MyApp = ({ Component, pageProps,  }) => {
   `}
       </Script>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
+
       <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
@@ -90,7 +91,7 @@ const MyApp = ({ Component, pageProps,  }) => {
         }}
       />
       <Layout>
-        <NextTopLoader color="#7D64FF" />
+        {/* <NextTopLoader color="#7D64FF" /> */}
         <Toaster richColors />
         <Component {...pageProps} />
       </Layout>

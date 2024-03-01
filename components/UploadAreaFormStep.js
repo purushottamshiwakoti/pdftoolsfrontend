@@ -95,9 +95,9 @@ const UploadAreaFormStep = React.memo(function UploadAreaFormStep({
                       </div>
                     </div>
                   </div>
-                  <div className={`${styles.uploader_droptxt}`}>
+                  <h2 className={`${styles.uploader_droptxt}`}>
                     {t("common:drop_files")}
-                  </div>
+                  </h2>
                 </div>
               </div>
             </label>

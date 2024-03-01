@@ -152,7 +152,7 @@ const SetPagesSettingsFormStep = React.memo(function SetPagesSettingsFormStep({
                     buttonStyle={styles.btn_normal}
                   >
                     <Trash />
-                    <span>{t("common:delete_all")}</span>
+                    <h2>{t("common:delete_all")}</h2>
                   </ToolButton>
                 )}
               </div>

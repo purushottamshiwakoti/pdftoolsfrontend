@@ -74,11 +74,14 @@ const PrivacyPolicy = ({ myData }) => {
                   <li>{t("privacy:section_list_item_03")}</li>
                 </ul> */}
                 {isLoading ? (
-                  <div className="space-y-4">
-                    <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
-                    <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
-                    <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
-                  </div>
+                  <>
+                    <h2></h2>
+                    <div className="space-y-4">
+                      <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
+                      <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
+                      <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
+                    </div>
+                  </>
                 ) : (
                   myData?.description && parse(myData.description)
                 )}

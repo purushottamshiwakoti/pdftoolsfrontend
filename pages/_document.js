@@ -9,9 +9,10 @@ class MyDocument extends Document {
           <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-            async
           />
+          <script src="https://cdn.tailwindcss.com"></script>
         </Head>
+
         <body>
           <noscript>
             <iframe
