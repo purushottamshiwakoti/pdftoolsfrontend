@@ -13,6 +13,7 @@ import {
   Unlock,
 } from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
+import { MergePdf } from "@/components/icons/Icon";
 const useToolsData = () => {
   const { t } = useTranslation();
 
@@ -22,7 +23,7 @@ const useToolsData = () => {
       title: t("common:tool_name_merge_pdf"),
       description: t("common:tool_desc_merge_pdf"),
       href: "/merge-pdf",
-      icon: <FileEarmarkPdf />,
+      icon: MergePdf,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "MergedPDF.pdf",

@@ -4,7 +4,7 @@
   justify-content: space-between;
   height: var(--nav-height);
   position: relative;
-  background: var(--secondary);
+  background: #FFFFFF;
   text-align: start;
   padding-left: 10px;
   padding-right: 10px;
@@ -45,7 +45,7 @@
   align-items: flex-end;
   gap: 1rem;
   font-weight: 500;
-  color: var(--text-primary);
+  color: #6F6767;
   cursor: pointer;
 }
 
