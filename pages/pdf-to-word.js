@@ -353,19 +353,19 @@ const PDFToWordPage = ({ myData }) => {
       </Head>
 
       <main>
-        <header className="page_section header mb-0">
-          {isLoading ? (
-            <>
-              <h1 className="title  bg-slate-200 h-6  w-[12rem] lg:w-[25rem] animate-pulse"></h1>
-              <p className=" bg-slate-200 h-6 w-[20rem] lg:w-[35rem] animate-pulse"></p>
-            </>
-          ) : (
-            <>
-              <h1 className="title">{myData?.title}</h1>
-              <p className="description">{myData?.shortDescription}</p>
-            </>
-          )}
+        <header className=" mb-0">
+          {/* <h1 className="title">{t("merge-pdf:page_header_title")}</h1> */}
+
+          <h1 className="text-center text-[##262323] text-[40px] font-[800]">
+            {myData?.title}
+          </h1>
+          <p className="text-[##6F6767] text-center text-[16px] leading-[22px] font-[400] mt-[16px]">
+            {myData?.shortDescription}
+          </p>
+
+          {/* <p className="description">{t("merge-pdf:page_header_text")}</p> */}
         </header>
+
         <section className="page_section mt-0">
           <article className="container ">
             <section className={pageStyles.tool_container_wrapper}>
@@ -570,45 +570,24 @@ const PDFToWordPage = ({ myData }) => {
         )}
         {/* features end */}
         {/* Article Start */}
-        <section className="page_section">
-          <article className={`container ${pageStyles.article_section}`}>
-            <header className={pageStyles.article_header}>
-              {isLoading ? (
-                <div className=" flex md:ml-[10rem] lg:ml-[20rem]  bg-slate-200 h-6 md:w-[20rem] lg:w-[25rem] animate-pulse">
-                  {/* {t("merge-pdf:article_title")} */}
-                </div>
-              ) : (
-                <h4 className={`${pageStyles.title_section} text-3xl`}>
+        <section className=" ">
+          <article className={`mt-[100px] `}>
+            <div className="lg:flex ">
+              <header className="">
+                <h4 className="text-[#262323] lg:w-[200%] text-[32px] font-[600] tracking-wide">
                   {myData?.longDescriptionTitle}
-                  {/* {t("merge-pdf:article_title")} */}
                 </h4>
-              )}
-              <div
-                className={`${pageStyles.divider} ${pageStyles.mx_auto}`}
-              ></div>
-            </header>
-            {isLoading ? (
-              <section>
-                <p className=" bg-slate-200 h-4 lg:w-[55rem] animate-pulse"></p>
-                <p className=" bg-slate-200 h-4 lg:w-[55rem] animate-pulse  mt-2"></p>
-                <p className=" bg-slate-200 h-4 lg:w-[55rem] animate-pulse  mt-2"></p>
-                <p className=" bg-slate-200 h-4 lg:w-[55rem] animate-pulse  mt-2"></p>
-                <p className=" bg-slate-200 h-4 lg:w-[55rem] animate-pulse  mt-2"></p>
-                <p className=" bg-slate-200 h-4 lg:w-[55rem] animate-pulse  mt-2"></p>
-              </section>
-            ) : (
-              <section className={pageStyles.article_content}>
-                {/* <p>{t("merge-pdf:article_paragraph_01")}</p>
-              <p>{t("merge-pdf:article_paragraph_02")}</p>
-              <p>{t("merge-pdf:article_paragraph_03")}</p> */}
+              </header>
+
+              <section className="lg:ml-[220px] text-[16px] font-[400] leading-[24px] lg:mt-0 mt-5 text-[##6F6767]">
                 {myData?.longDescription && parse(myData.longDescription)}
               </section>
-            )}
+            </div>
           </article>
         </section>
+
         {/* Article End */}
         {/* <AvailableTools /> */}
-        <Share />
       </main>
     </>
   );

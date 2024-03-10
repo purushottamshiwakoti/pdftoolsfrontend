@@ -5,6 +5,8 @@ import styles from "../styles/UploadContainer.module.css";
 import PropTypes from "prop-types";
 import Spinner from "./Spinner";
 import { notify, handlePreventDefault } from "../helpers/utils";
+import { UploadFileImage, UploadImage } from "./icons/Icon";
+import { Button } from "./ui/button";
 const UploadAreaFormStep = React.memo(function UploadAreaFormStep({
   handleChange,
   isSpinnerActive,
@@ -40,6 +42,10 @@ const UploadAreaFormStep = React.memo(function UploadAreaFormStep({
       );
     };
   }, []);
+
+  const handleButtonClick = () => {
+    file.current.click();
+  };
 
   return (
     <section className={`${styles.toolbox} py-0 mt-0 ${styles.is_upload}`}>
@@ -82,20 +88,24 @@ const UploadAreaFormStep = React.memo(function UploadAreaFormStep({
 
                 <div className={`${styles.uploader}`}>
                   <div className={`${styles.uploader_image}`}>
-                    <FileEarmarkPdfFill />
+                    {/* <FileEarmarkPdfFill /> */}
+                    {UploadImage}
                   </div>
-                  <div className={`${styles.upload_options} mt-3 mb-3`}>
-                    <div className={`${styles.from_device_option}`}>
-                      <FileEarmarkPlus size={20} />
+                  <div className={` mt-3 mb-3`}>
+                    <Button
+                      className={`bg-[#EE1B22] hover:bg-[#EE1B22]/80`}
+                      onClick={handleButtonClick}
+                    >
+                      {UploadFileImage}
                       <div
                         className={`${styles.upload_option_description}`}
                         title={t("common:select_files")}
                       >
                         {t("common:select_files")}
                       </div>
-                    </div>
+                    </Button>
                   </div>
-                  <h2 className={`${styles.uploader_droptxt}`}>
+                  <h2 className={`text-[#6F6767] text-[14px] font-[400]`}>
                     {t("common:drop_files")}
                   </h2>
                 </div>

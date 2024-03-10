@@ -5,24 +5,16 @@ import PropTypes from "prop-types";
 import pageStyles from "../styles/Page.module.css";
 const Steps = React.memo(function Steps({ title, stepsArray }) {
   return (
-    <section className="page_section">
-      <article className={`container banner ${styles.steps_section}`}>
-        <section className="w-100 mb-5">
-          <header>
-            <h2 className={`${styles.steps_title} text-3xl mt-0`}>{title}</h2>
-            <div
-              className={`${pageStyles.divider} ${pageStyles.mx_auto}`}
-            ></div>
-          </header>
-        </section>
-        <section
-          className="w-100"
-          style={{
-            paddingLeft: "6%",
-            paddingRight: "6%",
-          }}
-        >
-          <div>
+    <section className="-mt-14 -px-[30rem]">
+      <article className={``}>
+        <header>
+          <h2 className={` text-[32px] font-[600] text-[#262323] text-center`}>
+            {title}
+          </h2>
+          <div className={` `}></div>
+        </header>
+        <section className="w-100">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 mt-[40px] grid-cols-1 gap-[48px]">
             {stepsArray &&
               stepsArray.map((step, i) => {
                 return (

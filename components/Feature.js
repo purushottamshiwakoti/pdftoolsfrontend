@@ -6,10 +6,16 @@ const Feature = React.memo(function Feature({ title, description, icon }) {
   const selectedIcon = icons.find((ico) => ico.name === icon)?.icon;
 
   return (
-    <div className={`${styles.feature_wrapper}`}>
-      <p>{selectedIcon && React.createElement(selectedIcon)}</p>
-      <div className={`${styles.feature_title}`}>{title}</div>
-      <div className={`${styles.feature_desc}`}>{description}</div>
+    <div className={"bg-[#f9f8f8] border-1 border-[#000]/10 p-[24px]"}>
+      <p className="mb-[24px] text-[#EE1B22]">
+        {selectedIcon && React.createElement(selectedIcon)}
+      </p>
+      <div className={`text-[##262323] text-[18px] font-[600] mb-[12px]`}>
+        {title}
+      </div>
+      <div className={`text-[14px] font-[400] leading-[20px] text-[#6F6767]`}>
+        {description}
+      </div>
     </div>
   );
 });

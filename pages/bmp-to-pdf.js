@@ -421,12 +421,19 @@ const BMPToPDFPage = ({ myData }) => {
       </Head>
 
       <main>
-        <header className="page_section header mb-0">
-          <>
-            <h1 className="title">{myData?.title}</h1>
-            <h5 className="description">{myData?.shortDescription}</h5>
-          </>
+        <header className=" mb-0">
+          {/* <h1 className="title">{t("merge-pdf:page_header_title")}</h1> */}
+
+          <h1 className="text-center text-[##262323] text-[40px] font-[800]">
+            {myData?.title}
+          </h1>
+          <p className="text-[##6F6767] text-center text-[16px] leading-[22px] font-[400] mt-[16px]">
+            {myData?.shortDescription}
+          </p>
+
+          {/* <p className="description">{t("merge-pdf:page_header_text")}</p> */}
         </header>
+
         <section className="page_section mt-0">
           <article className="container">
             <section className={pageStyles.tool_container_wrapper}>
@@ -583,30 +590,25 @@ const BMPToPDFPage = ({ myData }) => {
         {/* features end */}
 
         {/* Article Start */}
-        <section className="page_section">
-          <article className={`container ${pageStyles.article_section}`}>
-            <header className={pageStyles.article_header}>
-              <h4 className={`${pageStyles.title_section} text-3xl`}>
-                {myData?.longDescriptionTitle}
-                {/* {t("merge-pdf:article_title")} */}
-              </h4>
-              <div
-                className={`${pageStyles.divider} ${pageStyles.mx_auto}`}
-              ></div>
-            </header>
+        <section className=" ">
+          <article className={`mt-[100px] `}>
+            <div className="lg:flex ">
+              <header className="">
+                <h4 className="text-[#262323] lg:w-[200%] text-[32px] font-[600] tracking-wide">
+                  {myData?.longDescriptionTitle}
+                </h4>
+              </header>
 
-            <section className={pageStyles.article_content}>
-              {/* <p>{t("merge-pdf:article_paragraph_01")}</p>
-              <p>{t("merge-pdf:article_paragraph_02")}</p>
-              <p>{t("merge-pdf:article_paragraph_03")}</p> */}
-              {myData?.longDescription && parse(myData.longDescription)}
-            </section>
+              <section className="lg:ml-[220px] text-[16px] font-[400] leading-[24px] lg:mt-0 mt-5 text-[##6F6767]">
+                {myData?.longDescription && parse(myData.longDescription)}
+              </section>
+            </div>
           </article>
         </section>
+
         {/* Article End */}
 
         {/* <AvailableTools /> */}
-        <Share />
       </main>
     </>
   );

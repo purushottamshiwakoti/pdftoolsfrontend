@@ -30,13 +30,15 @@ const NotFound = () => {
           <article>
             <div className={`${styles.notfound_wrapper}`}>
               <div className={`${styles.notfound}`}>
-                <div className={`${styles.notfound_404}`}>
-                  <h1>404</h1>
+                <div className={``}>
+                  <h1 className="font-bold text-4xl text-[#EE1B22]">404</h1>
                 </div>
                 <h2>{t("page404:oops")}</h2>
                 <div>
                   {t("page404:we_are_sorry")}
-                  <Link href="/">{t("page404:go_back_to")}</Link>
+                  <Link href="/" className="text-[#EE1B22]">
+                    {t("page404:go_back_to")}
+                  </Link>
                 </div>
               </div>
             </div>

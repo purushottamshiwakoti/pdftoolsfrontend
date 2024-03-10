@@ -13,34 +13,35 @@ import {
   Unlock,
 } from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
+
 import {
-  BmpToPdf,
-  CompressPdf,
-  ExcelToPdf,
-  ExtractPdfPages,
-  GrayScalePdf,
-  JpgToPdf,
-  MergePdf,
-  OrganizePdf,
-  PdfToPowerpoint,
-  PdfToTiff,
-  PdfToTxt,
-  PdfToWord,
-  PdftoBmp,
-  PdftoJpg,
-  PdftoPng,
-  PngToPdf,
-  PowerpointToPdf,
-  ProtectPdf,
-  RemovePages,
-  RepairPdf,
-  RotatePdf,
-  TiffToPdf,
-  TxtToPdf,
-  UnlockPdf,
-  WordToPdf,
-} from "@/components/icons/Icon";
-const useToolsData = () => {
+  BmpToPdfIndex,
+  CompressPdfIndex,
+  ExcelToPdfIndex,
+  ExtractPdfPageIndex,
+  GrayScalePdfIndex,
+  JpgToPdfIndex,
+  MergePdfIndex,
+  OrganizePdfIndex,
+  PdfToPowerpointIndex,
+  PdfToTiffIndex,
+  PdfToTxtIndex,
+  PdfToWordIndex,
+  PdftoBmpIndex,
+  PdftoJpgIndex,
+  PdftoPngIndex,
+  PngToPdfIndex,
+  PowerpointToPdfIndex,
+  ProtectPdfIndex,
+  RemovePagesIndex,
+  RepairPdfIndex,
+  RotatePdfIndex,
+  TiffToPdfIndex,
+  TxtToPdfIndex,
+  UnlockPdfIndex,
+  WordToPdfIndex,
+} from "@/components/icons/indexIcon";
+const useToolsIndexData = () => {
   const { t } = useTranslation();
 
   const toolsData = {
@@ -49,13 +50,14 @@ const useToolsData = () => {
       title: t("common:tool_name_merge_pdf"),
       description: t("common:tool_desc_merge_pdf"),
       href: "/merge-pdf",
-      icon: MergePdf,
+      icon: MergePdfIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "MergedPDF.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "",
+      color: "#EE1B22",
     },
 
     RotatePDFTool: {
@@ -63,13 +65,14 @@ const useToolsData = () => {
       title: t("common:tool_name_rotate_pdf"),
       description: t("common:tool_desc_rotate_pdf"),
       href: "/rotate-pdf-pages",
-      icon: RotatePdf,
+      icon: RotatePdfIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_RotatePDF.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "",
+      color: "#EE1B22",
     },
 
     RemovePDFPagesTool: {
@@ -77,13 +80,14 @@ const useToolsData = () => {
       title: t("common:tool_name_remove_Pages"),
       description: t("common:tool_desc_remove_Pages"),
       href: "/remove-pdf-pages",
-      icon: RemovePages,
+      icon: RemovePagesIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_RemovePDFPages.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "",
+      color: "#EE1B22",
     },
 
     OrganizePDFTool: {
@@ -91,13 +95,14 @@ const useToolsData = () => {
       title: t("common:tool_name_organize_pdf"),
       description: t("common:tool_desc_organize_pdf"),
       href: "/organize-pdf-pages",
-      icon: OrganizePdf,
+      icon: OrganizePdfIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_OrganizePDF.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "",
+      color: "#EE1B22",
     },
 
     CompressPDFTool: {
@@ -105,13 +110,14 @@ const useToolsData = () => {
       title: t("common:tool_name_compress_pdf"),
       description: t("common:tool_desc_compress_pdf"),
       href: "/compress-pdf",
-      icon: CompressPdf,
+      icon: CompressPdfIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_compressed.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "/compress-pdf",
+      color: "#EE1B22",
     },
 
     GrayscalePDFTool: {
@@ -119,13 +125,14 @@ const useToolsData = () => {
       title: t("common:tool_name_grayscale_pdf"),
       description: t("common:tool_desc_grayscale_pdf"),
       href: "/grayscale-pdf",
-      icon: GrayScalePdf,
+      icon: GrayScalePdfIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_grayscaled.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "/grayscale-pdf",
+      color: "#EE1B22",
     },
 
     ExtractPagesTool: {
@@ -133,13 +140,14 @@ const useToolsData = () => {
       title: t("common:tool_name_extract_pages"),
       description: t("common:tool_desc_extract_pages"),
       href: "/extract-pdf-pages",
-      icon: ExtractPdfPages,
+      icon: ExtractPdfPageIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_ExtractPages.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "/extract-pdf-pages",
+      color: "#EE1B22",
     },
 
     RepairPDFTool: {
@@ -147,13 +155,14 @@ const useToolsData = () => {
       title: t("common:tool_name_repair_pdf"),
       description: t("common:tool_desc_repair_pdf"),
       href: "/repair-pdf",
-      icon: RepairPdf,
+      icon: RepairPdfIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_RepairPDF.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "/repair-pdf",
+      color: "#EE1B22",
     },
 
     JPGToPDFTool: {
@@ -161,13 +170,14 @@ const useToolsData = () => {
       title: t("common:tool_name_jpg_to_pdf"),
       description: t("common:tool_desc_jpg_to_pdf"),
       href: "/jpg-to-pdf",
-      icon: JpgToPdf,
+      icon: JpgToPdfIndex,
       acceptedInputMimeType: "image/jpeg",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_JPGToPDF.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "/jpg-to-pdf",
+      color: "#14A085",
     },
 
     PNGToPDFTool: {
@@ -175,13 +185,14 @@ const useToolsData = () => {
       title: t("common:tool_name_png_to_pdf"),
       description: t("common:tool_desc_png_to_pdf"),
       href: "/png-to-pdf",
-      icon: PngToPdf,
+      icon: PngToPdfIndex,
       acceptedInputMimeType: "image/png",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_PNGToPDF.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "/png-to-pdf",
+      color: "#9C0DDF",
     },
 
     BMPToPDFTool: {
@@ -189,13 +200,14 @@ const useToolsData = () => {
       title: t("common:tool_name_bmp_to_pdf"),
       description: t("common:tool_desc_bmp_to_pdf"),
       href: "/bmp-to-pdf",
-      icon: BmpToPdf,
+      icon: BmpToPdfIndex,
       acceptedInputMimeType: "image/bmp",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_JPGToBMP.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "/bmp-to-pdf",
+      color: "#C9940D",
     },
 
     TIFFToPDFTool: {
@@ -203,13 +215,14 @@ const useToolsData = () => {
       title: t("common:tool_name_tiff_to_pdf"),
       description: t("common:tool_desc_tiff_to_pdf"),
       href: "/tiff-to-pdf",
-      icon: TiffToPdf,
+      icon: TiffToPdfIndex,
       acceptedInputMimeType: "image/tiff",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_TIFFToPDF.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "/img/tiff-thumbnail.png",
       URI: "/tiff-to-pdf",
+      color: "#D60DDA",
     },
 
     WORDToPDFTool: {
@@ -217,7 +230,7 @@ const useToolsData = () => {
       title: t("common:tool_name_word_to_pdf"),
       description: t("common:tool_desc_word_to_pdf"),
       href: "/word-to-pdf",
-      icon: WordToPdf,
+      icon: WordToPdfIndex,
       acceptedInputMimeType:
         "application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
@@ -225,6 +238,7 @@ const useToolsData = () => {
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "/img/word-thumbnail.png",
       URI: "/word-to-pdf",
+      color: "#0263D1",
     },
 
     PPTXToPDFTool: {
@@ -232,7 +246,7 @@ const useToolsData = () => {
       title: t("common:tool_name_powerpoint_to_pdf"),
       description: t("common:tool_desc_powerpoint_to_pdf"),
       href: "/pptx-to-pdf",
-      icon: PowerpointToPdf,
+      icon: PowerpointToPdfIndex,
       acceptedInputMimeType:
         "application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
@@ -240,6 +254,7 @@ const useToolsData = () => {
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "/img/pptx-thumbnail.png",
       URI: "/pptx-to-pdf",
+      color: "#E03303",
     },
 
     TXTToPDFTool: {
@@ -247,13 +262,14 @@ const useToolsData = () => {
       title: t("common:tool_name_txt_to_pdf"),
       description: t("common:tool_desc_txt_to_pdf"),
       href: "/txt-to-pdf",
-      icon: TxtToPdf,
+      icon: TxtToPdfIndex,
       acceptedInputMimeType: "text/plain",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_TXTToPDF.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "/img/txt-thumbnail.png",
       URI: "/txt-to-pdf",
+      color: "#0BB1D5",
     },
 
     EXCELToPDFTool: {
@@ -261,7 +277,7 @@ const useToolsData = () => {
       title: t("common:tool_name_excel_to_pdf"),
       description: t("common:tool_desc_excel_to_pdf"),
       href: "/excel-to-pdf",
-      icon: ExcelToPdf,
+      icon: ExcelToPdfIndex,
       acceptedInputMimeType:
         "application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
@@ -269,6 +285,7 @@ const useToolsData = () => {
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "/img/excel-thumbnail.png",
       URI: "/excel-to-pdf",
+      color: "#00733B",
     },
 
     PDFToJPGTool: {
@@ -276,13 +293,14 @@ const useToolsData = () => {
       title: t("common:tool_name_pdf_to_jpg"),
       description: t("common:tool_desc_pdf_to_jpg"),
       href: "/pdf-to-jpg",
-      icon: PdftoJpg,
+      icon: PdftoJpgIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_PDFToJPG.zip",
       outputFileMimeType: "application/zip",
       thumbnailImageURL: "",
       URI: "/pdf-to-jpg",
+      color: "#14A085",
     },
 
     PDFToPNGTool: {
@@ -290,13 +308,14 @@ const useToolsData = () => {
       title: t("common:tool_name_pdf_to_png"),
       description: t("common:tool_desc_pdf_to_png"),
       href: "/pdf-to-png",
-      icon: PdftoPng,
+      icon: PdftoPngIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_PDFToPNG.zip",
       outputFileMimeType: "application/zip",
       thumbnailImageURL: "",
       URI: "/pdf-to-png",
+      color: "#9C0DDF",
     },
 
     PDFToBMPTool: {
@@ -304,13 +323,14 @@ const useToolsData = () => {
       title: t("common:tool_name_pdf_to_bmp"),
       description: t("common:tool_desc_pdf_to_bmp"),
       href: "/pdf-to-bmp",
-      icon: PdftoBmp,
+      icon: PdftoBmpIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 10485760, //10MB = 10240KB (in binary) = 10485760 B (in binary),
       newFileNameSuffix: "_PDFToBMP.zip",
       outputFileMimeType: "application/zip",
       thumbnailImageURL: "",
       URI: "/pdf-to-bmp",
+      color: "#C9940D",
     },
 
     PDFToTIFFTool: {
@@ -318,13 +338,14 @@ const useToolsData = () => {
       title: t("common:tool_name_pdf_to_tiff"),
       description: t("common:tool_desc_pdf_to_tiff"),
       href: "/pdf-to-tiff",
-      icon: PdfToTiff,
+      icon: PdfToTiffIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_PDFToTIFF.zip",
       outputFileMimeType: "application/zip",
       thumbnailImageURL: "",
       URI: "/pdf-to-tiff",
+      color: "#D60DDA",
     },
 
     PDFToWORDTool: {
@@ -332,13 +353,14 @@ const useToolsData = () => {
       title: t("common:tool_name_pdf_to_word"),
       description: t("common:tool_desc_pdf_to_word"),
       href: "/pdf-to-word",
-      icon: PdfToWord,
+      icon: PdfToWordIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_PDFToWORD.docx",
       outputFileMimeType: "application/msword",
       thumbnailImageURL: "",
       URI: "/pdf-to-word",
+      color: "#0263D1",
     },
 
     PDFToPPTXTool: {
@@ -346,7 +368,7 @@ const useToolsData = () => {
       title: t("common:tool_name_pdf_to_powerpoint"),
       description: t("common:tool_desc_pdf_to_powerpoint"),
       href: "/pdf-to-pptx",
-      icon: PdfToPowerpoint,
+      icon: PdfToPowerpointIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_PDFToPPTX.pptx",
@@ -354,6 +376,7 @@ const useToolsData = () => {
         "application/vnd.openxmlformats-officedocument.presentationml.presentation",
       thumbnailImageURL: "",
       URI: "/pdf-to-pptx",
+      color: "#E03303",
     },
 
     PDFToTXTTool: {
@@ -361,13 +384,14 @@ const useToolsData = () => {
       title: t("common:tool_name_pdf_to_txt"),
       description: t("common:tool_desc_pdf_to_txt"),
       href: "/pdf-to-txt",
-      icon: PdfToTxt,
+      icon: PdfToTxtIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_PDFToTXT.txt",
       outputFileMimeType: "text/plain",
       thumbnailImageURL: "",
       URI: "/pdf-to-txt",
+      color: "#0BB1D5",
     },
 
     PDFToZIPTool: {
@@ -389,13 +413,14 @@ const useToolsData = () => {
       title: t("common:tool_name_protect_pdf"),
       description: t("common:tool_desc_protect_pdf"),
       href: "/protect-pdf",
-      icon: ProtectPdf,
+      icon: ProtectPdfIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_ProtectPDF.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "/protect-pdf",
+      color: "#EE1B22",
     },
 
     UnlockPDFTool: {
@@ -403,17 +428,18 @@ const useToolsData = () => {
       title: t("common:tool_name_unlock_pdf"),
       description: t("common:tool_desc_unlock_pdf"),
       href: "/unlock-pdf",
-      icon: UnlockPdf,
+      icon: UnlockPdfIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: "_UnlockPDF.pdf",
       outputFileMimeType: "application/pdf",
       thumbnailImageURL: "",
       URI: "/unlock-pdf",
+      color: "#EE1B22",
     },
   };
 
   return toolsData;
 };
 
-export default useToolsData;
+export default useToolsIndexData;

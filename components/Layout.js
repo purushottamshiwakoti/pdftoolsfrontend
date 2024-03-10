@@ -11,6 +11,7 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import { rtlLanguages } from "../helpers/utils";
 import { Poppins } from "next/font/google";
+import Thankyou from "./Thankyou";
 
 // Google Font
 const poppins = Poppins({
@@ -40,12 +41,15 @@ const Layout = ({ children }) => {
   return (
     <div style={langStyle} className={poppins.className}>
       <ToastAlert />
-      <BackToTopButton />
+      {/* <BackToTopButton /> */}
 
       <div>
         <Nav />
       </div>
-      <div className="main mt-28">{children}</div>
+      <div className="main md:px-3 sm:px-3 px-[10px] lg:px-[120px] pt-[132px] bg-[#f9f8f8]">
+        {children}
+      </div>
+      <Thankyou />
       <Footer />
     </div>
   );

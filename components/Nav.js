@@ -9,14 +9,30 @@ import styles from "../styles/MegaMenu.module.css";
 import { List, ChevronDown, X, ChevronUp } from "react-bootstrap-icons";
 import useToolsData from "../hooks/useToolsData";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { NavDown, NavUp } from "./icons/Icon";
+import NavSheet from "./NavSheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { Menu } from "lucide-react";
 
 const Nav = React.memo(function Nav() {
+  const ref = useRef(null);
+  const [handleClick, setHandleClick] = useState(false);
   const router = useRouter();
   const toolsData = useToolsData();
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const [navToggleShow, setNavToggleShow] = useState(false);
   const navMenuRef = useRef(null);
+  const path = usePathname();
 
   const handleRouteChange = () => {
     //Route changes
@@ -47,11 +63,26 @@ const Nav = React.memo(function Nav() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleOutSideClick = (event) => {
+      if (!ref.current?.contains(event.target)) {
+        setHandleClick(false);
+      }
+    };
+
+    window.addEventListener("mousedown", handleOutSideClick);
+
+    return () => {
+      window.removeEventListener("mousedown", handleOutSideClick);
+    };
+  }, [ref]);
+
   return (
     <>
-      <header className="relative">
-        <div className="fixed top-0 w-full z-[999]  ">
-          <nav className={`${styles.navigation}`}>
+      <header className=" ">
+        <div className="fixed top-0 w-full z-40  ">
+          <nav className="flex items-center justify-between w-full h-20 bg-white shadow-md px-[10px]  lg:px-[120px]    ">
+            {/* <nav className={`flex items-center justify-between `}> */}
             <Link href="/" className={`${styles.logo}`}>
               {/* <h3>
                 <span style={{ color: "#7d64ff" }}>PDF</span>
@@ -62,55 +93,183 @@ const Nav = React.memo(function Nav() {
               <Image
                 src={"/all-pdf-convertor-logo.png"}
                 alt="all-pdf-convertor-logo"
-                width={210}
-                height={80}
+                width={180}
+                height={38}
               />
             </Link>
+            <div className="lg:hidden block">
+              <Sheet>
+                <SheetTrigger>
+                  <Menu className="w-7 h-7" />
+                </SheetTrigger>
+                <SheetContent>
+                  <ul className=" space-y-11 text-[#6F6767] text-[16px] font-[500] uppercase ">
+                    <li className={`relative`}>
+                      <DialogClose asChild>
+                        <Link
+                          href="/"
+                          className={
+                            path === "/" && !handleClick
+                              ? "text-[#EE1B22] font-[600]"
+                              : "hover:text-[#EE1B22]"
+                          }
+                        >
+                          <span>{t("common:home_page")}</span>
+                          {path == "/" && !handleClick && (
+                            <span className="bg-[#EE1B22] w-[89px] h-[4px] absolute bottom-0 -left-4 top-10    "></span>
+                          )}
+                        </Link>
+                      </DialogClose>
+                    </li>
+
+                    <li className="relative">
+                      <DialogClose asChild>
+                        <Link
+                          href={toolsData["MergePDFTool"].href}
+                          className={
+                            path === "/merge-pdf" && !handleClick
+                              ? "text-[#EE1B22] font-[600]"
+                              : "hover:text-[#EE1B22]"
+                          }
+                          prefetch={false}
+                        >
+                          <span>{toolsData["MergePDFTool"].title}</span>
+                          {path == "/merge-pdf" && !handleClick && (
+                            <span className="bg-[#EE1B22] w-[120px] h-[4px] absolute bottom-0 -left-2 top-10   "></span>
+                          )}
+                        </Link>
+                      </DialogClose>
+                    </li>
+
+                    <DialogClose asChild>
+                      <li className={"relative"}>
+                        <Link
+                          href={toolsData["CompressPDFTool"].href}
+                          className={
+                            path === "/compress-pdf" && !handleClick
+                              ? "text-[#EE1B22] font-[600]"
+                              : "hover:text-[#EE1B22]"
+                          }
+                          prefetch={false}
+                        >
+                          <span>{toolsData["CompressPDFTool"].title}</span>
+                          {path == "/compress-pdf" && !handleClick && (
+                            <span className="bg-[#EE1B22] w-[160px] h-[4px] absolute bottom-0 -left-2 top-6   "></span>
+                          )}
+                        </Link>
+                      </li>
+                    </DialogClose>
+                    {/* <li
+                      className={` ${
+                        navToggleShow ? styles.nav_list_menu : ""
+                      }`}
+                    >
+                      <div
+                        className={` relative `}
+                        ref={ref}
+                        onClick={() => {
+                          setNavToggleShow(!navToggleShow),
+                            setHandleClick(!handleClick);
+                        }}
+                      >
+                        <div className="flex items-center gap-[6px]">
+                          <span
+                            className={handleClick ? "text-[#EE1B22]" : null}
+                          >
+                            {t("common:all_pdf_tools")}
+                          </span>
+                          {navToggleShow ? NavUp : NavDown}
+                        </div>
+                        {handleClick && (
+                          <span className="bg-[#EE1B22] w-[165px] h-[4px] absolute bottom-0 -left-3 top-12"></span>
+                        )}
+                      </div>
+                      <div className={``}>
+                        <div>
+                          {navToggleShow && (
+                            <div className="h-10">
+                              <ToolsList />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </li> */}
+                  </ul>
+                </SheetContent>
+              </Sheet>
+            </div>
             <ul
               ref={navMenuRef}
-              className={`${styles.nav_menu} ${
-                navToggleShow ? styles.active : ""
-              }`}
+              className="lg:flex hidden items-center gap-[40px] text-[#6F6767] text-[16px] font-[500] uppercase "
             >
-              <li className={`${styles.nav_list} ${styles.remove_in_mobile}`}>
-                <Link href="/" className={`${styles.nav_link}`}>
+              <li className={`relative`}>
+                <Link
+                  href="/"
+                  className={
+                    path === "/" && !handleClick
+                      ? "text-[#EE1B22] font-[600]"
+                      : "hover:text-[#EE1B22]"
+                  }
+                >
                   <span>{t("common:home_page")}</span>
+                  {path == "/" && !handleClick && (
+                    <span className="bg-[#EE1B22] w-[89px] h-[4px] absolute bottom-0 -left-4 top-12"></span>
+                  )}
                 </Link>
               </li>
 
-              <li className={`${styles.nav_list} ${styles.remove_in_mobile}`}>
+              <li className="relative">
                 <Link
                   href={toolsData["MergePDFTool"].href}
-                  className={`${styles.nav_link}`}
+                  className={
+                    path === "/merge-pdf" && !handleClick
+                      ? "text-[#EE1B22] font-[600]"
+                      : "hover:text-[#EE1B22]"
+                  }
                   prefetch={false}
                 >
                   <span>{toolsData["MergePDFTool"].title}</span>
+                  {path == "/merge-pdf" && !handleClick && (
+                    <span className="bg-[#EE1B22] w-[120px] h-[4px] absolute bottom-0 -left-2 top-12"></span>
+                  )}
                 </Link>
               </li>
 
-              <li className={`${styles.nav_list} ${styles.remove_in_mobile}`}>
+              <li className={"relative"}>
                 <Link
                   href={toolsData["CompressPDFTool"].href}
-                  className={`${styles.nav_link}`}
+                  className={
+                    path === "/compress-pdf" && !handleClick
+                      ? "text-[#EE1B22] font-[600]"
+                      : "hover:text-[#EE1B22]"
+                  }
                   prefetch={false}
                 >
                   <span>{toolsData["CompressPDFTool"].title}</span>
+                  {path == "/compress-pdf" && !handleClick && (
+                    <span className="bg-[#EE1B22] w-[160px] h-[4px] absolute bottom-0 -left-2 top-12"></span>
+                  )}
                 </Link>
               </li>
 
-              <li
-                className={`${styles.nav_list} ${
-                  navToggleShow ? styles.nav_list_menu : ""
-                }`}
-              >
+              <li className={` ${navToggleShow ? styles.nav_list_menu : ""}`}>
                 <div
-                  className={`${styles.nav_link} ${styles.remove_in_mobile}`}
+                  className={`${styles.nav_link} ${styles.remove_in_mobile} relative `}
+                  ref={ref}
                   onClick={() => {
-                    setNavToggleShow(!navToggleShow);
+                    setNavToggleShow(!navToggleShow),
+                      setHandleClick(!handleClick);
                   }}
                 >
-                  <span>{t("common:all_pdf_tools")}</span>
-                  {navToggleShow ? <ChevronUp /> : <ChevronDown />}
+                  <div className="flex items-center gap-[6px]">
+                    <span className={handleClick ? "text-[#EE1B22]" : null}>
+                      {t("common:all_pdf_tools")}
+                    </span>
+                    {navToggleShow ? NavUp : NavDown}
+                  </div>
+                  {handleClick && (
+                    <span className="bg-[#EE1B22] w-[165px] h-[4px] absolute bottom-0 -left-3 top-12"></span>
+                  )}
                 </div>
                 <div className={`${styles.dropdown}`}>
                   <div className={`${styles.dropdown_inner}`}>
@@ -119,12 +278,13 @@ const Nav = React.memo(function Nav() {
                 </div>
               </li>
             </ul>
-            <div className={`${styles.nav_action}`}>
+            <div className={`lg:block hidden`}>
               <div
-                className={`${styles.btn_primary}`}
+                className={`lg:flex items-center gap-[4px] cursor-pointer hidden`}
                 onClick={() => setShowModal(true)}
               >
                 <LanguageCountryFlag locale={router.locale} />
+                {NavDown}
               </div>
               <div
                 className={`${styles.nav_toggle}`}

@@ -112,7 +112,7 @@ const LanguageCountryFlag = React.memo(function LanguageCountryFlag({
           src={
             "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.4/flags/1x1/pt.svg"
           }
-          width={14}
+          width={24}
           height={12}
           loading="lazy"
           alt="PT Flag"
