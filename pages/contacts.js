@@ -77,17 +77,15 @@ const Contacts = ({ myData }) => {
                   <p className="bg-slate-200 h-6  w-[15rem] lg:w-[25rem] animate-pulse"></p>
                 </div>
               ) : (
-                myData?.description && parse(myData.description)
+                <div className="text-3xl">
+                  {myData?.description && parse(myData.description)}
+                </div>
               )}
             </section>
           </article>
-          <section
-            className={`hero mt-8 mb-8 lg:mt-10 lg:mb-32 ${
-              isWindows ? "lg:mx-[11rem]" : "lg:mx-[5rem]"
-            } mx-[1rem] md:mx-[3.8rem]`}
-          >
+          <section>
             <div>
-              <h2 className="text-[#7D64FF] font-bold tracking-wider text-xl md:text-3xl ">
+              <h2 className="text-[#262323] font-bold tracking-wider text-xl md:text-3xl ">
                 Contact Us
               </h2>
               <div className="mt-2">

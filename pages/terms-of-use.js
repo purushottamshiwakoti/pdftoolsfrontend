@@ -83,8 +83,7 @@ const TermsOfUse = ({ myData }) => {
                   </div>
                 ) : (
                   <>
-                    <h2></h2>
-                    myData?.description && parse(myData.description)
+                    <h2>{myData?.description && parse(myData.description)}</h2>
                   </>
                 )}
               </div>

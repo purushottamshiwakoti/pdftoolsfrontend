@@ -6,9 +6,9 @@ const Thankyou = () => {
   return (
     <div className="bg-[#F9F4F4] relative flex lg:flex-row flex-col items-center justify-between w-full pl-[120px] lg:h-[400px] overflow-x-hidden overflow-y-hidden mb-10 ">
       <div className="lg:max-w-xl">
-        <h2 className="text-[24px] text-[#262323] md:max-w-lg max-w-sm font-[600] tracking-wide">
+        <h4 className="text-[24px] text-[#262323] md:max-w-lg max-w-sm font-[600] tracking-wide">
           Thank you for using our services
-        </h2>
+        </h4>
         <p className="text-[#262323] text-[16px] font-[400] mt-[16px] md:max-w-lg max-w-sm">
           If you could spread the word about our website to your friends,
           highlighting that we offer everything for free, it would be greatly

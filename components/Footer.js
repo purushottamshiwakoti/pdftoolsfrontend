@@ -15,9 +15,9 @@ const Footer = () => {
               width={180}
               height={38}
             />
-            <h2 className="mt-[24px] text-[14px] text-[#262323] leading-[20px] tracking-normal">
+            {/* <h2 className="mt-[24px] text-[14px] text-[#262323] leading-[20px] tracking-normal">
               Access all essential PDF tools for free, right at your fingertips!
-            </h2>
+            </h2> */}
             <p className="text-[#6F6767] text-[12px] mt-[8px] font-[400]">
               Copyright © 2024. All Rights Reserved.
             </p>
@@ -46,7 +46,7 @@ const Footer = () => {
                 Blogs
               </Link>
               <Link
-                href={"/contactus"}
+                href={"/contacts"}
                 className="text-[#262323] text-[14px] font-[500]"
               >
                 Contact us

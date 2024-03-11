@@ -12,6 +12,7 @@ import Footer from "./Footer";
 import { rtlLanguages } from "../helpers/utils";
 import { Poppins } from "next/font/google";
 import Thankyou from "./Thankyou";
+import { usePathname } from "next/navigation";
 
 // Google Font
 const poppins = Poppins({
@@ -21,6 +22,7 @@ const poppins = Poppins({
 });
 
 const Layout = ({ children }) => {
+  const path = usePathname();
   const router = useRouter();
   const direction = rtlLanguages.includes(router.locale) ? "rtl" : "ltr";
   const langStyle = {
@@ -49,7 +51,7 @@ const Layout = ({ children }) => {
       <div className="main md:px-3 sm:px-3 px-[10px] lg:px-[120px] pt-[132px] bg-[#f9f8f8]">
         {children}
       </div>
-      <Thankyou />
+      {path == "/" && <Thankyou />}
       <Footer />
     </div>
   );

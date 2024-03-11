@@ -9,9 +9,9 @@ import Image from "next/image";
 const Reviews = ({ data }) => {
   return (
     <div>
-      <h4 className="text-[#262323] font-[600]  text-[32px] md:text-4xl text-center mb-[16px]">
+      <h3 className="text-[#262323] font-[600]  text-[32px] md:text-4xl text-center mb-[16px]">
         Join the community of 1M+ Happy Customers
-      </h4>
+      </h3>
       <p className="text-center  mb-[48px] text-[16px] leading-[22px] tracking-normal text-[#6F6767] font-[400]">
         Merge, split, compress, convert, rotate, unlock, and watermark PDFs
         effortlessly with just a few clicks. Compress, convert, rotate, unlock,
