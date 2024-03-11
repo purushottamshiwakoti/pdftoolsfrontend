@@ -19,12 +19,22 @@ import useToolsIndexData from "@/hooks/useToolsIndexData";
 import Thankyou from "@/components/Thankyou";
 
 export async function getStaticProps({ locale }) {
-  const res = await fetch(`${dashboardUrl}/other/home`);
-  const choose = await fetch(`${dashboardUrl}/choose-us`);
-  const reviews = await fetch(`${dashboardUrl}/reviews`);
-  const company = await fetch(`${dashboardUrl}/company-image`);
+  const res = await fetch(`${dashboardUrl}/other/home`,{
+    cache:"no-store"
+  });
+  const choose = await fetch(`${dashboardUrl}/choose-us`,{
+    cache:"no-store"
+  });
+  const reviews = await fetch(`${dashboardUrl}/reviews`,{
+    cache:"no-store"
+  });
+  const company = await fetch(`${dashboardUrl}/company-image`,{
+    cache:"no-store"
+  });
 
-  const seo = await fetch(`${dashboardUrl}/seo-settings`);
+  const seo = await fetch(`${dashboardUrl}/seo-settings`,{
+    cache:"no-store"
+  });
   let seoData = await seo.json();
   seoData = seoData.data;
 

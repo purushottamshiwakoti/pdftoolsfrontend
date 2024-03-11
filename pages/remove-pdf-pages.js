@@ -43,7 +43,9 @@ import { useRouter } from "next/router";
 // }
 
 export async function getStaticProps({ locale }) {
-  const res = await fetch(`${dashboardUrl}/page/remove-pdf-pages`);
+  const res = await fetch(`${dashboardUrl}/page/remove-pdf-pages`, {
+    cache: "no-store",
+  });
   const { page } = await res.json();
   return {
     props: {

@@ -56,7 +56,9 @@ import { useRouter } from "next/router";
 // }
 
 export async function getStaticProps({ locale }) {
-  const res = await fetch(`${dashboardUrl}/page/pdf-to-tiff`);
+  const res = await fetch(`${dashboardUrl}/page/pdf-to-tiff`, {
+    cache: "no-store",
+  });
   const { page } = await res.json();
   return {
     props: {

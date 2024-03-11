@@ -40,7 +40,9 @@ import { useRouter } from "next/router";
 import parse from "html-react-parser";
 
 export async function getStaticProps({ locale }) {
-  const res = await fetch(`${dashboardUrl}/page/compress-pdf`);
+  const res = await fetch(`${dashboardUrl}/page/compress-pdf`,{
+    cache:"no-store"
+  });
   const { page } = await res.json();
   return {
     props: {

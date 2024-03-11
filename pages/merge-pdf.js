@@ -30,7 +30,9 @@ import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
 
 export async function getStaticProps({ locale }) {
-  const res = await fetch(`${dashboardUrl}/page/merge-pdf`);
+  const res = await fetch(`${dashboardUrl}/page/merge-pdf`, {
+    cache: "no-store",
+  });
   const { page } = await res.json();
   return {
     props: {

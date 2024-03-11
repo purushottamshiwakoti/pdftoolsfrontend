@@ -43,7 +43,9 @@ import { appUrl, dashboardUrl } from "@/lib/url";
 // }
 
 export async function getStaticProps({ locale }) {
-  const res = await fetch(`${dashboardUrl}/page/repair-pdf`);
+  const res = await fetch(`${dashboardUrl}/page/repair-pdf`, {
+    cache: "no-store",
+  });
   const { page } = await res.json();
   return {
     props: {

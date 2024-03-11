@@ -8,7 +8,9 @@ import { useRouter } from "next/router";
 import { appUrl, dashboardUrl } from "@/lib/url";
 
 export async function getStaticProps({ locale }) {
-  const res = await fetch(`${dashboardUrl}/other/terms-and-conditions`);
+  const res = await fetch(`${dashboardUrl}/other/terms-and-conditions`, {
+    cache: "no-store",
+  });
   const { page } = await res.json();
 
   return {
