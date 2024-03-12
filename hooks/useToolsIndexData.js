@@ -27,6 +27,7 @@ import {
   PdfToTiffIndex,
   PdfToTxtIndex,
   PdfToWordIndex,
+  PdfToZIpIndex,
   PdftoBmpIndex,
   PdftoJpgIndex,
   PdftoPngIndex,
@@ -399,13 +400,14 @@ const useToolsIndexData = () => {
       title: t("common:tool_name_pdf_to_zip"),
       description: t("common:tool_desc_pdf_to_zip"),
       href: "/pdf-to-zip",
-      icon: <FiletypeJpg />,
+      icon: PdfToZIpIndex,
       acceptedInputMimeType: "application/pdf",
       acceptedInputFileMaxSize: 26214400, //25MB = 25600 KB (in binary) = 26214400 B (in binary),
       newFileNameSuffix: ".pdf",
       outputFileMimeType: "application/zip",
       thumbnailImageURL: "",
       URI: "",
+      color: "#ffb11f",
     },
 
     ProtectPDFTool: {

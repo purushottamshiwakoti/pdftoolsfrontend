@@ -24,7 +24,7 @@ const Thankyou = () => {
           <div className="flex items-center mt-[24px]  ">
             <div className="w-[50px] h-[50px] flex  items-center justify-center relative">
               <Image
-                src={"/manimg.png"}
+                src={"/r1.png"}
                 layout="fill"
                 objectFit="cover"
                 className="rounded-full border-[1px] border-[#F9F4F4]"
@@ -32,7 +32,7 @@ const Thankyou = () => {
             </div>
             <div className="w-[50px] h-[50px] flex -ml-5 items-center justify-center relative">
               <Image
-                src={"/manimg.png"}
+                src={"/r2.png"}
                 layout="fill"
                 objectFit="cover"
                 className="rounded-full  border-[1px] border-[#F9F4F4] "
@@ -40,7 +40,7 @@ const Thankyou = () => {
             </div>
             <div className="w-[50px] h-[50px] flex -ml-5  items-center justify-center relative">
               <Image
-                src={"/manimg.png"}
+                src={"/r3.png"}
                 layout="fill"
                 objectFit="cover"
                 className="rounded-full border-[1px] border-[#F9F4F4]  "
@@ -48,7 +48,7 @@ const Thankyou = () => {
             </div>
             <div className="w-[50px] h-[50px] flex -ml-5  items-center justify-center relative">
               <Image
-                src={"/manimg.png"}
+                src={"/r4.png"}
                 layout="fill"
                 objectFit="cover"
                 className="rounded-full border-[1px] border-[#F9F4F4] "

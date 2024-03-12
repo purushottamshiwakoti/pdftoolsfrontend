@@ -17,13 +17,15 @@ import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
 import useToolsIndexData from "@/hooks/useToolsIndexData";
 import Thankyou from "@/components/Thankyou";
+export const dynamic = "force-dynamic";
 
 export async function getStaticProps({ locale }) {
   const res = await fetch(`${dashboardUrl}/other/home`, {
-    cache: "no-store",
+    cache: "no-cache",
   });
   const choose = await fetch(`${dashboardUrl}/choose-us`, {
-    cache: "no-store",
+    // cache: "no-store",
+    next: { revalidate: 1 },
   });
   const reviews = await fetch(`${dashboardUrl}/reviews`, {
     cache: "no-store",
@@ -56,6 +58,7 @@ export async function getStaticProps({ locale }) {
       CompanyImagesData: CompanyImagesData,
       seoData: seoData,
     },
+    revalidate: 1,
   };
 }
 
@@ -243,9 +246,9 @@ const Home = ({
                         className={`p-[20px] border-[1px] bg-[${toolsData[key].color}] bg-opacity-[2%] rounded-[8px] max-w-[25rem] min-h-[10rem] border-[${toolsData[key].color}]/20 space-y-[12px]`}
                       >
                         <div>{toolsData[key].icon}</div>
-                        <h2 className="text-[#262323] text-[18px] font-[600]">
+                        <div className="text-[#262323] text-[18px] font-[600]">
                           {toolsData[key].title}
-                        </h2>
+                        </div>
                         <p className="text-[14px] text-[#6F6767] font-[400]">
                           {toolsData[key].description}
                         </p>

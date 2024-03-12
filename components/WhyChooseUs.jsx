@@ -17,9 +17,9 @@ const WhyChooseUs = ({ data }) => {
             <div className="relative w-[100px] h-[100px]">
               <Image src={item.image} alt={item.imageAlt} fill />
             </div>
-            <h2 className="text-[##262323] text-[18px]  font-[600] my-4">
+            <div className="text-[##262323] text-[18px]  font-[600] my-4">
               {item.title}
-            </h2>
+            </div>
             <p className="text-[14px] font-[400] text-[#6F6767]">
               {item.description}
             </p>

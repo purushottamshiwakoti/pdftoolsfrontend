@@ -7,6 +7,7 @@ import SwiperCore, { Autoplay } from "swiper/modules";
 import Image from "next/image";
 
 const Reviews = ({ data }) => {
+  const images = ["/manimg.png", "/girl.png", "/boy.png"];
   return (
     <div>
       <h3 className="text-[#262323] font-[600]  text-[32px] md:text-4xl text-center mb-[16px]">
@@ -19,7 +20,7 @@ const Reviews = ({ data }) => {
       </p>
 
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
-        {data.map((item) => (
+        {data.map((item, index) => (
           <div className="text-center relative h-[188px] mx-[28px]">
             <div className="">
               <p className="text-[14px] text-[#262323] tracking-normal text-center font-[500] leading-[22px] italic">
@@ -28,7 +29,7 @@ const Reviews = ({ data }) => {
               <div className="flex items-center mt-[24px] justify-center gap-[9px]">
                 <div className="w-[50px] h-[50px] flex items-center justify-center relative">
                   <Image
-                    src={"/manimg.png"}
+                    src={images[index]}
                     layout="fill"
                     objectFit="cover"
                     className="rounded-full "
