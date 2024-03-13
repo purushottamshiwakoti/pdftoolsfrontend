@@ -7,7 +7,7 @@ import SwiperCore, { Autoplay } from "swiper/modules";
 import Image from "next/image";
 
 const Reviews = ({ data }) => {
-  const images = ["/manimg.png", "/girl.png", "/boy.png"];
+  const images = ["/person.png", "/person1.png", "/person2.jpg"];
   return (
     <div>
       <h3 className="text-[#262323] font-[600]  text-[32px] md:text-4xl text-center mb-[16px]">

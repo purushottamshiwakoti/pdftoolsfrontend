@@ -72,10 +72,14 @@ const Home = ({
   const toolsData = useToolsIndexData();
   const router = useRouter();
   const currentUrl = router.asPath;
-  const title = myData.Settings[0]?.title || "";
-  const words = title.split(" ");
 
   const { t } = useTranslation();
+
+  let title = myData.Settings[0]?.title.split(" ");
+  const blackTitle = title[title.length - 1];
+  console.log(title);
+  console.log(blackTitle);
+  title.pop();
 
   return (
     <>
@@ -114,22 +118,12 @@ const Home = ({
               <div className="lg:space-y-7 space-y-5">
                 <h1
                   className="lg:text-[48px] text-[30px] font-[500] w-full lg:max-w-[80%] leading-[
-58.09px]"
+58.09px] "
                 >
-                  {words.slice(0, 3).map((word, index) => (
-                    <span
-                      key={index}
-                      className="text-[rgb(238,27,34)] font-[700] "
-                    >
-                      {word}{" "}
-                    </span>
-                  ))}
-                  {words.slice(3).map((word, index) => (
-                    <span key={index} className="">
-                      {word}
-                    </span>
-                  ))}
-                  <span className="text-[#262323]">{title.slice(3)}</span>
+                  <span className="text-[rgb(238,27,34)] font-[700]">
+                    {title.join(" ")}
+                  </span>
+                  <span className="text-[#262323]">{` ${blackTitle}`}</span>
                 </h1>
 
                 <p className="lg:w-[40rem] lg:mr-20 text-[#6F6767] text-[16px] font-[400]">
