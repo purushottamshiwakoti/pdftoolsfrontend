@@ -8,7 +8,6 @@ import DocumentPreviewSelectable from "../components/DocumentPreviewSelectable";
 import EditFilesFormStep from "../components/EditFilesFormStep";
 import Features from "../components/Features";
 import PagePreviwerModal from "../components/PagePreviwerModal";
-import Share from "../components/Share";
 import Steps from "../components/Steps";
 import UploadAreaFormStep from "../components/UploadAreaFormStep";
 import {
@@ -22,8 +21,8 @@ import styles from "../styles/UploadContainer.module.css";
 
 import parse from "html-react-parser";
 
-import { useRouter } from "next/router";
 import { appUrl, dashboardUrl } from "@/lib/url";
+import { useRouter } from "next/router";
 
 // export async function getStaticProps({ locale }) {
 //   const url = `${process.env.API_URL}/rotate-pdf-pages`;

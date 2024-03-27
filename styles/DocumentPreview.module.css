@@ -87,7 +87,7 @@
   align-items: center;
   justify-content: center;
   border: none;
-  background-color: var(--primary);
+  background-color: #EE1B22;
   color: #fff;
 }
 
@@ -222,7 +222,7 @@
 }
 
 .selected .file_info_name {
-  color: var(--primary);
+  color: #EE1B22;
   font-weight: bold;
 }
 

@@ -186,7 +186,7 @@ const EditFilesFormStep = React.memo(function EditFilesFormStep({
                     style={{
                       textAlign: "center",
                       fontSize: "22px",
-                      color: "#fff",
+                      color: "#EE1B22",
                       padding: "10px 19px",
                     }}
                   >

@@ -4,6 +4,7 @@ import { ArrowRight } from "react-bootstrap-icons";
 import styles from "../styles/UploadContainer.module.css";
 import PropTypes from "prop-types";
 import ToolButton from "./ToolButton";
+import { Button } from "./ui/button";
 const SelectOptionFormStep = React.memo(function SelectOptionFormStep({
   children,
   title,
@@ -26,22 +27,22 @@ const SelectOptionFormStep = React.memo(function SelectOptionFormStep({
       <div className="d-flex">
         <div className="w-100 pt-3 pb-3 d-flex flex-column align-items-center">
           <div className="row w-100 d-flex justify-content-center text-center mt-2">
-            <h2 className={`${styles.container_title}`}>{title}</h2>
+            {/* <h2 className={`${styles.container_title}`}>{title}</h2> */}
           </div>
 
           <div className="row w-100 d-flex justify-content-center mt-3">
             {children}
           </div>
 
-          <div className="row w-100 d-flex justify-content-center">
+          <div className="row w-100 gap-10 d-flex justify-content-center items-center">
             <ToolButton
               title={actionTitle}
               onClick={action}
               isActive={true}
-              buttonStyle={styles.action_btn}
+              // buttonStyle={styles.action_btn}
             >
-              <ArrowRight />
               {actionTitle}
+              <ArrowRight className="ml-2 w-5 h-5" />
             </ToolButton>
           </div>
         </div>

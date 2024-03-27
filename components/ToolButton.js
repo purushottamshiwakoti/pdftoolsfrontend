@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import styles from "../styles/UploadContainer.module.css";
 import PropTypes from "prop-types";
 import { rtlLanguages } from "../helpers/utils";
+import { Button } from "./ui/button";
 const ToolButton = React.memo(function ToolButton({
   children,
   title,
@@ -27,7 +28,7 @@ const ToolButton = React.memo(function ToolButton({
     };
   }, []);
   return (
-    <button
+    <Button
       ref={buttonRef}
       className={`${buttonStyle} ${!isActive && styles.disabled}`}
       title={title}
@@ -37,7 +38,7 @@ const ToolButton = React.memo(function ToolButton({
       style={langStyle}
     >
       {children}
-    </button>
+    </Button>
   );
 });
 

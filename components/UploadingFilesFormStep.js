@@ -26,7 +26,7 @@ const UploadingFilesFormStep = React.memo(function UploadingFilesFormStep({
             <CloudArrowUp
               className={`${styles.saved_percentage}`}
               size={130}
-              color="#7d64ff"
+              color="#EE1B22"
             />
 
             <span

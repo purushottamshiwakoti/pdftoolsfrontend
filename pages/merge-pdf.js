@@ -12,7 +12,6 @@ import EditFilesFormStep from "../components/EditFilesFormStep";
 import Features from "../components/Features";
 import PageDragLayer from "../components/PageDragLayer";
 import PagePreviwerModal from "../components/PagePreviwerModal";
-import Share from "../components/Share";
 import Steps from "../components/Steps";
 import UploadAreaFormStep from "../components/UploadAreaFormStep";
 import {
