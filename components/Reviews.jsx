@@ -1,9 +1,3 @@
-import React from "react";
-import { Quote, StarFill } from "react-bootstrap-icons";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/autoplay";
-import SwiperCore, { Autoplay } from "swiper/modules";
 import Image from "next/image";
 
 const Reviews = ({ data }) => {
