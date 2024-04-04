@@ -82,7 +82,9 @@ const EditFilesFormStep = React.memo(function EditFilesFormStep({
     };
   }, []);
   return (
-    <section className={`${styles.toolbox} py-0 mt-0 ${styles.is_process}`}>
+    <section
+      className={`${styles.toolbox} py-0 mt-0 ${styles.is_process} z-10`}
+    >
       <form onSubmit={handlePreventDefault} ref={formRef}>
         <div
           ref={dropZone}
@@ -106,13 +108,9 @@ const EditFilesFormStep = React.memo(function EditFilesFormStep({
           <Spinner isSpinnerActive={isSpinnerActive} />
 
           <div className={`${styles.previewer} w-100`}>
-            <div
-              className={`${
-                isPanelTopSticky ? styles.panel_sticky : styles.panel
-              } ${styles.panel_top} `}
-            >
+            <div>
               <div
-                className={`${styles.panel_inner} justify-content-end justify-content-md-center justify-content-lg-end`}
+                className={`${styles.panel_inner} justify-content-end justify-content-md-center justify-content-lg-end z-0`}
               >
                 {enableAddingMoreFiles && (
                   <div className={`${styles.panel_btn_left} mr-5`}>
@@ -183,11 +181,7 @@ const EditFilesFormStep = React.memo(function EditFilesFormStep({
               {filesComponents}
             </div>
 
-            <div
-              className={`${
-                isPanelBottomSticky ? styles.panel_sticky : styles.panel
-              } ${styles.panel_bottom} `}
-            >
+            <div className={` ${styles.panel_bottom} `}>
               <div
                 className={`${styles.panel_inner} ${styles.upload_container}  ${positionPanelBottomItems}`}
               >

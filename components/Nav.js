@@ -1,26 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import LangModal from "./LangModal";
-import ToolsList from "./ToolsList";
-import LanguageCountryFlag from "./LanguageCountryFlag";
-import styles from "../styles/MegaMenu.module.css";
-import { List, ChevronDown, X, ChevronUp } from "react-bootstrap-icons";
-import useToolsData from "../hooks/useToolsData";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { NavDown, NavUp } from "./icons/Icon";
-import NavSheet from "./NavSheet";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Menu } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
+import { List, X } from "react-bootstrap-icons";
+import useToolsData from "../hooks/useToolsData";
+import styles from "../styles/MegaMenu.module.css";
+import LanguageCountryFlag from "./LanguageCountryFlag";
+import ToolsList from "./ToolsList";
+import { NavDown, NavUp } from "./icons/Icon";
 
 const Nav = React.memo(function Nav() {
   const ref = useRef(null);

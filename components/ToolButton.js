@@ -32,7 +32,7 @@ const ToolButton = React.memo(function ToolButton({
       ref={buttonRef}
       className={`${buttonStyle} ${
         !isActive && styles.disabled
-      } bg-[#EE1B22] hover:bg-[#EE1B22]/80`}
+      } bg-[#EE1B22] hover:bg-[#EE1B22]/80 `}
       title={title}
       aria-label={title}
       onClick={onClick}

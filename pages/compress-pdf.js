@@ -1,5 +1,3 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useReducer, useRef, useState } from "react";
 import {
@@ -39,20 +37,20 @@ import { useRouter } from "next/router";
 
 import parse from "html-react-parser";
 
-export async function getStaticProps({ locale }) {
-  const res = await fetch(`${dashboardUrl}/page/compress-pdf`,{
-    cache:"no-store"
+export async function getServerSideProps() {
+  const res = await fetch(`${dashboardUrl}/page/compress-pdf`, {
+    cache: "no-store",
   });
   const { page } = await res.json();
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "compress-pdf"])),
       myData: page,
     },
   };
 }
 
 const CompressPDFPage = ({ myData }) => {
+  let t;
   const isLoading = false;
   const router = useRouter();
   const currentUrl = router.asPath;
@@ -68,7 +66,6 @@ const CompressPDFPage = ({ myData }) => {
   const [requestSignal, setRequestSignal] = useState();
 
   const [compressionLevel, setCompressionLevel] = useState(2);
-  const { t } = useTranslation();
 
   const {
     documents,
@@ -598,19 +595,23 @@ const CompressPDFPage = ({ myData }) => {
                   deleteFiles={handleResetInitialDocumentsState}
                   rotateFilesToRight={handleRotateAllDocuments}
                   action={() => updateFormStep(2)}
-                  actionTitle={t("compress-pdf:select_compression_level")}
+                  // actionTitle={t("compress-pdf:select_compression_level")}
+                  actionTitle={"Select Compression Level"}
                 />
               )}
 
               {formStep === 2 && (
                 <SelectOptionFormStep
-                  title={t("compress-pdf:select_compression_level_title")}
+                  // title={t("compress-pdf:select_compression_level_title")}
+                  title={"Select compression level"}
                   action={handleCompressFiles}
                   actionTitle={
                     documents.length === 1
-                      ? t("compress-pdf:compress_file")
+                      ? // ? t("compress-pdf:compress_file")
+                        "Select compression level"
                       : documents.length > 1
-                      ? t("compress-pdf:compress_files")
+                      ? // ? t("compress-pdf:compress_files")
+                        "Select compression level"
                       : ""
                   }
                 >
@@ -620,11 +621,13 @@ const CompressPDFPage = ({ myData }) => {
                     value="low"
                   >
                     <span>
-                      {t("compress-pdf:less_compression")} (
-                      {t("compress-pdf:high_quality_less_compression")})
+                      {/* {t("compress-pdf:less_compression")} (
+                      {t("compress-pdf:high_quality_less_compression")}) */}
+                      LESS COMPRESSION (High quality, less compression)
                     </span>
                     <span className={`${styles.pdf_to_image_option_desc}`}>
-                      {t("compress-pdf:estimated_size")}
+                      {/* {t("compress-pdf:estimated_size")} */}
+                      Estimated size
                       {": ~ "}
                       {displaySizeEstimations(documents, 1)}
                     </span>
@@ -636,11 +639,13 @@ const CompressPDFPage = ({ myData }) => {
                     value="medium"
                   >
                     <span>
-                      {t("compress-pdf:recommended_compression")} (
-                      {t("compress-pdf:good_quality_good_compression")})
+                      {/* {t("compress-pdf:recommended_compression")} (
+                      {t("compress-pdf:good_quality_good_compression")}) */}
+                      RECOMMENDED COMPRESSION (Good quality, good compression)
                     </span>
                     <span className={`${styles.pdf_to_image_option_desc}`}>
-                      {t("compress-pdf:estimated_size")}
+                      {/* {t("compress-pdf:estimated_size")} */}
+                      Estimated size
                       {": ~ "}
                       {displaySizeEstimations(documents, 2)}
                     </span>
@@ -652,11 +657,13 @@ const CompressPDFPage = ({ myData }) => {
                     value="high"
                   >
                     <span>
-                      {t("compress-pdf:extreme_compression")} (
-                      {t("compress-pdf:less_quality_high_compression")})
+                      {/* {t("compress-pdf:extreme_compression")} (
+                      {t("compress-pdf:less_quality_high_compression")}) */}
+                      EXTREME COMPRESSION (Less quality, high compression)
                     </span>
                     <span className={`${styles.pdf_to_image_option_desc}`}>
-                      {t("compress-pdf:estimated_size")}
+                      {/* {t("compress-pdf:estimated_size")} */}
+                      Estimated size
                       {": ~ "}
                       {displaySizeEstimations(documents, 3)}
                     </span>
@@ -668,9 +675,11 @@ const CompressPDFPage = ({ myData }) => {
                 <UploadingFilesFormStep
                   title={`${t(
                     "common:uploading_file"
-                  )} ${currentUploadedFilesCounter} ${t("common:of")} ${
-                    documents.length
-                  }`}
+                  )} ${currentUploadedFilesCounter} 
+                  
+                  // ${t("common:of")}
+                  
+                  ${documents.length}`}
                   uploadTimeLeft={uploadTimeLeft}
                   uploadSpeed={uploadSpeed}
                   totalUploadingProgress={totalUploadingProgress}

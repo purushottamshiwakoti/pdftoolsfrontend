@@ -7,9 +7,12 @@ const ToolsList = React.memo(function ToolsList() {
   const toolsData = useToolsData();
   const { t } = useTranslation();
   return (
-    <div>
+    <div className="z-50">
       <div className="dropdown_item">
-        <h3 className="item_heading">{t("common:tool_group_merge_&_edit")}</h3>
+        <h3 className="item_heading">
+          {/* {t("common:tool_group_merge_&_edit")} */}
+          Merge & Edit
+        </h3>
 
         <NavItem
           title={toolsData["MergePDFTool"].title}
@@ -38,7 +41,9 @@ const ToolsList = React.memo(function ToolsList() {
 
       <div className="dropdown_item">
         <h3 className="item_heading">
-          {t("common:tool_group_optimize_&_extract")}
+          {/* {t("common:tool_group_optimize_&_extract")}
+           */}
+          Optimize & Extract
         </h3>
 
         <NavItem
@@ -68,7 +73,8 @@ const ToolsList = React.memo(function ToolsList() {
 
       <div className="dropdown_item">
         <h3 className="item_heading">
-          {t("common:tool_group_convert_to_pdf")}
+          {/* {t("common:tool_group_convert_to_pdf")} */}
+          Convert To PDF
         </h3>
 
         <NavItem
@@ -122,7 +128,8 @@ const ToolsList = React.memo(function ToolsList() {
 
       <div className="dropdown_item">
         <h3 className="item_heading">
-          {t("common:tool_group_convert_from_pdf")}
+          {/* {t("common:tool_group_convert_from_pdf")} */}
+          Convert From PDF
         </h3>
 
         <NavItem
@@ -175,7 +182,10 @@ const ToolsList = React.memo(function ToolsList() {
       </div>
 
       <div className="dropdown_item">
-        <h3 className="item_heading">{t("common:tool_group_pdf_security")}</h3>
+        <h3 className="item_heading">
+          {/* {t("common:tool_group_pdf_security")} */}
+          PDF Security
+        </h3>
 
         <NavItem
           title={toolsData["ProtectPDFTool"].title}

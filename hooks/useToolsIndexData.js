@@ -1,17 +1,3 @@
-import {
-  FileEarmarkExcel,
-  FileEarmarkPdf,
-  FileEarmarkPpt,
-  FileEarmarkWord,
-  FileEarmarkZip,
-  FiletypeBmp,
-  FiletypeJpg,
-  FiletypePng,
-  FiletypeTiff,
-  FiletypeTxt,
-  Lock,
-  Unlock,
-} from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
 
 import {
@@ -116,7 +102,7 @@ const useToolsIndexData = () => {
 
     CompressPDFTool: {
       key: "CompressPDF",
-      title: t("common:tool_name_compress_pdf"),
+      // title: t("common:tool_name_compress_pdf"),
       title: "Compress PDF",
       // description: t("common:tool_desc_compress_pdf"),
       description: "Reduce the size of your PDF without losing quality",
@@ -237,7 +223,7 @@ const useToolsIndexData = () => {
       key: "TIFFToPDF",
       // title: t("common:tool_name_tiff_to_pdf"),
       title: "TIFF To PDF",
-      description: t("common:tool_desc_tiff_to_pdf"),
+      // description: t("common:tool_desc_tiff_to_pdf"),
       description: "Convert TIFF Images to PDF documents",
       href: "/tiff-to-pdf",
       icon: TiffToPdfIndex,
@@ -459,8 +445,9 @@ const useToolsIndexData = () => {
 
     ProtectPDFTool: {
       key: "ProtectPDF",
-      title: t("common:tool_name_protect_pdf"),
-      description: t("common:tool_desc_protect_pdf"),
+      title: "Protect PDF",
+      // description: t("common:tool_desc_unlock_pdf"),
+      description: "Add a password and encrypt your PDF file",
       href: "/protect-pdf",
       icon: ProtectPdfIndex,
       acceptedInputMimeType: "application/pdf",
@@ -475,9 +462,8 @@ const useToolsIndexData = () => {
     UnlockPDFTool: {
       key: "UnlockPDF",
       // title: t("common:tool_name_unlock_pdf"),
-      title: "Protect PDF",
-      // description: t("common:tool_desc_unlock_pdf"),
-      description: "Add a password and encrypt your PDF file",
+      title: "Unlock PDF",
+      description: "Remove password from your protected PDF files",
       href: "/unlock-pdf",
       icon: UnlockPdfIndex,
       acceptedInputMimeType: "application/pdf",

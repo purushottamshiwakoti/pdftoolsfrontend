@@ -1,19 +1,4 @@
 import {
-  FileEarmarkExcel,
-  FileEarmarkPdf,
-  FileEarmarkPpt,
-  FileEarmarkWord,
-  FileEarmarkZip,
-  FiletypeBmp,
-  FiletypeJpg,
-  FiletypePng,
-  FiletypeTiff,
-  FiletypeTxt,
-  Lock,
-  Unlock,
-} from "react-bootstrap-icons";
-import { useTranslation } from "next-i18next";
-import {
   BmpToPdf,
   CompressPdf,
   ExcelToPdf,
@@ -41,14 +26,16 @@ import {
   UnlockPdf,
   WordToPdf,
 } from "@/components/icons/Icon";
+import { useTranslation } from "next-i18next";
 const useToolsData = () => {
   const { t } = useTranslation();
 
   const toolsData = {
     MergePDFTool: {
       key: "MergePDF",
-      title: t("common:tool_name_merge_pdf"),
-      description: t("common:tool_desc_merge_pdf"),
+      title: "Merge PDF",
+      // description: t("common:tool_desc_merge_pdf"),
+      description: "Merge multiple PDF files into a single PDF",
       href: "/merge-pdf",
       icon: MergePdf,
       acceptedInputMimeType: "application/pdf",
@@ -61,8 +48,9 @@ const useToolsData = () => {
 
     RotatePDFTool: {
       key: "RotatePDF",
-      title: t("common:tool_name_rotate_pdf"),
-      description: t("common:tool_desc_rotate_pdf"),
+      title: "Rotate PDF",
+      // description: t("common:tool_desc_rotate_pdf"),
+      description: "Rotate one or all pages in your PDF",
       href: "/rotate-pdf-pages",
       icon: RotatePdf,
       acceptedInputMimeType: "application/pdf",
@@ -75,8 +63,9 @@ const useToolsData = () => {
 
     RemovePDFPagesTool: {
       key: "RemovePDFPages",
-      title: t("common:tool_name_remove_Pages"),
-      description: t("common:tool_desc_remove_Pages"),
+      title: "Remove Pages",
+      // description: t("common:tool_desc_remove_Pages"),
+      description: "Remove one or multiple pages from your PDF",
       href: "/remove-pdf-pages",
       icon: RemovePages,
       acceptedInputMimeType: "application/pdf",
@@ -89,8 +78,9 @@ const useToolsData = () => {
 
     OrganizePDFTool: {
       key: "OrganizePDF",
-      title: t("common:tool_name_organize_pdf"),
-      description: t("common:tool_desc_organize_pdf"),
+      title: "Organize PDF",
+      // description: t("common:tool_desc_organize_pdf"),
+      description: "Sort, delete and merge pages of your PDF file",
       href: "/organize-pdf-pages",
       icon: OrganizePdf,
       acceptedInputMimeType: "application/pdf",
@@ -103,8 +93,9 @@ const useToolsData = () => {
 
     CompressPDFTool: {
       key: "CompressPDF",
-      title: t("common:tool_name_compress_pdf"),
-      description: t("common:tool_desc_compress_pdf"),
+      title: "Compress PDF",
+      // description: t("common:tool_desc_compress_pdf"),
+      description: "Reduce the size of your PDF without losing quality",
       href: "/compress-pdf",
       icon: CompressPdf,
       acceptedInputMimeType: "application/pdf",
@@ -117,8 +108,9 @@ const useToolsData = () => {
 
     GrayscalePDFTool: {
       key: "GrayscalePDF",
-      title: t("common:tool_name_grayscale_pdf"),
-      description: t("common:tool_desc_grayscale_pdf"),
+      title: "Grayscale PDF",
+      // description: t("common:tool_desc_grayscale_pdf"),
+      description: "Convert Text and Images to grayscale in your PDF file",
       href: "/grayscale-pdf",
       icon: GrayScalePdf,
       acceptedInputMimeType: "application/pdf",
@@ -131,8 +123,9 @@ const useToolsData = () => {
 
     ExtractPagesTool: {
       key: "ExtractPages",
-      title: t("common:tool_name_extract_pages"),
-      description: t("common:tool_desc_extract_pages"),
+      title: "Extract PDF Pages",
+      // description: t("common:tool_desc_extract_pages"),
+      description: "Get a PDF document containing only the desired pages",
       href: "/extract-pdf-pages",
       icon: ExtractPdfPages,
       acceptedInputMimeType: "application/pdf",
@@ -145,8 +138,9 @@ const useToolsData = () => {
 
     RepairPDFTool: {
       key: "RepairPDF",
-      title: t("common:tool_name_repair_pdf"),
-      description: t("common:tool_desc_repair_pdf"),
+      title: "Repair PDF",
+      // description: t("common:tool_desc_repair_pdf"),
+      description: "Repair a damaged PDF and recover data",
       href: "/repair-pdf",
       icon: RepairPdf,
       acceptedInputMimeType: "application/pdf",
@@ -159,8 +153,9 @@ const useToolsData = () => {
 
     JPGToPDFTool: {
       key: "JPGToPDF",
-      title: t("common:tool_name_jpg_to_pdf"),
-      description: t("common:tool_desc_jpg_to_pdf"),
+      title: "JPG To PDF",
+      // description: t("common:tool_desc_jpg_to_pdf"),
+      description: "Convert JPG Images to PDF documents",
       href: "/jpg-to-pdf",
       icon: JpgToPdf,
       acceptedInputMimeType: "image/jpeg",
@@ -173,8 +168,9 @@ const useToolsData = () => {
 
     PNGToPDFTool: {
       key: "PNGToPDF",
-      title: t("common:tool_name_png_to_pdf"),
-      description: t("common:tool_desc_png_to_pdf"),
+      title: "PNG To PDF",
+      // description: t("common:tool_desc_png_to_pdf"),
+      description: "Convert PNG Images to PDF documents",
       href: "/png-to-pdf",
       icon: PngToPdf,
       acceptedInputMimeType: "image/png",
@@ -187,8 +183,9 @@ const useToolsData = () => {
 
     BMPToPDFTool: {
       key: "BMPToPDF",
-      title: t("common:tool_name_bmp_to_pdf"),
-      description: t("common:tool_desc_bmp_to_pdf"),
+      title: "BMP To PDF",
+      // description: t("common:tool_desc_bmp_to_pdf"),
+      description: "Convert BMP Images to PDF documents",
       href: "/bmp-to-pdf",
       icon: BmpToPdf,
       acceptedInputMimeType: "image/bmp",
@@ -201,8 +198,9 @@ const useToolsData = () => {
 
     TIFFToPDFTool: {
       key: "TIFFToPDF",
-      title: t("common:tool_name_tiff_to_pdf"),
-      description: t("common:tool_desc_tiff_to_pdf"),
+      title: "TIFF To PDF",
+      // description: t("common:tool_desc_tiff_to_pdf"),
+      description: "Convert TIFF Images to PDF documents",
       href: "/tiff-to-pdf",
       icon: TiffToPdf,
       acceptedInputMimeType: "image/tiff",
@@ -215,8 +213,9 @@ const useToolsData = () => {
 
     WORDToPDFTool: {
       key: "WORDToPDF",
-      title: t("common:tool_name_word_to_pdf"),
-      description: t("common:tool_desc_word_to_pdf"),
+      title: "Word to PDF",
+      // description: t("common:tool_desc_word_to_pdf"),
+      description: "Convert Word documents to PDF Documents",
       href: "/word-to-pdf",
       icon: WordToPdf,
       acceptedInputMimeType:
@@ -230,8 +229,9 @@ const useToolsData = () => {
 
     PPTXToPDFTool: {
       key: "PPTXToPDF",
-      title: t("common:tool_name_powerpoint_to_pdf"),
-      description: t("common:tool_desc_powerpoint_to_pdf"),
+      title: " Powerpoint To PDF ",
+      // description: t("common:tool_desc_powerpoint_to_pdf"),
+      description: "Convert Powerpoint presentations to PDF Documents",
       href: "/pptx-to-pdf",
       icon: PowerpointToPdf,
       acceptedInputMimeType:
@@ -245,8 +245,9 @@ const useToolsData = () => {
 
     TXTToPDFTool: {
       key: "TXTToPDF",
-      title: t("common:tool_name_txt_to_pdf"),
-      description: t("common:tool_desc_txt_to_pdf"),
+      title: "TXT To PDF",
+      // description: t("common:tool_desc_txt_to_pdf"),
+      description: "Convert Text files to PDF Documents",
       href: "/txt-to-pdf",
       icon: TxtToPdf,
       acceptedInputMimeType: "text/plain",
@@ -259,8 +260,9 @@ const useToolsData = () => {
 
     EXCELToPDFTool: {
       key: "EXCELToPDF",
-      title: t("common:tool_name_excel_to_pdf"),
-      description: t("common:tool_desc_excel_to_pdf"),
+      title: "Excel To PDF",
+      // description: t("common:tool_desc_excel_to_pdf"),
+      description: "Convert Excel spreadsheets to PDF documents",
       href: "/excel-to-pdf",
       icon: ExcelToPdf,
       acceptedInputMimeType:
@@ -274,8 +276,9 @@ const useToolsData = () => {
 
     PDFToJPGTool: {
       key: "PDFToJPG",
-      title: t("common:tool_name_pdf_to_jpg"),
-      description: t("common:tool_desc_pdf_to_jpg"),
+      title: "PDF To JPG",
+      // description: t("common:tool_desc_pdf_to_jpg"),
+      description: "Convert PDF documents to JPG Images",
       href: "/pdf-to-jpg",
       icon: PdftoJpg,
       acceptedInputMimeType: "application/pdf",
@@ -288,8 +291,9 @@ const useToolsData = () => {
 
     PDFToPNGTool: {
       key: "PDFToPNG",
-      title: t("common:tool_name_pdf_to_png"),
-      description: t("common:tool_desc_pdf_to_png"),
+      title: "PDF To PNG",
+      // description: t("common:tool_desc_pdf_to_png"),
+      description: "Convert PDF documents to PNG Images",
       href: "/pdf-to-png",
       icon: PdftoPng,
       acceptedInputMimeType: "application/pdf",
@@ -302,8 +306,9 @@ const useToolsData = () => {
 
     PDFToBMPTool: {
       key: "PDFToBMP",
-      title: t("common:tool_name_pdf_to_bmp"),
-      description: t("common:tool_desc_pdf_to_bmp"),
+      title: "PDF To BMP",
+      // description: t("common:tool_desc_pdf_to_bmp"),
+      description: "Convert PDF documents to BMP Images",
       href: "/pdf-to-bmp",
       icon: PdftoBmp,
       acceptedInputMimeType: "application/pdf",
@@ -316,8 +321,9 @@ const useToolsData = () => {
 
     PDFToTIFFTool: {
       key: "PDFToTIFF",
-      title: t("common:tool_name_pdf_to_tiff"),
-      description: t("common:tool_desc_pdf_to_tiff"),
+      title: "PDF To TIFF",
+      // description: t("common:tool_desc_pdf_to_tiff"),
+      description: "Convert PDF documents to TIFF Images",
       href: "/pdf-to-tiff",
       icon: PdfToTiff,
       acceptedInputMimeType: "application/pdf",
@@ -330,8 +336,8 @@ const useToolsData = () => {
 
     PDFToWORDTool: {
       key: "PDFToWORD",
-      title: t("common:tool_name_pdf_to_word"),
-      description: t("common:tool_desc_pdf_to_word"),
+      title: "PDF To Word",
+      description: "Convert PDF files to Word documents",
       href: "/pdf-to-word",
       icon: PdfToWord,
       acceptedInputMimeType: "application/pdf",
@@ -344,8 +350,9 @@ const useToolsData = () => {
 
     PDFToPPTXTool: {
       key: "PDFToPPTX",
-      title: t("common:tool_name_pdf_to_powerpoint"),
-      description: t("common:tool_desc_pdf_to_powerpoint"),
+      title: "PDF To Powerpoint",
+      // description: t("common:tool_desc_pdf_to_powerpoint"),
+      description: "Convert PDF files to Powerpoint presentations",
       href: "/pdf-to-pptx",
       icon: PdfToPowerpoint,
       acceptedInputMimeType: "application/pdf",
@@ -359,8 +366,9 @@ const useToolsData = () => {
 
     PDFToTXTTool: {
       key: "PDFToTXT",
-      title: t("common:tool_name_pdf_to_txt"),
-      description: t("common:tool_desc_pdf_to_txt"),
+      title: "PDF To TXT",
+      // description: t("common:tool_desc_pdf_to_txt"),
+      description: "Convert PDF files to Text files",
       href: "/pdf-to-txt",
       icon: PdfToTxt,
       acceptedInputMimeType: "application/pdf",
@@ -373,8 +381,9 @@ const useToolsData = () => {
 
     PDFToZIPTool: {
       key: "PDFToZIP",
-      title: t("common:tool_name_pdf_to_zip"),
-      description: t("common:tool_desc_pdf_to_zip"),
+      title: "PDF To ZIP",
+      // description: t("common:tool_desc_pdf_to_zip"),
+      description: "Convert PDF files to ZIP file",
       href: "/pdf-to-zip",
       icon: PdfToZip,
       acceptedInputMimeType: "application/pdf",
@@ -387,8 +396,9 @@ const useToolsData = () => {
 
     ProtectPDFTool: {
       key: "ProtectPDF",
-      title: t("common:tool_name_protect_pdf"),
-      description: t("common:tool_desc_protect_pdf"),
+      title: "Protect PDF",
+      // description: t("common:tool_desc_unlock_pdf"),
+      description: "Add a password and encrypt your PDF file",
       href: "/protect-pdf",
       icon: ProtectPdf,
       acceptedInputMimeType: "application/pdf",
@@ -401,8 +411,9 @@ const useToolsData = () => {
 
     UnlockPDFTool: {
       key: "UnlockPDF",
-      title: t("common:tool_name_unlock_pdf"),
-      description: t("common:tool_desc_unlock_pdf"),
+      title: "Unlock PDF",
+      description: "Remove password from your protected PDF files",
+
       href: "/unlock-pdf",
       icon: UnlockPdf,
       acceptedInputMimeType: "application/pdf",

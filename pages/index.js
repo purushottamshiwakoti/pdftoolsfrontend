@@ -14,24 +14,14 @@ import { useRouter } from "next/router";
 export const dynamic = "force-dynamic";
 
 export async function getServerSideProps(context) {
-  const { locale } = context;
-  const res = await fetch(`${dashboardUrl}/other/home`, {
-    cache: "no-cache",
-  });
-  const choose = await fetch(`${dashboardUrl}/choose-us`, {
-    // cache: "no-store",
-    next: { revalidate: 1 },
-  });
-  const reviews = await fetch(`${dashboardUrl}/reviews`, {
-    cache: "no-store",
-  });
-  const company = await fetch(`${dashboardUrl}/company-image`, {
-    cache: "no-store",
-  });
+  const [res, choose, reviews, company, seo] = await Promise.all([
+    fetch(`${dashboardUrl}/other/home`, { cache: "no-cache" }),
+    fetch(`${dashboardUrl}/choose-us`, { next: { revalidate: 1 } }),
+    fetch(`${dashboardUrl}/reviews`, { cache: "no-store" }),
+    fetch(`${dashboardUrl}/company-image`, { cache: "no-store" }),
+    fetch(`${dashboardUrl}/seo-settings`, { cache: "no-store" }),
+  ]);
 
-  const seo = await fetch(`${dashboardUrl}/seo-settings`, {
-    cache: "no-store",
-  });
   let seoData = await seo.json();
   seoData = seoData.data;
 

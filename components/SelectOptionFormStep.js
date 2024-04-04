@@ -39,7 +39,7 @@ const SelectOptionFormStep = React.memo(function SelectOptionFormStep({
               title={actionTitle}
               onClick={action}
               isActive={true}
-              // buttonStyle={styles.action_btn}
+              buttonStyle={styles.action_btn}
             >
               {actionTitle}
               <ArrowRight className="ml-2 w-5 h-5" />
