@@ -30,7 +30,9 @@ const ToolButton = React.memo(function ToolButton({
   return (
     <Button
       ref={buttonRef}
-      className={`${buttonStyle} ${!isActive && styles.disabled}`}
+      className={`${buttonStyle} ${
+        !isActive && styles.disabled
+      } bg-[#EE1B22] hover:bg-[#EE1B22]/80`}
       title={title}
       aria-label={title}
       onClick={onClick}

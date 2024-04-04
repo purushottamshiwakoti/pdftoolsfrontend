@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from "react";
-import { FileEarmarkPlus, FileEarmarkPdfFill } from "react-bootstrap-icons";
 import { useTranslation } from "next-i18next";
-import styles from "../styles/UploadContainer.module.css";
 import PropTypes from "prop-types";
+import React, { useEffect, useRef } from "react";
+import { handlePreventDefault, notify } from "../helpers/utils";
+import styles from "../styles/UploadContainer.module.css";
 import Spinner from "./Spinner";
-import { notify, handlePreventDefault } from "../helpers/utils";
 import { UploadFileImage, UploadImage } from "./icons/Icon";
 import { Button } from "./ui/button";
 const UploadAreaFormStep = React.memo(function UploadAreaFormStep({
@@ -99,14 +98,17 @@ const UploadAreaFormStep = React.memo(function UploadAreaFormStep({
                       {UploadFileImage}
                       <div
                         className={`${styles.upload_option_description}`}
+                        // title={t("common:select_files")}
                         title={t("common:select_files")}
                       >
-                        {t("common:select_files")}
+                        {/* {t("common:select_files")} */}
+                        Choose Files
                       </div>
                     </Button>
                   </div>
                   <h2 className={`text-[#6F6767] text-[14px] font-[400]`}>
-                    {t("common:drop_files")}
+                    {/* {t("common:drop_files")} */}
+                    or drop PDFs here
                   </h2>
                 </div>
               </div>

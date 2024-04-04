@@ -152,14 +152,19 @@ const DocumentPreviewDraggable = React.memo(function DocumentPreviewDraggable({
           <div className={`file ${styles.file}`} title={`${fileSizeString}`}>
             <div className={`${styles.file_actions}`}>
               {zoomOnPage && (
-                <FileButton title={t("common:zoom")} onClick={zoomOnPage}>
+                <FileButton
+                  // title={t("common:zoom")}
+                  title="Zoom in"
+                  onClick={zoomOnPage}
+                >
                   <ZoomIn />
                 </FileButton>
               )}
 
               {handleRotatePageLeft && (
                 <FileButton
-                  title={t("common:rotate_left")}
+                  // title={t("common:rotate_left")}
+                  title={"Rotate Left"}
                   onClick={handleRotatePageLeft}
                   className={`${styles.hide_btn_on_mobile}`}
                   hideOnMobile={true}
@@ -170,14 +175,19 @@ const DocumentPreviewDraggable = React.memo(function DocumentPreviewDraggable({
 
               {handleRotatePageRight && (
                 <FileButton
-                  title={t("common:rotate_right")}
+                  // title={t("common:rotate_right")}
+                  title={"Rotate Right"}
                   onClick={handleRotatePageRight}
                 >
                   <ArrowClockwise />
                 </FileButton>
               )}
 
-              <FileButton title={t("common:delete")} onClick={handleDeletePage}>
+              <FileButton
+                // title={t("common:delete")}
+                title={"Delete"}
+                onClick={handleDeletePage}
+              >
                 <Trash />
               </FileButton>
             </div>

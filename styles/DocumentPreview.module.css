@@ -227,7 +227,7 @@
 }
 
 .selected .file {
-  background-color: #7d64ff3b;
+  background-color: rgba(238, 27, 34, 0.2);
 }
 
 .card {

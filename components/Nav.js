@@ -297,7 +297,7 @@ const Nav = React.memo(function Nav() {
                 onClick={() => setShowModal(true)}
               >
                 <LanguageCountryFlag locale={router.locale} />
-                {NavDown}
+                {/* {NavDown} */}
               </div>
               <div
                 className={`${styles.nav_toggle}`}
@@ -309,9 +309,9 @@ const Nav = React.memo(function Nav() {
           </nav>
         </div>
       </header>
-      {showModal && (
+      {/* {showModal && (
         <LangModal show={showModal} onClose={() => setShowModal(false)} />
-      )}
+      )} */}
     </>
   );
 });

@@ -118,8 +118,9 @@ const EditFilesFormStep = React.memo(function EditFilesFormStep({
                   <div className={`${styles.panel_btn_left} mr-5`}>
                     <label
                       htmlFor="inputFile"
-                      className={`${styles.btn_normal}`}
-                      title={t("common:select_files")}
+                      className={`${styles.btn_normal} bg-[#EE1B22] text-white hover:bg-[#EE1B22]/80 cursor-pointer`}
+                      // title={t("common:select_files")}
+                      title={"Choose Files"}
                     >
                       <PlusLg />
                     </label>
@@ -127,29 +128,35 @@ const EditFilesFormStep = React.memo(function EditFilesFormStep({
                 )}
                 {rotateFilesToLeft && (
                   <ToolButton
-                    title={t("common:rotate_left")}
+                    title={"Rotate Left"}
                     onClick={rotateFilesToLeft}
                     isActive={files.length > 0}
                     buttonStyle={styles.btn_normal}
                   >
                     <ArrowCounterclockwise />
-                    <h2>{t("common:rotate_all")}</h2>
+                    <h2>
+                      {/* {t("common:rotate_all")} */}
+                      Rotate Left
+                    </h2>
                   </ToolButton>
                 )}
                 {rotateFilesToRight && (
                   <ToolButton
-                    title={t("common:rotate_right")}
+                    title={"Rotate Right"}
+                    // title={t("common:rotate_right")}
                     onClick={rotateFilesToRight}
                     isActive={files.length > 0}
                     buttonStyle={styles.btn_normal}
                   >
                     <ArrowClockwise />
-                    <span>{t("common:rotate_all")}</span>
+                    {/* <span>{t("common:rotate_all")}</span> */}
+                    <span>Rotate Right</span>
                   </ToolButton>
                 )}
                 {deleteFiles && (
                   <ToolButton
-                    title={t("common:delete_all")}
+                    // title={t("common:delete_all")}
+                    title={"Delete All"}
                     onClick={deleteFiles}
                     isActive={
                       isFilesSelectionActive
@@ -160,7 +167,10 @@ const EditFilesFormStep = React.memo(function EditFilesFormStep({
                     buttonStyle={styles.btn_normal}
                   >
                     <Trash />
-                    <span>{t("common:delete_all")}</span>
+                    <span>
+                      {/* {t("common:delete_all")} */}
+                      Delete All
+                    </span>
                   </ToolButton>
                 )}
 
@@ -193,7 +203,8 @@ const EditFilesFormStep = React.memo(function EditFilesFormStep({
                     <span>
                       {files.filter((file) => file.selected === true).length}
                     </span>{" "}
-                    {t("common:selected")}
+                    {/* {t("common:selected")} */}
+                    Selected
                   </div>
                 )}
 
@@ -201,7 +212,7 @@ const EditFilesFormStep = React.memo(function EditFilesFormStep({
                   title={actionTitle}
                   onClick={action}
                   isActive={files.length > 0}
-                  buttonStyle={styles.btn_accent}
+                  buttonStyle={styles.btn_normal}
                 >
                   {actionTitle}
                 </ToolButton>

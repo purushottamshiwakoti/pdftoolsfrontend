@@ -1,5 +1,3 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { isMobile } from "react-device-detect";
@@ -28,14 +26,13 @@ import parse from "html-react-parser";
 import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
 
-export async function getServerSideProps({ locale }) {
+export async function getServerSideProps() {
   const res = await fetch(`${dashboardUrl}/page/merge-pdf`, {
     cache: "no-store",
   });
   const { page } = await res.json();
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "merge-pdf"])),
       myData: page,
     },
   };
@@ -45,6 +42,7 @@ export async function getServerSideProps({ locale }) {
 
 const MergePDFPage = ({ myData }) => {
   const isLoading = false;
+  let t;
 
   const router = useRouter();
   const currentUrl = router.asPath;
@@ -266,93 +264,6 @@ const MergePDFPage = ({ myData }) => {
         )}
 
         <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
-        {/* You can add your canonical link here */}
-        {/* <link
-          rel="canonical"
-          href={`https://www.example.com${MergePDFTool.href}`}
-          key="canonical"
-        /> */}
-        {/* You can add your alternate links here, example: */}
-        {/* <link
-          rel="alternate"
-          href={`https://www.example.com/en${MergePDFTool.href}`}
-          hrefLang="en"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/es${MergePDFTool.href}`}
-          hrefLang="es"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ar${MergePDFTool.href}`}
-          hrefLang="ar"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/zh${MergePDFTool.href}`}
-          hrefLang="zh"
-        />{" "}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/de${MergePDFTool.href}`}
-          hrefLang="de"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/fr${MergePDFTool.href}`}
-          hrefLang="fr"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/it${MergePDFTool.href}`}
-          hrefLang="it"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/pt${MergePDFTool.href}`}
-          hrefLang="pt"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ru${MergePDFTool.href}`}
-          hrefLang="ru"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/uk${MergePDFTool.href}`}
-          hrefLang="uk"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/id${MergePDFTool.href}`}
-          hrefLang="id"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/da${MergePDFTool.href}`}
-          hrefLang="da"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/nl${MergePDFTool.href}`}
-          hrefLang="nl"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/hi${MergePDFTool.href}`}
-          hrefLang="hi"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ko${MergePDFTool.href}`}
-          hrefLang="ko"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ja${MergePDFTool.href}`}
-          hrefLang="ja"
-        /> */}
       </Head>
 
       <main>
