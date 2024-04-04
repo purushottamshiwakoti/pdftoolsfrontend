@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "next-i18next";
 import PropTypes from "prop-types";
 import { GearWide } from "react-bootstrap-icons";
 import styles from "../styles/UploadContainer.module.css";
@@ -7,8 +6,6 @@ import styles from "../styles/UploadContainer.module.css";
 const ProcessingFilesFormStep = React.memo(function ProcessingFilesFormStep({
   progress,
 }) {
-  const { t } = useTranslation();
-
   return (
     <section className={`${styles.toolbox} py-0 mt-0`}>
       <div className="d-flex">
@@ -27,7 +24,9 @@ const ProcessingFilesFormStep = React.memo(function ProcessingFilesFormStep({
 
           <div className="row w-100 d-flex justify-content-center text-center mt-5 mb-5">
             <span style={{ color: "#2d3748" }}>
-              {t("common:do_not_close_window")}
+              {
+                "Do not close your browser. Wait until your files are processed! This might take a few minutes."
+              }
             </span>
           </div>
         </div>

@@ -1,5 +1,3 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { isMobile } from "react-device-detect";
@@ -45,17 +43,13 @@ import { useRouter } from "next/router";
 //   };
 // }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps() {
   const res = await fetch(`${dashboardUrl}/page/organize-pdf-pages`, {
     cache: "no-store",
   });
   const { page } = await res.json();
   return {
     props: {
-      ...(await serverSideTranslations(locale, [
-        "common",
-        "organize-pdf-pages",
-      ])),
       myData: page,
     },
   };
@@ -85,7 +79,7 @@ const OrganizePDFPages = ({ myData }) => {
     handleDeletePage,
   } = usePages();
 
-  const { t } = useTranslation();
+  let t;
 
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
   const mountedRef = useRef(false);
@@ -420,7 +414,7 @@ const OrganizePDFPages = ({ myData }) => {
                   action={() =>
                     handleMerge(pages, OrganizePDFTool.newFileNameSuffix)
                   }
-                  actionTitle={t("common:save_&_download")}
+                  actionTitle={"Save & Download"}
                 />
               )}
 

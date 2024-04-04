@@ -28,9 +28,11 @@ const Alerts = React.memo(function Alerts({
 
           <div className="col-md-10 mt-2 mb-2">
             {alerts.length === 1
-              ? t("common:file_error")
+              ? "We are sorry! An error occurred while processing this file, please try again."
               : alerts.length > 1
-              ? t("common:files_error")
+              ? t(
+                  "We are sorry! An error occurred, some files haven't been processed. Please try again."
+                )
               : ""}
             <ul
               style={{

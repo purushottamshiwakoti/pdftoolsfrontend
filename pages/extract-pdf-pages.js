@@ -1,6 +1,4 @@
 import parse from "html-react-parser";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
@@ -51,17 +49,13 @@ import { appUrl, dashboardUrl } from "@/lib/url";
 //   };
 // }
 
-export async function getStaticProps({ locale }) {
-  const res = await fetch(`${dashboardUrl}/page/extract-pdf-pages`,{
-    cache:"no-store"
+export async function getServerSideProps() {
+  const res = await fetch(`${dashboardUrl}/page/extract-pdf-pages`, {
+    cache: "no-store",
   });
   const { page } = await res.json();
   return {
     props: {
-      ...(await serverSideTranslations(locale, [
-        "common",
-        "extract-pdf-pages",
-      ])),
       myData: page,
     },
   };
@@ -83,7 +77,7 @@ const ExtractPagesPage = ({ myData }) => {
   const [extractionOption, setExtractionOption] = useState(
     "EXTRACT_SELECTED_PAGES"
   );
-  const { t } = useTranslation();
+  let t;
 
   const {
     currentUploadingFile,
@@ -377,94 +371,6 @@ const ExtractPagesPage = ({ myData }) => {
           </>
         )}
         <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
-
-        {/* You can add your canonical link here */}
-        {/* <link
-          rel="canonical"
-          href={`https://www.example.com${ExtractPagesTool.href}`}
-          key="canonical"
-        /> */}
-        {/* You can add your alternate links here, example: */}
-        {/* <link
-          rel="alternate"
-          href={`https://www.example.com/en${ExtractPagesTool.href}`}
-          hrefLang="en"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/es${ExtractPagesTool.href}`}
-          hrefLang="es"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ar${ExtractPagesTool.href}`}
-          hrefLang="ar"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/zh${ExtractPagesTool.href}`}
-          hrefLang="zh"
-        />{" "}
-        <link
-          rel="alternate"
-          href={`https://www.example.com/de${ExtractPagesTool.href}`}
-          hrefLang="de"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/fr${ExtractPagesTool.href}`}
-          hrefLang="fr"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/it${ExtractPagesTool.href}`}
-          hrefLang="it"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/pt${ExtractPagesTool.href}`}
-          hrefLang="pt"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ru${ExtractPagesTool.href}`}
-          hrefLang="ru"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/uk${ExtractPagesTool.href}`}
-          hrefLang="uk"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/id${ExtractPagesTool.href}`}
-          hrefLang="id"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/da${ExtractPagesTool.href}`}
-          hrefLang="da"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/nl${ExtractPagesTool.href}`}
-          hrefLang="nl"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/hi${ExtractPagesTool.href}`}
-          hrefLang="hi"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ko${ExtractPagesTool.href}`}
-          hrefLang="ko"
-        />
-        <link
-          rel="alternate"
-          href={`https://www.example.com/ja${ExtractPagesTool.href}`}
-          hrefLang="ja"
-        /> */}
       </Head>
 
       <main>
@@ -497,7 +403,7 @@ const ExtractPagesPage = ({ myData }) => {
 
               {formStep === 1 && (
                 <SelectOptionFormStep
-                  title={t("extract-pdf-pages:select_pages_extraction_option")}
+                  title={"Select Extraction option"}
                   action={() => {
                     //CONVERT ENTIRE PAGES
                     if (
@@ -514,8 +420,8 @@ const ExtractPagesPage = ({ myData }) => {
                   actionTitle={
                     extractionOption === "EXTRACT_ODD_PAGES" ||
                     extractionOption === "EXTRACT_EVEN_PAGES"
-                      ? t("extract-pdf-pages:start_pages_extraction")
-                      : t("extract-pdf-pages:select_pages_to_extract")
+                      ? "Start Pages Extraction"
+                      : "Select pages to extract"
                   }
                 >
                   <Option
@@ -524,9 +430,11 @@ const ExtractPagesPage = ({ myData }) => {
                     value="1"
                   >
                     <span>
-                      {t("extract-pdf-pages:extract_odd_pages")}{" "}
+                      {"Extract All Odd Pages"}{" "}
                       <span className={`${styles.pdf_to_image_option_desc}`}>
-                        {t("extract-pdf-pages:extract_odd_pages_description")}
+                        {
+                          "(Get a new document containing only the odd pages 1,3,5,7 etc from the original)"
+                        }
                       </span>
                     </span>
                   </Option>
@@ -537,9 +445,11 @@ const ExtractPagesPage = ({ myData }) => {
                     value="2"
                   >
                     <span>
-                      {t("extract-pdf-pages:extract_even_pages")}{" "}
+                      {"Extract All Even Pages"}{" "}
                       <span className={`${styles.pdf_to_image_option_desc}`}>
-                        {t("extract-pdf-pages:extract_even_pages_description")}
+                        {
+                          "(Get a new document containing only the even pages 2,4,6,8, etc from the original)"
+                        }
                       </span>
                     </span>
                   </Option>
@@ -552,11 +462,11 @@ const ExtractPagesPage = ({ myData }) => {
                     value="3"
                   >
                     <span>
-                      {t("extract-pdf-pages:extract_selected_pages")}{" "}
+                      {"extract_selected_pages"}{" "}
                       <span className={`${styles.pdf_to_image_option_desc}`}>
-                        {t(
-                          "extract-pdf-pages:extract_selected_pages_description"
-                        )}
+                        {
+                          "(Get a new document containing only the desired pages from the original)"
+                        }
                       </span>
                     </span>
                   </Option>
@@ -566,7 +476,7 @@ const ExtractPagesPage = ({ myData }) => {
               {formStep === 2 &&
                 extractionOption === "EXTRACT_SELECTED_PAGES" && (
                   <EditFilesFormStep
-                    showTitle={t("extract-pdf-pages:select_pages_to_extract")}
+                    showTitle={"Select pages to extract"}
                     acceptedMimeType={ExtractPagesTool.acceptedInputMimeType}
                     files={pages}
                     enableAddingMoreFiles={false}
@@ -581,15 +491,15 @@ const ExtractPagesPage = ({ myData }) => {
                     action={handlePagesExtraction}
                     actionTitle={
                       formStep === 0
-                        ? t("extract-pdf-pages:select_pages_extraction_option")
-                        : t("extract-pdf-pages:start_pages_extraction")
+                        ? "Select Extraction option"
+                        : "Start Pages Extraction"
                     }
                   />
                 )}
 
               {formStep === 3 && (
                 <UploadingFilesFormStep
-                  title={t("common:uploading_file")}
+                  title={"Uploading file"}
                   uploadTimeLeft={uploadTimeLeft}
                   uploadSpeed={uploadSpeed}
                   totalUploadingProgress={totalUploadingProgress}
@@ -599,14 +509,12 @@ const ExtractPagesPage = ({ myData }) => {
               )}
 
               {formStep === 4 && (
-                <ProcessingFilesFormStep
-                  progress={t("extract-pdf-pages:extracting_pages")}
-                />
+                <ProcessingFilesFormStep progress={"Extracting Pages"} />
               )}
 
               {formStep === 5 && (
                 <DownloadFilesFormStep
-                  title={t("extract-pdf-pages:pages_extraction_is_complete")}
+                  title={"Your page(s) extraction is complete!"}
                   handleDownload={handleDownload}
                   handleResetInitialState={handlehandleResetInitialStates}
                 >

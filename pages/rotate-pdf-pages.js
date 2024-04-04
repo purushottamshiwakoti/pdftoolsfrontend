@@ -1,5 +1,3 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { isMobile } from "react-device-detect";
@@ -37,14 +35,13 @@ import { useRouter } from "next/router";
 //   };
 // }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps() {
   const res = await fetch(`${dashboardUrl}/page/rotate-pdf-pages`, {
     cache: "no-store",
   });
   const { page } = await res.json();
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "rotate-pdf-pages"])),
       myData: page,
     },
   };
@@ -64,7 +61,7 @@ const RotatePDFPage = ({ myData }) => {
   const [scrollOptions, setScrollOptions] = useState({});
 
   const [zoomedPage, setZoomedPage] = useState(null);
-  const { t } = useTranslation();
+  let t;
   const {
     pages,
     handleAddPage,
@@ -289,7 +286,7 @@ const RotatePDFPage = ({ myData }) => {
                   action={() =>
                     handleMerge(pages, RotatePDFTool.newFileNameSuffix)
                   }
-                  actionTitle={t("common:save_&_download")}
+                  actionTitle={"Save & Download"}
                 />
               )}
 
