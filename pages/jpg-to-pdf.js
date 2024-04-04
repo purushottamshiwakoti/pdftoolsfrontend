@@ -1,5 +1,3 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
@@ -48,14 +46,13 @@ import { useRouter } from "next/router";
 //   };
 // }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps() {
   const res = await fetch(`${dashboardUrl}/page/jpg-to-pdf`, {
     cache: "no-store",
   });
   const { page } = await res.json();
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "jpg-to-pdf"])),
       myData: page,
     },
   };
@@ -97,7 +94,7 @@ const JPGToPDFPage = ({ myData }) => {
     handleUpdateResultsDisplay,
   } = useUploadStats();
 
-  const { t } = useTranslation();
+  let t;
 
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
   const [formStep, updateFormStep] = useState(0);
@@ -461,7 +458,7 @@ const JPGToPDFPage = ({ myData }) => {
                   deleteFiles={handleDeleteSelectedPages}
                   rotateFilesToRight={handleRotateSelectedPagesToRight}
                   action={handleconvertJPGToPDF}
-                  actionTitle={t("common:convert_to_pdf")}
+                  actionTitle={"Convert To PDF"}
                   handleCheckboxChange={handleCheckboxChange}
                   handleMarginChange={handleMarginChange}
                   handleOrientationChange={handleOrientationChange}
@@ -472,19 +469,19 @@ const JPGToPDFPage = ({ myData }) => {
 
               {formStep === 2 && (
                 <ProcessingFilesFormStep
-                  progress={t("common:converting_images_to_PDF")}
+                  progress={"Converting Images To PDF"}
                 />
               )}
 
               {formStep === 3 && (
                 <DownloadFilesFormStep
-                  title={t("common:images_conversion_is_complete")}
+                  title={"Your images conversion is complete!"}
                   handleDownload={handleDownload}
                   handleResetInitialState={handlehandleResetInitialStates}
                 >
                   {resultsInfoVisibility && (
                     <div className="row w-100 d-flex justify-content-center text-center mt-5 mb-5">
-                      <Check2Circle size={130} color="#7d64ff" />
+                      <Check2Circle size={130} color="#EE1B22" />
                     </div>
                   )}
                   {resultsErrors.length > 0 && (

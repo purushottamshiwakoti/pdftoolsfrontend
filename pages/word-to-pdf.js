@@ -1,5 +1,3 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
@@ -42,14 +40,13 @@ import { useRouter } from "next/router";
 //   };
 // }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps() {
   const res = await fetch(`${dashboardUrl}/page/word-to-pdf`, {
     cache: "no-store",
   });
   const { page } = await res.json();
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "word-to-pdf"])),
       myData: page,
     },
   };
@@ -67,7 +64,7 @@ const WORDToPDFPage = ({ myData }) => {
   //loadedfilesCount is used to count the files currently being loaded to show progress spinner while loading the files //
   const [loadedfilesCount, setLoadedFilesCount] = useState(0);
   const [requestSignal, setRequestSignal] = useState();
-  const { t } = useTranslation();
+  let t;
   const {
     currentUploadingFile,
     currentUploadedFilesCounter,
@@ -307,15 +304,13 @@ const WORDToPDFPage = ({ myData }) => {
                   positionPanelBottomItems={styles.centered}
                   deleteFiles={handleResetInitialDocumentsState}
                   action={() => handleCompressFiles()}
-                  actionTitle={t("common:convert_to_pdf")}
+                  actionTitle={"Convert To PDF"}
                 />
               )}
 
               {formStep === 2 && (
                 <UploadingFilesFormStep
-                  title={`${t(
-                    "common:uploading_file"
-                  )} ${currentUploadedFilesCounter} ${t("common:of")} ${
+                  title={`${"Uploading file"} ${currentUploadedFilesCounter} ${"of"} ${
                     documents.length
                   }`}
                   uploadTimeLeft={uploadTimeLeft}
@@ -330,9 +325,7 @@ const WORDToPDFPage = ({ myData }) => {
 
               {formStep === 3 && (
                 <ProcessingFilesFormStep
-                  progress={`${t(
-                    "common:processing"
-                  )} ${currentProccessedFilesCounter} ${t("common:of")} ${
+                  progress={`${"Processing PDF"} ${currentProccessedFilesCounter} ${"of"} ${
                     documents.length
                   }`}
                 />
@@ -342,9 +335,9 @@ const WORDToPDFPage = ({ myData }) => {
                 <DownloadFilesFormStep
                   title={
                     documents.length === 1
-                      ? t("common:your_document_is_ready")
+                      ? "Your document is ready!"
                       : documents.length > 1
-                      ? t("common:your_documents_are_ready")
+                      ? "Your documents are ready!"
                       : ""
                   }
                   handleDownload={handleDownload}
@@ -352,7 +345,7 @@ const WORDToPDFPage = ({ myData }) => {
                 >
                   {resultsInfoVisibility && (
                     <div className="row w-100 d-flex justify-content-center text-center mt-5 mb-5">
-                      <Check2Circle size={130} color="#7d64ff" />
+                      <Check2Circle size={130} color="#EE1B22" />
                     </div>
                   )}
                   {resultsErrors.length > 0 && (

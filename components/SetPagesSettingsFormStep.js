@@ -116,7 +116,7 @@ const SetPagesSettingsFormStep = React.memo(function SetPagesSettingsFormStep({
           <Spinner isSpinnerActive={isSpinnerActive} />
 
           <div className={`${styles.previewer} w-100`}>
-            <div className={`${styles.panel_sticky} ${styles.panel_top} `}>
+            <div className={` `}>
               <div
                 className={`${styles.panel_inner} justify-content-end justify-content-md-center justify-content-lg-end`}
               >
@@ -124,8 +124,8 @@ const SetPagesSettingsFormStep = React.memo(function SetPagesSettingsFormStep({
                   <div className={`${styles.panel_btn_left} mr-5`}>
                     <label
                       htmlFor="inputFile"
-                      className={`${styles.btn_normal}`}
-                      title={t("common:select_files")}
+                      className={`${styles.btn_normal} bg-[#EE1B22] text-white hover:bg-[#EE1B22]/80`}
+                      title={"Choose Files"}
                     >
                       <PlusLg />
                     </label>
@@ -133,18 +133,18 @@ const SetPagesSettingsFormStep = React.memo(function SetPagesSettingsFormStep({
                 )}
                 {rotateFilesToRight && (
                   <ToolButton
-                    title={t("common:rotate_right")}
+                    title={"Rotate Right"}
                     onClick={rotateFilesToRight}
                     isActive={files.length > 0}
                     buttonStyle={styles.btn_normal}
                   >
                     <ArrowClockwise />
-                    <span>{t("common:rotate_all")}</span>
+                    <span>{"Rotate All"}</span>
                   </ToolButton>
                 )}
                 {deleteFiles && (
                   <ToolButton
-                    title={t("common:delete_all")}
+                    title={"Delete All"}
                     onClick={deleteFiles}
                     isActive={
                       files.filter((file) => file.selected === true).length > 0
@@ -152,14 +152,14 @@ const SetPagesSettingsFormStep = React.memo(function SetPagesSettingsFormStep({
                     buttonStyle={styles.btn_normal}
                   >
                     <Trash />
-                    <h2>{t("common:delete_all")}</h2>
+                    <h2>{"Delete All"}</h2>
                   </ToolButton>
                 )}
               </div>
             </div>
             <div className={`${styles.unset_margin}`}>{filesComponents}</div>
 
-            <div className={`${styles.panel_sticky} ${styles.panel_bottom} `}>
+            <div className={` `}>
               <div
                 className={`${styles.panel_inner} ${styles.upload_container}`}
                 style={{
@@ -169,7 +169,7 @@ const SetPagesSettingsFormStep = React.memo(function SetPagesSettingsFormStep({
                 }}
               >
                 <div
-                  className={`${styles.buttom_buttons_settings_wrapper}`}
+                  className={`${styles.buttom_buttons_settings_wrapper} lg:gap-4`}
                   style={langStyle}
                 >
                   <select
@@ -179,9 +179,9 @@ const SetPagesSettingsFormStep = React.memo(function SetPagesSettingsFormStep({
                     defaultValue={"A4"}
                     onChange={handlePageSizeChange}
                   >
-                    <option value="A4">{t("common:a4")}</option>
-                    <option value="Letter">{t("common:letter")}</option>
-                    <option value="Fit">{t("common:fit_to_content")}</option>
+                    <option value="A4">{"A4"}</option>
+                    <option value="Letter">{"Letter"}</option>
+                    <option value="Fit">{"Fit to Content"}</option>
                   </select>
 
                   <select
@@ -197,9 +197,9 @@ const SetPagesSettingsFormStep = React.memo(function SetPagesSettingsFormStep({
                     onChange={handleOrientationChange}
                     disabled={selectPageSize.current?.value === "Fit"}
                   >
-                    <option value="portrait">{t("common:portrait")}</option>
-                    <option value="landscape">{t("common:landscape")}</option>
-                    <option value="auto">{t("common:automatic")}</option>
+                    <option value="portrait">{"Portrait"}</option>
+                    <option value="landscape">{"Landscape"}</option>
+                    <option value="auto">{"Automatic"}</option>
                   </select>
 
                   <select
@@ -209,11 +209,11 @@ const SetPagesSettingsFormStep = React.memo(function SetPagesSettingsFormStep({
                     defaultValue={"no-margin"}
                     onChange={handleMarginChange}
                   >
-                    <option value="no-margin">{t("common:no_margin")}</option>
+                    <option value="no-margin">{"No Margin"}</option>
                     <option value="small-margin">
                       {t("common:small_margin")}
                     </option>
-                    <option value="big-margin">{t("common:big_margin")}</option>
+                    <option value="big-margin">{"Big Margin"}</option>
                   </select>
 
                   <div className={`checkbox ${styles.merge_pages}`}>
@@ -226,8 +226,8 @@ const SetPagesSettingsFormStep = React.memo(function SetPagesSettingsFormStep({
                       onChange={handleCheckboxChange}
                     />
 
-                    <label htmlFor="merge_pages">
-                      {t("common:merge_all_in_one_pdf")}
+                    <label htmlFor="merge_pages" className="text-[#EE1B22]">
+                      {"Merge all images in one PDF file"}
                     </label>
                   </div>
                 </div>
@@ -237,21 +237,21 @@ const SetPagesSettingsFormStep = React.memo(function SetPagesSettingsFormStep({
                     style={{
                       textAlign: "center",
                       fontSize: "22px",
-                      color: "#fff",
+                      color: "#EE1B22",
                       padding: "10px 19px",
                     }}
                   >
                     <span>
                       {files.filter((file) => file.selected === true).length}
                     </span>{" "}
-                    {t("common:selected")}
+                    {"Selected"}
                   </div>
 
                   <ToolButton
                     title={actionTitle}
                     onClick={action}
                     isActive={files.length > 0}
-                    buttonStyle={styles.btn_accent}
+                    buttonStyle={styles.action}
                   >
                     {actionTitle}
                   </ToolButton>
