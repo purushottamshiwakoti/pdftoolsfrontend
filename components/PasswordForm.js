@@ -49,13 +49,13 @@ const PasswordForm = React.memo(function PasswordForm({
             className={`row w-100 d-flex justify-content-center text-center`}
           >
             <h2 className={`${uploadContainerStyles.container_title}`}>
-              {t("common:enter_password")}
+              {"Enter Your Password"}
             </h2>
             {showErrorMessage && (
               <div
                 className={`${passwordFormStyles.error_message} justify-content-center`}
               >
-                {t("unlock-pdf:wrong_password")}
+                {"Sorry, wrong password. Please try again"}
               </div>
             )}
           </div>
@@ -78,7 +78,7 @@ const PasswordForm = React.memo(function PasswordForm({
                       : passwordFormStyles.right
                   }
                 >
-                  {t("common:password")}
+                  {"Password"}
                 </label>
               </div>
               <div className={`${passwordFormStyles.input_box}`}>
@@ -97,11 +97,11 @@ const PasswordForm = React.memo(function PasswordForm({
                       : passwordFormStyles.right
                   }
                 >
-                  {t("common:confirm_password")}
+                  {"Confirm Password"}
                 </label>
               </div>
               <div className={`${passwordFormStyles.alert_message}`}>
-                {!passwordsMatch && t("common:password_must_match")}
+                {!passwordsMatch && "Passwords must match!"}
               </div>
 
               <div

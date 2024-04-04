@@ -1,6 +1,4 @@
 import parse from "html-react-parser";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { Check2Circle, ExclamationTriangle } from "react-bootstrap-icons";
@@ -40,14 +38,13 @@ import { useRouter } from "next/router";
 //   };
 // }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps() {
   const res = await fetch(`${dashboardUrl}/page/protect-pdf`, {
     cache: "no-store",
   });
   const { page } = await res.json();
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "protect-pdf"])),
       myData: page,
     },
   };
@@ -65,7 +62,7 @@ const ProtectPDFPage = ({ myData }) => {
   //loadedfilesCount is used to count the files currently being loaded to show spinner while loading the files
   const [loadedfilesCount, setLoadedFilesCount] = useState(0);
   const [requestSignal, setRequestSignal] = useState();
-  const { t } = useTranslation();
+  let t;
 
   const {
     resultsInfoVisibility,
@@ -268,23 +265,21 @@ const ProtectPDFPage = ({ myData }) => {
                   setPassword={handlePasswordChange}
                   setConfirmPassword={handleConfirmPasswordChange}
                   handleSubmit={handleSubmit}
-                  actionTitle={t("protect-pdf:protect_pdf")}
+                  actionTitle={"Protect PDF"}
                 />
               )}
 
               {formStep === 2 && (
-                <ProcessingFilesFormStep
-                  progress={t("protect-pdf:locking_pdf")}
-                />
+                <ProcessingFilesFormStep progress={"Locking PDF..."} />
               )}
 
               {formStep === 3 && (
                 <DownloadFilesFormStep
                   title={
                     documents.length === 1
-                      ? t("common:your_document_is_ready")
+                      ? "Your document is ready!"
                       : documents.length > 1
-                      ? t("common:your_documents_are_ready")
+                      ? "Your documents are ready!"
                       : ""
                   }
                   handleDownload={handleDownload}
@@ -292,7 +287,7 @@ const ProtectPDFPage = ({ myData }) => {
                 >
                   {resultsInfoVisibility && (
                     <div className="row w-100 d-flex justify-content-center text-center mt-5 mb-5">
-                      <Check2Circle size={130} color="#7d64ff" />
+                      <Check2Circle size={130} color="#EE1B22" />
                     </div>
                   )}
                   {resultsErrors.length > 0 && (
