@@ -28,7 +28,7 @@ import parse from "html-react-parser";
 import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ locale }) {
   const res = await fetch(`${dashboardUrl}/page/merge-pdf`, {
     cache: "no-store",
   });
@@ -69,7 +69,7 @@ const MergePDFPage = ({ myData }) => {
     handleDeletePage,
   } = usePages();
 
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
   const mountedRef = useRef(false);
@@ -401,7 +401,8 @@ const MergePDFPage = ({ myData }) => {
                   action={() =>
                     handleMerge(pages, MergePDFTool.newFileNameSuffix)
                   }
-                  actionTitle={t("common:save_&_download")}
+                  // actionTitle={t("common:save_&_download")}
+                  actionTitle={"Save&Download"}
                 />
               )}
 

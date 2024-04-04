@@ -3,23 +3,18 @@ import Reviews from "@/components/Reviews";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { Button } from "@/components/ui/button";
 import parse from "html-react-parser";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import Share from "../components/Share";
-import useToolsData from "../hooks/useToolsData";
-import styles from "../styles/index.module.css";
 
 import { MergePdf } from "@/components/icons/Icon";
+import useToolsIndexData from "@/hooks/useToolsIndexData";
 import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
-import useToolsIndexData from "@/hooks/useToolsIndexData";
-import Thankyou from "@/components/Thankyou";
 export const dynamic = "force-dynamic";
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps(context) {
+  const { locale } = context;
   const res = await fetch(`${dashboardUrl}/other/home`, {
     cache: "no-cache",
   });
@@ -51,14 +46,12 @@ export async function getStaticProps({ locale }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
       myData: page,
       chooseUsData: data,
       reviewsData: reviewsData,
       CompanyImagesData: CompanyImagesData,
       seoData: seoData,
     },
-    revalidate: 1,
   };
 }
 
@@ -73,12 +66,9 @@ const Home = ({
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  const { t } = useTranslation();
-
   let title = myData.Settings[0]?.title.split(" ");
   const blackTitle = title[title.length - 1];
-  console.log(title);
-  console.log(blackTitle);
+
   title.pop();
 
   return (

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import LangModal from "./LangModal";
 import ToolsList from "./ToolsList";
-import { useTranslation } from "next-i18next";
 import LanguageCountryFlag from "./LanguageCountryFlag";
 import styles from "../styles/MegaMenu.module.css";
 import { List, ChevronDown, X, ChevronUp } from "react-bootstrap-icons";
@@ -28,7 +27,6 @@ const Nav = React.memo(function Nav() {
   const [handleClick, setHandleClick] = useState(false);
   const router = useRouter();
   const toolsData = useToolsData();
-  const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const [navToggleShow, setNavToggleShow] = useState(false);
   const navMenuRef = useRef(null);
@@ -114,7 +112,8 @@ const Nav = React.memo(function Nav() {
                               : "hover:text-[#EE1B22]"
                           }
                         >
-                          <span>{t("common:home_page")}</span>
+                          {/* <span>{t("common:home_page")}</span> */}
+                          <span>Home</span>
                           {path == "/" && !handleClick && (
                             <span className="bg-[#EE1B22] w-[89px] h-[4px] absolute bottom-0 -left-4 top-10    "></span>
                           )}
@@ -133,7 +132,10 @@ const Nav = React.memo(function Nav() {
                           }
                           prefetch={false}
                         >
-                          <span>{toolsData["MergePDFTool"].title}</span>
+                          <span>
+                            {/* {toolsData["MergePDFTool"].title} */}
+                            Merge PDF
+                          </span>
                           {path == "/merge-pdf" && !handleClick && (
                             <span className="bg-[#EE1B22] w-[120px] h-[4px] absolute bottom-0 -left-2 top-10   "></span>
                           )}
@@ -152,7 +154,10 @@ const Nav = React.memo(function Nav() {
                           }
                           prefetch={false}
                         >
-                          <span>{toolsData["CompressPDFTool"].title}</span>
+                          <span>
+                            {/* {toolsData["CompressPDFTool"].title} */}
+                            Compress PDF
+                          </span>
                           {path == "/compress-pdf" && !handleClick && (
                             <span className="bg-[#EE1B22] w-[160px] h-[4px] absolute bottom-0 -left-2 top-6   "></span>
                           )}
@@ -211,7 +216,8 @@ const Nav = React.memo(function Nav() {
                       : "hover:text-[#EE1B22]"
                   }
                 >
-                  <span>{t("common:home_page")}</span>
+                  {/* <span>{t("common:home_page")}</span> */}
+                  <span>Home</span>
                   {path == "/" && !handleClick && (
                     <span className="bg-[#EE1B22] w-[89px] h-[4px] absolute bottom-0 -left-4 top-12"></span>
                   )}
@@ -228,7 +234,10 @@ const Nav = React.memo(function Nav() {
                   }
                   prefetch={false}
                 >
-                  <span>{toolsData["MergePDFTool"].title}</span>
+                  <span>
+                    {/* {toolsData["MergePDFTool"].title} */}
+                    Merge PDF
+                  </span>
                   {path == "/merge-pdf" && !handleClick && (
                     <span className="bg-[#EE1B22] w-[120px] h-[4px] absolute bottom-0 -left-2 top-12"></span>
                   )}
@@ -245,7 +254,10 @@ const Nav = React.memo(function Nav() {
                   }
                   prefetch={false}
                 >
-                  <span>{toolsData["CompressPDFTool"].title}</span>
+                  <span>
+                    {/* {toolsData["CompressPDFTool"].title} */}
+                    Compress PDF
+                  </span>
                   {path == "/compress-pdf" && !handleClick && (
                     <span className="bg-[#EE1B22] w-[160px] h-[4px] absolute bottom-0 -left-2 top-12"></span>
                   )}
@@ -263,7 +275,8 @@ const Nav = React.memo(function Nav() {
                 >
                   <div className="flex items-center gap-[6px]">
                     <span className={handleClick ? "text-[#EE1B22]" : null}>
-                      {t("common:all_pdf_tools")}
+                      {/* {t("common:all_pdf_tools")} */}
+                      All PDF Tools
                     </span>
                     {navToggleShow ? NavUp : NavDown}
                   </div>
