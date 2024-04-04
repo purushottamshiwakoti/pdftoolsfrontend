@@ -11,7 +11,6 @@ const DownloadFilesFormStep = React.memo(function DownloadFilesFormStep({
   handleDownload,
   handleResetInitialState,
 }) {
-  const { t } = useTranslation();
   const downloadBtnRef = useRef();
   const goBackBtnRef = useRef();
 
@@ -49,19 +48,17 @@ const DownloadFilesFormStep = React.memo(function DownloadFilesFormStep({
             className={`row d-flex justify-content-center ${styles.download_container} mt-4`}
           >
             <ToolButton
-              title={t("common:download")}
+              title={"Download"}
               onClick={handleDownload}
               isActive={true}
               buttonStyle={styles.download_btn}
             >
               <Download />
-              {t("common:download")}
+              {"Download"}
             </ToolButton>
             <div className={`${styles.start_over}`}>
               <ArrowLeft className={`${styles.start_over_icon}`} size={20} />
-              <span onClick={handleResetInitialState}>
-                {t("common:start_over")}
-              </span>
+              <span onClick={handleResetInitialState}>{"Start Over"}</span>
             </div>
           </div>
         </div>

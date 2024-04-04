@@ -12,7 +12,7 @@ const Option = React.memo(function Option({
 }) {
   return (
     <div className={`${styles.box}`}>
-      <label className={`form-control ${isChecked && "checked"}`}>
+      <label className={`form-control ${isChecked && "border-[#EE1B22]/50"}`}>
         <input
           type="radio"
           name="radioLevel"

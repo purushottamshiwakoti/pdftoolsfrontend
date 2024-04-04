@@ -603,7 +603,7 @@ const CompressPDFPage = ({ myData }) => {
               {formStep === 2 && (
                 <SelectOptionFormStep
                   // title={t("compress-pdf:select_compression_level_title")}
-                  title={"Select compression level"}
+                  title={"Select Compression Level"}
                   action={handleCompressFiles}
                   actionTitle={
                     documents.length === 1
@@ -673,11 +673,9 @@ const CompressPDFPage = ({ myData }) => {
 
               {formStep === 3 && (
                 <UploadingFilesFormStep
-                  title={`${t(
-                    "common:uploading_file"
-                  )} ${currentUploadedFilesCounter} 
+                  title={`${"Uploading file"} ${currentUploadedFilesCounter} 
                   
-                  // ${t("common:of")}
+                  // ${"of"}
                   
                   ${documents.length}`}
                   uploadTimeLeft={uploadTimeLeft}
@@ -692,9 +690,7 @@ const CompressPDFPage = ({ myData }) => {
 
               {formStep === 4 && (
                 <ProcessingFilesFormStep
-                  progress={`${t(
-                    "common:processing"
-                  )} ${currentProccessedFilesCounter} ${t("common:of")} ${
+                  progress={`${"Processing PDF"} ${currentProccessedFilesCounter} ${"of"} ${
                     documents.length
                   }`}
                 />
@@ -704,9 +700,9 @@ const CompressPDFPage = ({ myData }) => {
                 <DownloadFilesFormStep
                   title={
                     documents.length === 1
-                      ? t("compress-pdf:file_is_compressed")
+                      ? "Your PDF compression is complete!"
                       : documents.length > 1
-                      ? t("compress-pdf:files_are_compressed")
+                      ? "Your PDFs compression is complete!"
                       : ""
                   }
                   handleDownload={handleDownload}
@@ -716,7 +712,7 @@ const CompressPDFPage = ({ myData }) => {
                     <>
                       <div className="row w-100 d-flex justify-content-center text-center mt-5 mb-5">
                         <span style={{ color: "#2d3748", fontWeight: "bold" }}>
-                          {t("compress-pdf:saved")}
+                          {"SAVED"}
                         </span>
                         <span className={`${styles.saved_percentage}`}>
                           {state.totalReducedSizePercentage}%
@@ -725,12 +721,11 @@ const CompressPDFPage = ({ myData }) => {
                       <div className="row w-100 d-flex justify-content-center text-center mt-2 mb-2">
                         <span style={{ color: "#2d3748", fontWeight: "bold" }}>
                           {documents.length === 1
-                            ? t("compress-pdf:your_pdf_is_now")
+                            ? "Your PDF is now"
                             : documents.length > 1
-                            ? t("compress-pdf:your_pdfs_are_now")
+                            ? "Your PDFs are now"
                             : ""}{" "}
-                          {state.totalReducedSizePercentage}%{" "}
-                          {t("compress-pdf:smaller")}
+                          {state.totalReducedSizePercentage}% {"smaller"}
                         </span>
                         <span
                           style={{

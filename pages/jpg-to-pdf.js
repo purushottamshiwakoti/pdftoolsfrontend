@@ -429,7 +429,7 @@ const JPGToPDFPage = ({ myData }) => {
           <h1 className="text-center text-[##262323] text-[40px] font-[800]">
             {myData?.title}
           </h1>
-          <p className="text-[##6F6767] text-[16px] leading-[22px] font-[400] mt-[16px]">
+          <p className="text-[##6F6767] text-center text-[16px] leading-[22px] font-[400] mt-[16px]">
             {myData?.shortDescription}
           </p>
 

@@ -27,7 +27,7 @@ const SelectOptionFormStep = React.memo(function SelectOptionFormStep({
       <div className="d-flex">
         <div className="w-100 pt-3 pb-3 d-flex flex-column align-items-center">
           <div className="row w-100 d-flex justify-content-center text-center mt-2">
-            {/* <h2 className={`${styles.container_title}`}>{title}</h2> */}
+            <h2 className={`${styles.container_title}`}>{title}</h2>
           </div>
 
           <div className="row w-100 d-flex justify-content-center mt-3">
@@ -39,7 +39,7 @@ const SelectOptionFormStep = React.memo(function SelectOptionFormStep({
               title={actionTitle}
               onClick={action}
               isActive={true}
-              buttonStyle={styles.action_btn}
+              buttonStyle={`${styles.action_btn}`}
             >
               {actionTitle}
               <ArrowRight className="ml-2 w-5 h-5" />

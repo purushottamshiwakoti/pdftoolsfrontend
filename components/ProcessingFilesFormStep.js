@@ -21,7 +21,7 @@ const ProcessingFilesFormStep = React.memo(function ProcessingFilesFormStep({
             <GearWide
               className={`${styles.process_circle}`}
               size={130}
-              color="#7d64ff"
+              color="#EE1B22"
             />
           </div>
 
