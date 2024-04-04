@@ -1,8 +1,6 @@
 import BlogCategory from "@/components/BlogCategory";
 import { Button } from "@/components/ui/button";
 import parse from "html-react-parser";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,30 +16,40 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { appUrl, dashboardUrl } from "@/lib/url";
 
-export async function getStaticProps({ locale }) {
-  const res = await fetch(`${dashboardUrl}/other/blogs`);
-  const blogs = await fetch(`${dashboardUrl}/blogs`);
-  const categories = await fetch(`${dashboardUrl}/categories`);
-  let categoriesData = await categories.json();
-  categoriesData = categoriesData.data;
-  let blogsData = await blogs.json();
-  blogsData = blogsData.data;
-  const { page } = await res.json();
+export async function getServerSideProps() {
+  try {
+    const [res, blogs, categories] = await Promise.all([
+      fetch(`${dashboardUrl}/other/blogs`),
+      fetch(`${dashboardUrl}/blogs`),
+      fetch(`${dashboardUrl}/categories`),
+    ]);
 
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["common", "about"])),
-      myData: page,
-      blogsData: blogsData,
-      categoriesData: categoriesData,
-    },
-  };
+    const { page } = await res.json();
+    const blogsData = await blogs.json();
+    const categoriesData = (await categories.json()).data;
+
+    return {
+      props: {
+        myData: page,
+        blogsData: blogsData.data,
+        categoriesData: categoriesData,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        myData: null,
+        blogsData: null,
+        categoriesData: null,
+      },
+    };
+  }
 }
 
 const BlogsPage = ({ myData, blogsData, categoriesData }) => {
   const searchParams = useSearchParams();
   const filterCategory = searchParams.get("category");
-  const { t } = useTranslation();
   const isLoading = false;
 
   const isWindows = false;

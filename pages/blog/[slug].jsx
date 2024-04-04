@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button";
 import { dashboardUrl } from "@/lib/url";
 import { format } from "date-fns";
 import parse, { domToReact } from "html-react-parser";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -19,25 +17,7 @@ import { appUrl } from "@/lib/url";
 import { redirect } from "next/dist/server/api-utils";
 import { notFound } from "next/navigation";
 
-export async function getStaticPaths() {
-  const res = await fetch(`${dashboardUrl}/blogs `, {
-    cache: "no-store",
-    method: "GET",
-  });
-
-  const data = await res.json();
-
-  const paths = data.data.map((blog) => ({
-    params: { slug: blog.slug }, // Use the unique slug as the path parameter
-  }));
-
-  return {
-    paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const res = await fetch(`${dashboardUrl}/blogs/${params.slug}`);
   let myData = await res.json();
   if (!myData) {
@@ -47,14 +27,12 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      ...(await serverSideTranslations("en", ["common", "home"])),
       myData: myData,
     },
   };
 }
 
 const BlogDetail = ({ myData }) => {
-  const { t } = useTranslation();
   const router = useRouter();
   const { slug } = router.query;
 

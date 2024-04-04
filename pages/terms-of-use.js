@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
 import pageStyles from "../styles/Page.module.css";
 import parse from "html-react-parser";
 import { useRouter } from "next/router";
 import { appUrl, dashboardUrl } from "@/lib/url";
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps() {
   const res = await fetch(`${dashboardUrl}/other/terms-and-conditions`, {
     cache: "no-store",
   });
@@ -15,7 +13,6 @@ export async function getStaticProps({ locale }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "terms"])),
       myData: page,
     },
   };
@@ -23,7 +20,6 @@ export async function getStaticProps({ locale }) {
 
 const TermsOfUse = ({ myData }) => {
   const isLoading = false;
-  const { t } = useTranslation();
   const router = useRouter();
   const currentUrl = router.asPath;
 
