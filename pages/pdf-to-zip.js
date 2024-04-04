@@ -1,8 +1,6 @@
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 
-import { useTranslation } from "next-i18next";
 import DocumentPreview from "../components/DocumentPreview";
 
 import { ZipFiles, handlePDFToZIPFileSelection } from "../helpers/utils.js";
@@ -34,14 +32,13 @@ import { appUrl, dashboardUrl } from "@/lib/url";
 //   };
 // }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps() {
   const res = await fetch(`${dashboardUrl}/page/pdf-to-zip`, {
     cache: "no-store",
   });
   const { page } = await res.json();
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "pdf-to-zip"])),
       myData: page,
     },
   };
@@ -62,7 +59,7 @@ const PDFToZipPage = ({ myData }) => {
     handleResetInitialDocumentsState,
   } = useDocuments();
 
-  const { t } = useTranslation();
+  let t;
 
   const mountedRef = useRef(false);
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
@@ -288,7 +285,7 @@ const PDFToZipPage = ({ myData }) => {
                   positionPanelBottomItems={styles.centered}
                   deleteFiles={handleResetInitialDocumentsState}
                   action={() => handleDownload()}
-                  actionTitle={t("pdf-to-zip:create_zip")}
+                  actionTitle={"Create ZIP"}
                 />
               )}
 

@@ -1,5 +1,3 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -54,14 +52,13 @@ import { useRouter } from "next/router";
 //     },
 //   };
 // }
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps() {
   const res = await fetch(`${dashboardUrl}/page/pdf-to-bmp`, {
     cache: "no-store",
   });
   const { page } = await res.json();
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "pdf-to-bmp"])),
       myData: page,
     },
   };
@@ -81,7 +78,7 @@ const PDFToBMPPage = ({ myData }) => {
   const [requestSignal, setRequestSignal] = useState();
   const [scrollOptions, setScrollOptions] = useState({});
   const [extractionOption, setExtractionOption] = useState(1);
-  const { t } = useTranslation();
+  let t;
 
   const {
     currentUploadingFile,
@@ -453,7 +450,7 @@ const PDFToBMPPage = ({ myData }) => {
 
               {formStep === 1 && (
                 <SelectOptionFormStep
-                  title={t("common:select_conversion_option")}
+                  title={"Select conversion option"}
                   action={() => {
                     //CONVERT ENTIRE PAGES
                     if (extractionOption === 1) {
@@ -464,7 +461,7 @@ const PDFToBMPPage = ({ myData }) => {
                     }
                   }}
                   /* Start Images Extraction or Select Images to be extracted */
-                  actionTitle={t("common:next")}
+                  actionTitle={"Next page"}
                 >
                   <Option
                     onChange={() => setExtractionOption(1)}
@@ -479,10 +476,10 @@ const PDFToBMPPage = ({ myData }) => {
                     }
                   >
                     <span className={`${styles.pdf_to_image_option_title}`}>
-                      {t("common:convert_all_pages")}
+                      {"CONVERT ALL PAGES"}
                     </span>
                     <span className={`${styles.pdf_to_image_option_desc}`}>
-                      {t("common:convert_all_pages_description")}
+                      {"(Convert all PDF pages to Images)"}
                     </span>
                   </Option>
 
@@ -499,10 +496,10 @@ const PDFToBMPPage = ({ myData }) => {
                     }
                   >
                     <span className={`${styles.pdf_to_image_option_title}`}>
-                      {t("common:convert_selected_pages")}
+                      {"CONVERT SELECTED PAGES"}
                     </span>
                     <span className={`${styles.pdf_to_image_option_desc}`}>
-                      {t("common:convert_selected_pages_description")}
+                      {"(Select pages to be converted to images)"}
                     </span>
                   </Option>
                 </SelectOptionFormStep>
@@ -510,7 +507,7 @@ const PDFToBMPPage = ({ myData }) => {
 
               {formStep === 2 && (
                 <EditFilesFormStep
-                  showTitle={t("common:select_pages_to_convert")}
+                  showTitle={"Select pages to convert"}
                   acceptedMimeType={PDFToBMPTool.acceptedInputMimeType}
                   files={pages}
                   enableAddingMoreFiles={false}
@@ -525,15 +522,13 @@ const PDFToBMPPage = ({ myData }) => {
                   action={() => {
                     handleImageExtraction();
                   }}
-                  actionTitle={t("common:start_images_extraction")}
+                  actionTitle={"Start Images Extraction"}
                 />
               )}
 
               {formStep === 3 && (
                 <UploadingFilesFormStep
-                  title={`${t(
-                    "common:uploading_file"
-                  )} ${currentUploadedFilesCounter} ${t("common:of")} ${
+                  title={`${"Uploading file"} ${currentUploadedFilesCounter} ${"of"} ${
                     documents.length
                   }`}
                   uploadTimeLeft={uploadTimeLeft}
@@ -545,20 +540,18 @@ const PDFToBMPPage = ({ myData }) => {
               )}
 
               {formStep === 4 && (
-                <ProcessingFilesFormStep
-                  progress={t("common:extracting_images")}
-                />
+                <ProcessingFilesFormStep progress={"Extracting Images"} />
               )}
 
               {formStep === 5 && (
                 <DownloadFilesFormStep
-                  title={t("common:images_extraction_is_complete")}
+                  title={"Your image(s) extraction is complete!"}
                   handleDownload={handleDownload}
                   handleResetInitialState={handlehandleResetInitialStates}
                 >
                   {resultsInfoVisibility && (
                     <div className="row w-100 d-flex justify-content-center text-center mt-5 mb-5">
-                      <Check2Circle size={130} color="#7d64ff" />
+                      <Check2Circle size={130} color="#EE1B22" />
                     </div>
                   )}
                   {resultsErrors.length > 0 && (
