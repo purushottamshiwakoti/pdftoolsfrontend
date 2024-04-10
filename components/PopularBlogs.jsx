@@ -1,82 +1,50 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import parse from "html-react-parser";
-import { Button } from "./ui/button";
-import { ArrowRight } from "react-bootstrap-icons";
 
 const PopularBlogs = ({ blogsData }) => {
   return (
-    <div className="mt-10">
-      <div>
-        <h2 className="text-[#7D64FF]  text-3xl font-medium mt-4 tracking-tight mb-2 ">
-          Popular Blogs
-        </h2>
-        <Separator />
-      </div>
-      <div className="mt-3">
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:space-x-4 lg:space-y-0 md:space-y-4  ">
-          {blogsData.length > 0 ? (
-            blogsData.map((item, index) =>
-              index == 0 ? null : index < 4 ? (
-                <div className="hover:scale-105 transition-all ease-in-out duration-300 delay-200 cursor-pointer   ">
-                  <div className="shadow-lg  p-5 bg-white rounded-lg">
-                    <Link
-                      href={`/blog/${item.slug}`}
-                      className="space-y-3 "
-                      key={index}
-                    >
-                      <div className=" -ml-8  ">
-                        {item.bannerImage ? (
-                          <Image
-                            src={item.bannerImage}
-                            alt={item.bannerImageAlt}
-                            className="rounded-md "
-                            width={500}
-                            height={500}
-                          />
-                        ) : (
-                          <Image
-                            src={"/img/banner.jpg"}
-                            alt={"img"}
-                            className="rounded-md "
-                            width={500}
-                            height={500}
-                          />
-                        )}
-                      </div>
-                      <div className="space-y-2">
-                        <h2 className="font-bold text-black/80 line-clamp-1">
-                          {item.title}
-                        </h2>
-                        <p className="line-clamp-2 text-gray-600 flex-1 h-10 ">
-                          {parse(item.description)}
-                        </p>
-                      </div>
-                      <Button
-                        asChild
-                        variant="link"
-                        className="flex lg:justify-end"
-                      >
-                        <Link
-                          href={`/blog/${item.slug}`}
-                          className="text-[#7D64FF]"
-                        >
-                          Read More
-                          <ArrowRight className="ml-2" />
-                        </Link>
-                      </Button>
-                    </Link>
+    <div className=" bg-white p-[24px] border-[1px] border-black/10 w-[380px]">
+      <h3 className="text-[#262323] font-[700] text-[20px]">Popular Blogs</h3>
+
+      {blogsData &&
+        blogsData.map((item, index) =>
+          index === 2 ? null : ( // Skip rendering the item at index 2
+            <>
+              <Link
+                href={`/blog/${item.slug}`}
+                className="mt-[24px] flex"
+                key={item.id}
+              >
+                <div>
+                  <Image
+                    src={item.image}
+                    alt={item.imageAlt}
+                    width={200}
+                    height={200}
+                  />
+                </div>
+                <div className="ml-[12px]">
+                  <h4 className="font-[600] text-[16px]">
+                    {/* 10 Tips for Optimizing Your Document Workflow */}
+                    {item.title}
+                  </h4>
+                  <div className="text-[12px] font-[500] text-[#6F6767] mt-[12px]">
+                    <div>
+                      {format(item.created_at, "MMMM  dd,yyyy")}
+                      {"  "}•{"  "} {item.views[0].views} Views{" "}
+                    </div>
                   </div>
                 </div>
-              ) : null
-            )
-          ) : (
-            <p>No blogs found</p>
-          )}
-        </div>
-      </div>
+              </Link>
+              {index < 2 ? (
+                <hr class="h-px my-[24px] bg-[#3B444F] opacity-10 border-1" />
+              ) : (
+                <div className="mb-[40px]"></div>
+              )}
+            </>
+          )
+        )}
     </div>
   );
 };

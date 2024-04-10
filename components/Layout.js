@@ -48,9 +48,16 @@ const Layout = ({ children }) => {
       <div>
         <Nav />
       </div>
-      <div className="main md:px-3 sm:px-3 px-[10px] lg:px-[120px] pt-[132px] bg-[#f9f8f8]">
-        {children}
-      </div>
+      {
+        <div
+          className={
+            !path.includes("blogs") &&
+            "main md:px-3 sm:px-3 px-[10px] lg:px-[120px] pt-[132px] bg-[#f9f8f8]"
+          }
+        >
+          {children}
+        </div>
+      }
       {path == "/" && <Thankyou />}
       <Footer />
     </div>

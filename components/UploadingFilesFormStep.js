@@ -35,11 +35,13 @@ const UploadingFilesFormStep = React.memo(function UploadingFilesFormStep({
               }}
             >
               <span style={{ fontWeight: "bold" }}>
-                {t("common:time_left")}
+                {/* {t("common:time_left")} */}
+                Time left
               </span>{" "}
               {uploadTimeLeft} -{" "}
               <span style={{ fontWeight: "bold" }}>
-                {t("common:upload_speed")}
+                {/* {t("common:upload_speed")} */}
+                Upload speed
               </span>{" "}
               {uploadSpeed}
             </span>

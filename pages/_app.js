@@ -91,7 +91,7 @@ const MyApp = ({ Component, pageProps }) => {
         }}
       />
       <Layout>
-        {/* <NextTopLoader color="#7D64FF" /> */}
+        <NextTopLoader color="#ee1b22" />
         <Toaster richColors />
         <Component {...pageProps} />
       </Layout>

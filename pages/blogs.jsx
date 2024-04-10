@@ -1,20 +1,19 @@
 import BlogCategory from "@/components/BlogCategory";
-import { Button } from "@/components/ui/button";
 import parse from "html-react-parser";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { ArrowRight } from "react-bootstrap-icons";
+import { useState } from "react";
 
 import PopularBlogs from "@/components/PopularBlogs";
-import ReactPaginate from "react-paginate";
 
 import { format } from "date-fns";
 import { useSearchParams } from "next/navigation";
 
-import { useRouter } from "next/router";
 import { appUrl, dashboardUrl } from "@/lib/url";
+import { useRouter } from "next/router";
+
+import Tags from "@/components/Tags";
 
 export async function getServerSideProps() {
   try {
@@ -77,7 +76,7 @@ const BlogsPage = ({ myData, blogsData, categoriesData }) => {
     setItemOffset(newOffset);
   };
 
-  console.log(blogsData ? blogsData[0] : "bno");
+  console.log(blogsData ? blogsData[0].views[0].views : "bno");
 
   return (
     <>
@@ -122,214 +121,123 @@ const BlogsPage = ({ myData, blogsData, categoriesData }) => {
         </div>
       ) : (
         <main className="">
-          <header className="page_section header mb-0">
+          <header className="">
             {myData && (
               <>
-                <h1 className="title">{myData.title}</h1>
-                <h6 className="description">{parse(myData.description)}</h6>
+                <div className="h-[350px] mt-[72px] relative w-full flex flex-col items-center justify-center bg-[url('/blog.jpeg')] repeat-0 ">
+                  <h1 className="text-white font-[700] text-[40px]">
+                    {myData.title}
+                  </h1>
+                  <h6 className="mt-[24px] font-[400] text-[16px] text-white ">
+                    {parse(myData.description)}
+                  </h6>
+                  {/* Content inside the div */}
+                </div>
               </>
             )}
           </header>
 
-          <section
-            className={`hero mt-8 mb-8 lg:mt-5 lg:mb-32 ${
-              isWindows ? "lg:mx-[12rem]" : "lg:mx-[5rem]"
-            } mx-[1rem] md:mx-[3.8rem]`}
-          >
+          <section className={`md:px-3 sm:px-3 px-[10px] lg:px-[120px] `}>
             <div>
-              <Link href={`/blog/${blogsData[0].slug}`}>
-                <div className="lg:flex lg:space-x-14 lg:justify-start lg:items-center hover:scale-105 transition-all ease-in-out duration-300 delay-200 cursor-pointer  ">
-                  {blogsData && blogsData[0] && (
-                    <div className="">
-                      {blogsData[0].bannerImage ? (
-                        <div className="relative w-[300px] h-[300px]">
-                          <Image
-                            src={blogsData[0].bannerImage}
-                            alt={blogsData[0].bannerImageAlt}
-                            className="rounded-md "
-                            fill
-                          />
-                        </div>
-                      ) : (
-                        <Image
-                          src={"/img/banner.jpg"}
-                          alt={"img"}
-                          className="rounded-md "
-                          width={500}
-                          height={500}
-                        />
-                      )}
-                    </div>
-                  )}
-                  <div className=" lg:space-y-4 space-y-2">
-                    <div className="mt-2 flex items-center justify-between">
-                      <div>
-                        <Button variant="ghost" className="text-[#7D64FF]">
-                          {blogsData &&
-                            blogsData[0] &&
-                            blogsData[0].category.name}
-                        </Button>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <p className="tracking-tighter  text-gray-600 font-medium">
-                          {blogsData &&
-                            blogsData[0] &&
-                            format(
-                              new Date(blogsData[0].created_at),
-                              "MMMM dd, yyyy"
-                            )}
-                        </p>
-                        <p className="tracking-tighter  text-gray-600 font-medium">
-                          {blogsData && blogsData[0] && blogsData[0].views[0]
-                            ? blogsData[0].views[0].views
-                            : 0}{" "}
-                          views
-                        </p>
-                      </div>
-                    </div>
-
-                    <h2 className="text-black/80  text-3xl font-bold line-clamp-2 tracking-wide">
-                      {blogsData && blogsData[0] && blogsData[0].title}
-                    </h2>
-                    <p className="line-clamp-6 tracking-normal text-gray-600">
-                      {blogsData &&
-                        blogsData[0] &&
-                        parse(blogsData[0].description)}
-                    </p>
-                    <Button
-                      asChild
-                      variant="link"
-                      className="flex  lg:justify-start  "
-                    >
-                      {blogsData && blogsData[0] && (
+              <div className=" mt-[48px] ">
+                <div className="grid grid-cols-3">
+                  <div className="col-span-2 grid grid-cols-2  gap-y-[24px]">
+                    {blogsData &&
+                      blogsData.length > 0 &&
+                      blogsData.map((item) => (
                         <Link
-                          href={`/blog/${blogsData[0].slug}`}
-                          className="text-[#7D64FF]  "
+                          href={`/blog/${item.slug}`}
+                          className="relative w-[384px] border-[1px] border-black/10"
+                          key={item.id}
                         >
-                          Read More
-                          <ArrowRight className="ml-2" />
-                        </Link>
-                      )}
-                    </Button>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div>
-              <h2 className="text-[#7D64FF]  text-3xl font-medium mt-4 lg:mt-3 ">
-                All Blogs
-              </h2>
-              <div className="lg:flex ">
-                <div className="mt-10 ">
-                  <div className="grid md:grid-cols-2 grid-cols-1 ">
-                    {blogsData && blogsData.length > 0 ? (
-                      currentItems.map((item, index) =>
-                        index === 0 ? null : (
-                          <Link href={`/blog/${item.slug}`} key={index}>
-                            <div className=" bg-white rounded-lg shadow-lg p-3 cursor-pointer hover:scale-105 transition-all ease-in-out duration-300 delay-200 mr-10 mb-10">
-                              <div>
-                                {item.bannerImage ? (
-                                  <Image
-                                    src={item.bannerImage}
-                                    alt={item.bannerImageAlt}
-                                    width={500}
-                                    height={500}
-                                    className="rounded-md  image   "
-                                  />
-                                ) : (
-                                  <Image
-                                    src={"/img/banner.jpg"}
-                                    alt={"img"}
-                                    className="rounded-md "
-                                    width={500}
-                                    height={500}
-                                  />
-                                )}
-                              </div>
-                              <div className="">
-                                <div className="">
-                                  <Button
-                                    variant="link"
-                                    className="text-[#7D64FF] -ml-6"
-                                  >
-                                    {item.category.name}
-                                  </Button>
-                                </div>
-
-                                <div className="space-y-2">
-                                  <h2 className="text-black/80 text-lg font-bold line-clamp-1 tracking-wide">
-                                    {item.title}
-                                  </h2>
-                                  <div className="line-clamp-4 text-gray-600 h-9">
-                                    {parse(item.description)}
-                                  </div>
-                                  <div className="flex items-center space-x-3">
-                                    <p className="tracking-tighter text-gray-600 font-medium">
-                                      {format(
-                                        new Date(item.created_at),
-                                        "MMMM dd, yyyy"
-                                      )}
-                                    </p>
-                                    <p className="tracking-tighter text-gray-600 font-medium">
-                                      {item.views[0] ? item.views[0].views : 0}{" "}
-                                      views
-                                    </p>
-                                  </div>
-                                </div>
-                                <Button
-                                  asChild
-                                  variant="link"
-                                  className="flex lg:justify-end"
+                          <Image
+                            src={item.image}
+                            alt={item.imageAlt}
+                            width={384}
+                            height={193}
+                          />
+                          <div className="p-[15.5px]">
+                            <div>
+                              <h2
+                                className="mt-[20px] font-[600] text-[20px]
+                        text-[##262323] w-[354px]
+                        leading-[24.2px]
+                        "
+                              >
+                                {item.title}
+                              </h2>
+                              <div className="flex mt-[20px] space-y-[4px] items-center">
+                                <svg
+                                  width="21"
+                                  height="20"
+                                  viewBox="0 0 21 20"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
                                 >
-                                  <Link
-                                    href={`/blog/${item.slug}`}
-                                    className="text-[#7D64FF]"
-                                  >
-                                    Read More
-                                    <ArrowRight className="ml-2" />
-                                  </Link>
-                                </Button>
+                                  <g clip-path="url(#clip0_151_1578)">
+                                    <path
+                                      d="M10.5 17.5C14.6421 17.5 18 14.1421 18 10C18 5.85786 14.6421 2.5 10.5 2.5C6.35786 2.5 3 5.85786 3 10C3 14.1421 6.35786 17.5 10.5 17.5Z"
+                                      stroke="#EE1B22"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                    <path
+                                      d="M10.5 10.8333C11.8807 10.8333 13 9.71403 13 8.33331C13 6.9526 11.8807 5.83331 10.5 5.83331C9.11929 5.83331 8 6.9526 8 8.33331C8 9.71403 9.11929 10.8333 10.5 10.8333Z"
+                                      fill="#EE1B22"
+                                      stroke="#EE1B22"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                    <path
+                                      d="M5.64014 15.7075C5.84639 15.0211 6.26844 14.4194 6.84368 13.9917C7.41891 13.564 8.11668 13.3332 8.83347 13.3334H12.1668C12.8845 13.3331 13.5831 13.5645 14.1588 13.9932C14.7344 14.4219 15.1564 15.0249 15.3618 15.7125"
+                                      stroke="#EE1B22"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </g>
+                                  <defs>
+                                    <clipPath id="clip0_151_1578">
+                                      <rect
+                                        width="20"
+                                        height="20"
+                                        fill="white"
+                                        transform="translate(0.5)"
+                                      />
+                                    </clipPath>
+                                  </defs>
+                                </svg>
+                                <p className="text-[12px] font-[500] text-[#EE1B22]">
+                                  {" "}
+                                  By AllPDFconverter
+                                </p>
                               </div>
                             </div>
-                          </Link>
-                        )
-                      )
-                    ) : (
-                      <p>No blogs found</p>
-                    )}
+                            <div className="mt-[12px]">
+                              <div className="text-[#6F6767] text-sm font-normal line-clamp-2">
+                                {item.description.length > 20
+                                  ? parse(item.description)
+                                  : parse(item.description)}
+                              </div>
+                            </div>
+                            <div className="mt-[16px] text-[#6F6767] text-[12px] font-[500] flex">
+                              <div>
+                                {format(item.created_at, "MMMM  dd,yyyy")}
+                                {"  "}•{"  "} {item.views[0].views} Views{" "}
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                  </div>
+                  <div>
+                    <PopularBlogs blogsData={blogsData} />
+                    <BlogCategory categoriesData={categoriesData} />
+                    <Tags />
                   </div>
                 </div>
-                <div className="relative">
-                  {categoriesData && (
-                    <BlogCategory categoriesData={categoriesData} />
-                  )}
-                </div>
               </div>
-            </div>
-
-            <div className="mt-2">
-              <ReactPaginate
-                breakLabel="..."
-                nextLabel="Next"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={6}
-                pageCount={pageCount}
-                previousLabel="Previous"
-                renderOnZeroPageCount={null}
-                activeClassName="bg-purple-600 text-white p-2 rounded"
-                disabledClassName="disabled"
-                containerClassName="flex space-x-5 p-2 items-end justify-center"
-                pageClassName="hover:bg-purple-200 p-2 rounded"
-                previousClassName="hover:bg-purple-200 p-2 rounded"
-                nextClassName="hover:bg-purple-200 p-2 rounded"
-              />
-            </div>
-            <div>
-              {blogsData && (
-                <>
-                  <PopularBlogs blogsData={blogsData} />
-                </>
-              )}
             </div>
           </section>
         </main>
