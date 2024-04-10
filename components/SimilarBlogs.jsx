@@ -6,23 +6,22 @@ import parse, { domToReact } from "html-react-parser";
 
 const SimilarBlogs = ({ blogsData, blogId }) => {
   return (
-    <div className="mt-10 -ml-10">
+    <div className="">
       {blogsData.length > 0 && (
         <div>
-          <h2 className="text-[#7D64FF]  text-3xl font-medium mt-4 tracking-tight mb-2 ">
-            Similar Blogs
+          <h2 className="font-[600] text-[32px] text-[#262323]">
+            Other similar blogs
           </h2>
-          <Separator />
         </div>
       )}
-      <div className="mt-3">
+      <div className="mt-[48px]">
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-[40px]  ">
           {blogsData ? (
             blogsData.map((item, index) =>
               item.id === blogId ? null : index < 4 ? (
                 <Link
                   href={`/blog/${item.slug}`}
-                  className="relative w-[384px] border-[1px] bg-white border-black/10"
+                  className="relative w-[90%] border-[1px] bg-white border-black/10"
                   key={item.id}
                 >
                   <Image

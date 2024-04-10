@@ -395,8 +395,8 @@ const BlogDetail = ({ myData, blogsData }) => {
               </div>
 
               {myData.comments.length > 0 && (
-                <div className="grid grid-cols-3">
-                  <div className="col-span-2">
+                <div className="grid lg:grid-cols-3">
+                  <div className="lg:col-span-2">
                     <h3 className="text-[#262323] font-[700] text-[24px] ">
                       Comments
                     </h3>
@@ -445,6 +445,9 @@ const BlogDetail = ({ myData, blogsData }) => {
                     blogId={myData.id}
                   />
                 )}
+              </div>
+              <div className="bg-[#F9F8F8]">
+                <hr class="h-px mt-[80px] lg:block hidden bg-[#3B444F] opacity-10 border-1 col-span-2" />
               </div>
             </div>
           </section>
