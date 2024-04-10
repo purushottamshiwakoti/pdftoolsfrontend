@@ -213,7 +213,7 @@ const BlogsPage = ({ myData, blogsData, categoriesData }) => {
                               </div>
                             </div>
                             <div className="mt-[12px]">
-                              <div className="text-[#6F6767] text-sm font-normal line-clamp-2">
+                              <div className="text-[#6F6767] text-sm font-normal line-clamp-2 max-w-[90%]">
                                 {item.description.length > 20
                                   ? parse(item.description)
                                   : parse(item.description)}
