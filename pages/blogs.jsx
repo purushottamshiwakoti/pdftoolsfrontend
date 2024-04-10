@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import PopularBlogs from "@/components/PopularBlogs";
 
@@ -14,6 +14,7 @@ import { appUrl, dashboardUrl } from "@/lib/url";
 import { useRouter } from "next/router";
 
 import Tags from "@/components/Tags";
+import { Button } from "@/components/ui/button";
 
 export async function getServerSideProps() {
   try {
@@ -47,36 +48,33 @@ export async function getServerSideProps() {
 }
 
 const BlogsPage = ({ myData, blogsData, categoriesData }) => {
+  const [data, setData] = useState(blogsData);
   const searchParams = useSearchParams();
-  const filterCategory = searchParams.get("category");
+  const category = searchParams.get("category");
   const isLoading = false;
 
   const isWindows = false;
 
   const router = useRouter();
-  const currentUrl = router.asPath;
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
-  const [itemOffset, setItemOffset] = useState(0);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(data.length / itemsPerPage);
 
-  // Simulate fetching items from another resources.
-  // (This could be items from props; or items loaded in a local state
-  // from an API endpoint with useEffect and useState)
-  const itemsPerPage = 7;
-  const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = blogsData && blogsData.slice(itemOffset, endOffset);
-  const pageCount = blogsData && Math.ceil(blogsData.length / itemsPerPage);
-
-  // Invoke when user click to request another page.
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % blogsData.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    router.push(`/blogs?page=${pageNumber}`);
   };
 
-  console.log(blogsData ? blogsData[0].views[0].views : "bno");
+  useEffect(() => {
+    if (category) {
+      const newData = blogsData.filter((item) => item.category_id == category);
+      setData(newData);
+    }
+  }, [category]);
 
   return (
     <>
@@ -98,7 +96,7 @@ const BlogsPage = ({ myData, blogsData, categoriesData }) => {
         />
 
         {/* You can add your canonical here */}
-        <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" />
+        {/* <link rel="canonical" href={`${appUrl}${currentUrl}`} key="canonical" /> */}
         {/* You can add your alternate here */}
       </Head>
       {isLoading ? (
@@ -140,19 +138,19 @@ const BlogsPage = ({ myData, blogsData, categoriesData }) => {
           <section className={`md:px-3 sm:px-3 px-[10px] lg:px-[120px] `}>
             <div>
               <div className=" mt-[48px] ">
-                <div className="grid grid-cols-3">
-                  <div className="col-span-2 grid grid-cols-2  gap-y-[24px]">
-                    {blogsData &&
-                      blogsData.length > 0 &&
-                      blogsData.map((item) => (
+                <div className="grid lg:grid-cols-3 md:grid-cols-2  ">
+                  <div className="lg:col-span-2  lg:grid lg:grid-cols-2  gap-[24px] lg:gap-y-[24px]">
+                    {currentItems &&
+                      currentItems.length > 0 &&
+                      currentItems.map((item) => (
                         <Link
                           href={`/blog/${item.slug}`}
-                          className="relative w-[384px] border-[1px] border-black/10"
+                          className="relative  border-[1px] border-black/10"
                           key={item.id}
                         >
                           <Image
-                            src={item.image}
-                            alt={item.imageAlt}
+                            src={item.bannerImage}
+                            alt={item.bannerImageAlt}
                             width={384}
                             height={193}
                           />
@@ -160,8 +158,8 @@ const BlogsPage = ({ myData, blogsData, categoriesData }) => {
                             <div>
                               <h2
                                 className="mt-[20px] font-[600] text-[20px]
-                        text-[##262323] w-[354px]
-                        leading-[24.2px]
+                        text-[#262323] 
+                        leading-[24.2px] flex-1
                         "
                               >
                                 {item.title}
@@ -208,7 +206,7 @@ const BlogsPage = ({ myData, blogsData, categoriesData }) => {
                                     </clipPath>
                                   </defs>
                                 </svg>
-                                <p className="text-[12px] font-[500] text-[#EE1B22]">
+                                <p className="text-[12px] font-[500] text-[#EE1B22] flex-1">
                                   {" "}
                                   By AllPDFconverter
                                 </p>
@@ -230,8 +228,84 @@ const BlogsPage = ({ myData, blogsData, categoriesData }) => {
                           </div>
                         </Link>
                       ))}
+                    {data.length > 0 ? (
+                      <div className=" col-span-2 items-center justify-center flex">
+                        <div className="flex items-center justify-center gap-[16px] lg:mb-0 mb-10  ">
+                          {
+                            <Button
+                              className={
+                                "border-1 border-[#6F6767] text-[#6F6767] rounded-none font-[600] text-[16px]"
+                              }
+                              disabled={currentPage == 1}
+                              variant="ghost"
+                              onClick={() => handlePagination(currentPage - 1)}
+                            >
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M7.41165 1.91161L7.50004 1.82322L7.58842 1.91161L8.63842 2.96161L8.72681 3.05L8.63842 3.13839L4.65181 7.125H15H15.125V7.25V8.75V8.875H15H4.65181L8.63842 12.8616L8.72681 12.95L8.63842 13.0384L7.58842 14.0884L7.50004 14.1768L7.41165 14.0884L1.41165 8.08839L1.32326 8L1.41165 7.91161L7.41165 1.91161Z"
+                                  fill="#6F6767"
+                                  stroke="#6F6767"
+                                  stroke-width="0.25"
+                                />
+                              </svg>
+                              <p className="ml-[1.5px]">Previous</p>
+                            </Button>
+                          }
+
+                          {Array.from({ length: totalPages }, (_, index) => (
+                            <Button
+                              className={
+                                index + 1 == currentPage
+                                  ? "bg-[#EE1B22] hover:bg-[#EE1B22]/80 text-white rounded-none font-[600] text-[16px]"
+                                  : "border-1 border-[#6F6767] text-[#6F6767] rounded-none font-[600] text-[16px]"
+                              }
+                              variant="ghost"
+                              key={index + 1}
+                              onClick={() => handlePagination(index + 1)}
+                            >
+                              {index + 1}
+                            </Button>
+                          ))}
+
+                          {
+                            <Button
+                              className="border-1 border-[#6F6767] text-[#6F6767] font-[600] text-[16px] rounded-none"
+                              variant="ghost"
+                              onClick={() => handlePagination(currentPage + 1)}
+                              disabled={currentPage == totalPages}
+                            >
+                              <p className="mr-[1.5px]">Next</p>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M8.58835 1.91161L8.49996 1.82322L8.41158 1.91161L7.36158 2.96161L7.27319 3.05L7.36158 3.13839L11.3482 7.125H1H0.875V7.25V8.75V8.875H1H11.3482L7.36158 12.8616L7.27319 12.95L7.36158 13.0384L8.41158 14.0884L8.49996 14.1768L8.58835 14.0884L14.5884 8.08839L14.6767 8L14.5884 7.91161L8.58835 1.91161Z"
+                                  fill="#6F6767"
+                                  stroke="#6F6767"
+                                  stroke-width="0.25"
+                                />
+                              </svg>
+                            </Button>
+                          }
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <p>No blogs found</p>
+                      </div>
+                    )}
                   </div>
-                  <div>
+                  <div className="space-y-[32px] lg:ml-[26px] w-[">
                     <PopularBlogs blogsData={blogsData} />
                     <BlogCategory categoriesData={categoriesData} />
                     <Tags />

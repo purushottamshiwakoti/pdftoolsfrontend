@@ -4,12 +4,12 @@ import Link from "next/link";
 
 const PopularBlogs = ({ blogsData }) => {
   return (
-    <div className=" bg-white p-[24px] border-[1px] border-black/10 w-[380px]">
+    <div className=" bg-white p-[24px] border-[1px] border-black/10 w-[90%] lg:w-[380px]">
       <h3 className="text-[#262323] font-[700] text-[20px]">Popular Blogs</h3>
 
       {blogsData &&
         blogsData.map((item, index) =>
-          index === 2 ? null : ( // Skip rendering the item at index 2
+          index === 3 ? null : (
             <>
               <Link
                 href={`/blog/${item.slug}`}

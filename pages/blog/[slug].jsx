@@ -2,7 +2,6 @@ import AddComment from "@/components/AddComment";
 import BlogCategory from "@/components/BlogCategory";
 import ShareBlog from "@/components/ShareBlog";
 import SimilarBlogs from "@/components/SimilarBlogs";
-import { Button } from "@/components/ui/button";
 import { dashboardUrl } from "@/lib/url";
 import { format } from "date-fns";
 import parse, { domToReact } from "html-react-parser";
@@ -13,11 +12,10 @@ import React, { useEffect, useState } from "react";
 
 import styles from "../../styles/UploadContainer.module.css";
 
-import { appUrl } from "@/lib/url";
-import { redirect } from "next/dist/server/api-utils";
-import { notFound } from "next/navigation";
 import PopularBlogs from "@/components/PopularBlogs";
 import Tags from "@/components/Tags";
+import { appUrl } from "@/lib/url";
+import { notFound } from "next/navigation";
 
 export async function getServerSideProps({ params }) {
   const res = await fetch(`${dashboardUrl}/blogs/${params.slug}`);
@@ -39,6 +37,7 @@ export async function getServerSideProps({ params }) {
 }
 
 const BlogDetail = ({ myData, blogsData }) => {
+  console.log(myData);
   const router = useRouter();
   const { slug } = router.query;
 
@@ -91,6 +90,8 @@ const BlogDetail = ({ myData, blogsData }) => {
     }
   }, [slug, !myData]);
 
+  const filteredBlogs = blogsData.filter((item) => item.id !== myData.id);
+
   function calculateAverageWordsPerSentence(text) {
     // Split text into sentences using regular expression
     const sentences = text.split(/[.!?]/);
@@ -135,19 +136,15 @@ const BlogDetail = ({ myData, blogsData }) => {
       </Head>
       <div className={styles}>
         <div className="bg-[#f9f8f8]">
-          <section
-            className={`hero mt-8 mb-8 lg:mt-5 lg:mb-32 ${
-              isWindows ? "lg:mx-[12rem]" : "lg:mx-[5rem]"
-            } mx-[1rem] md:mx-[3.8rem]`}
-          >
+          <section>
             {myData ? (
               <div>
                 <div>
                   <div>
-                    <h1 className="text-center text-[#262323] font-[700] text-[48px] px-[150px] ">
+                    <h1 className="text-center text-[#262323] font-[700] lg:text-[48px] lg:px-[150px] ">
                       {myData.title}
                     </h1>
-                    <div className="flex gap-[32px] justify-center mt-[10px]">
+                    <div className="flex lg:gap-[32px] gap-[10px] lg:flex-row flex-col justify-center mt-[10px]">
                       <div className="flex mt-[20px] space-y-[4px] items-center">
                         <svg
                           width="21"
@@ -290,13 +287,13 @@ const BlogDetail = ({ myData, blogsData }) => {
                           </defs>
                         </svg>
 
-                        <p className="text-[14px] font-[500] text-[#6F6767] ml-[4px]">
+                        <div className="text-[14px] font-[500] text-[#6F6767] ml-[4px]">
                           {" "}
                           {calculateAverageWordsPerSentence(
                             myData.description
                           )}{" "}
                           Mins Read
-                        </p>
+                        </div>
                       </div>
                       <div className="flex mt-[20px] space-y-[4px] items-center">
                         <svg
@@ -339,14 +336,14 @@ const BlogDetail = ({ myData, blogsData }) => {
                       <Image
                         src={myData.image}
                         alt={myData.imageAlt}
-                        className="rounded-md mt-[24px] "
+                        className="mt-[24px] "
                         width={1200}
                         height={603}
                       />
                     )}
                   </div>
-                  <div className="grid grid-cols-3 mt-[48px]">
-                    <div className="col-span-2">
+                  <div className="grid lg:grid-cols-3 mt-[48px]">
+                    <div className="lg:col-span-2">
                       <p className=" ">
                         {parse(myData.description, {
                           replace: (domNode) => {
@@ -383,8 +380,8 @@ const BlogDetail = ({ myData, blogsData }) => {
                         })}
                       </p>
                     </div>
-                    <div className="ml-[26px]">
-                      <PopularBlogs blogsData={blogsData} />
+                    <div className="lg:ml-[26px] lg:mt-0 mt-[10px] lg:space-y-0 space-y-3">
+                      <PopularBlogs blogsData={filteredBlogs} />
                       {categoriesData && (
                         <BlogCategory categoriesData={categoriesData} />
                       )}
@@ -396,7 +393,7 @@ const BlogDetail = ({ myData, blogsData }) => {
                   <ShareBlog slug={myData.slug} />
                 </div>
                 <div className="grid grid-cols-3">
-                  <hr class="h-px my-[72px] bg-[#3B444F] opacity-10 border-1 col-span-2" />
+                  <hr class="h-px my-[72px] lg:block hidden bg-[#3B444F] opacity-10 border-1 col-span-2" />
                   <div></div>
                 </div>
                 <div className="grid grid-cols-3">
