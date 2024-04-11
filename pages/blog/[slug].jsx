@@ -438,7 +438,7 @@ const BlogDetail = ({ myData, blogsData }) => {
               <div>
                 <hr class="h-px my-[72px] lg:block hidden bg-[#3B444F] opacity-10 border-1 col-span-2" />
               </div>
-              <div>
+              <div className="lg:mt-0 mt-10">
                 {similarBlogsData !== null && (
                   <SimilarBlogs
                     blogsData={similarBlogsData}

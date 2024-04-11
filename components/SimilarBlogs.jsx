@@ -34,7 +34,7 @@ const SimilarBlogs = ({ blogsData, blogId }) => {
                     <div>
                       <h2
                         className="mt-[20px] font-[600] text-[20px]
-              text-[##262323] w-[354px]
+              text-[##262323] 
               leading-[24.2px]
               "
                       >

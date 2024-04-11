@@ -122,11 +122,12 @@ const BlogsPage = ({ myData, blogsData, categoriesData }) => {
           <header className="">
             {myData && (
               <>
-                <div className="h-[350px] mt-[72px] relative w-full flex flex-col items-center justify-center bg-[url('/blog.jpeg')] repeat-0 ">
-                  <h1 className="text-white font-[700] text-[40px]">
+                <div className="h-[350px] mt-[72px] relative w-full flex flex-col items-center justify-center  bg-[url('/blog.jpeg')] bg-no-repeat bg-center bg-cover ">
+                  <div className="absolute bg-black h-[350px] w-full  opacity-50 z-10" />
+                  <h1 className="text-white font-[700] text-[40px] z-20">
                     {myData.title}
                   </h1>
-                  <h6 className="mt-[24px] font-[400] text-[16px] text-white ">
+                  <h6 className="mt-[24px] font-[400] text-[16px] text-white  z-20">
                     {parse(myData.description)}
                   </h6>
                   {/* Content inside the div */}
