@@ -24,12 +24,20 @@ const SimilarBlogs = ({ blogsData, blogId }) => {
                   className="relative w-[90%] border-[1px] bg-white border-black/10"
                   key={item.id}
                 >
-                  <Image
+                  {/* <Image
                     src={item.bannerImage}
                     alt={item.bannerImageAlt}
                     width={384}
                     height={193}
-                  />
+                  /> */}
+                  <div className="relative w-full h-[193px]">
+                    <Image
+                      src={item.bannerImage}
+                      alt={item.bannerImageAlt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="p-[15.5px]">
                     <div>
                       <h2

@@ -149,12 +149,14 @@ const BlogsPage = ({ myData, blogsData, categoriesData }) => {
                           className="relative  border-[1px] border-black/10"
                           key={item.id}
                         >
-                          <Image
-                            src={item.bannerImage}
-                            alt={item.bannerImageAlt}
-                            width={384}
-                            height={193}
-                          />
+                          <div className="relative w-full h-[193px]">
+                            <Image
+                              src={item.bannerImage}
+                              alt={item.bannerImageAlt}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
                           <div className="p-[15.5px]">
                             <div>
                               <h2
