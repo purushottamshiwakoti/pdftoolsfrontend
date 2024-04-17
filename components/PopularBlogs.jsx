@@ -31,7 +31,7 @@ const PopularBlogs = ({ blogsData }) => {
                     <div>
                       {/* Format date and display views count */}
                       {format(item.created_at, "MMMM dd, yyyy")} •{" "}
-                      {item.views[0].views} Views
+                      {item.views[0]?.views ?? 0} Views
                     </div>
                   </div>
                 </div>

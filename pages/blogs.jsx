@@ -225,7 +225,7 @@ const BlogsPage = ({ myData, blogsData, categoriesData }) => {
                             <div className="mt-[16px] text-[#6F6767] text-[12px] font-[500] flex">
                               <div>
                                 {format(item.created_at, "MMMM  dd,yyyy")}
-                                {"  "}•{"  "} {item.views[0].views} Views{" "}
+                                {"  "}•{"  "} {item.views[0]?.views ?? 0} Views{" "}
                               </div>
                             </div>
                           </div>
