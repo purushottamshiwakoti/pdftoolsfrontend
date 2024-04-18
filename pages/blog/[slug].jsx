@@ -342,7 +342,7 @@ const BlogDetail = ({ myData, blogsData }) => {
                 </div>
                 <div className="grid lg:grid-cols-3 mt-[48px]">
                   <div className="lg:col-span-2">
-                    <p className=" ">
+                    <p className="prose ">
                       {parse(myData.description, {
                         replace: (domNode) => {
                           if (domNode.type === "tag" && domNode.name === "ul") {
